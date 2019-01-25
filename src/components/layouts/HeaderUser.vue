@@ -9,7 +9,7 @@
         img(src="../../assets/logo-ninweb.png")
 
       div.col-md-4#box
-        p hola
+        p hola user
 </template>
 
 <style lang="scss">
