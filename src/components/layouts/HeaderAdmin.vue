@@ -17,6 +17,7 @@
 		background: #222222;
 		color: white;
 		width: 100%;
+    margin-bottom: 50px;
 
     .row {
       padding: 0 20px;
