@@ -2,8 +2,7 @@
   div#head
     div.row.align-items-center
       div.col-md-4#menu-btn
-        i.fas.fa-times
-        i.fas.fa-bars
+        sidebar-admin
 
       div.col-md-4#logo
         img(src="../../assets/logo-ninweb.png")
@@ -11,6 +10,15 @@
       div.col-md-4#box
         p hola admin
 </template>
+
+<script>
+import SidebarAdmin from './SidebarAdmin.vue'
+
+export default {
+  components: {SidebarAdmin}
+}
+</script>
+
 
 <style lang="scss">
   #head {

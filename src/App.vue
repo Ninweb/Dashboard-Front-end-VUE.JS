@@ -16,5 +16,6 @@ export default {
 
 #app {
   font-family: 'Open Sans', sans-serif;
+  background: $nin-white;
 }
 </style>

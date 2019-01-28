@@ -1,22 +1,23 @@
 <template lang="pug">
   #dashAdmin
-    header-admin
+    #header
+      header-admin
 
-    .container#main-container
-      //- short-departments
+    .container.main-container#page-wrap
+      short-departments
 
-      //- .row
-      //-   .col-md-6
-      //-     short-profile
+      .row
+        .col-md-6
+          short-profile
 
-      //-   .col-md-6
-      //-     short-projects
+        .col-md-6
+          short-projects
 
-      //- carousel-employees
+      carousel-employees
 
     //- full-list-employees
 
-    create-user-form
+    //- create-user-form
 
 
 </template>
@@ -48,8 +49,9 @@
 
   #dashAdmin {
 
-    #main-container {
+    .main-container {
       margin-top: -30px;
+      height: 100vh;
     }
   }
 </style>
