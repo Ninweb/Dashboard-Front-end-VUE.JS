@@ -1,19 +1,23 @@
 <template lang="pug">
   #login
+    #logo
+      img(src="../assets/login-logo.png")
+
     form
-      div#loginTitle
-        p.title NINWEB, C.A.
-        p.subtitle Sistema Administrativo
+      #fields
+        .form-group
+          i.fas.fa-at
+          input.form-control(type="email", placeholder="Correo electrónico")
 
-      .form-group
-        i.fas.fa-at
-        input.form-control(type="email")
-
-      .form-group
-        i.fas.fa-key
-        input.form-control(type="password")
+        .form-group
+          i.fas.fa-key
+          input.form-control(type="password", placeholder="Contraseña")
 
       button.btn.btn-primary(type="submit") Ingresar
+
+    #info
+      p.forgot ¿Olvidó su contraseña?
+      p.copyright © Copyright 2019 - NINWEB, C.A.
 </template>
 
 <script>
@@ -27,32 +31,34 @@ export default {
 @import "../utils/variables.scss";
 
 #login {
-  padding: 15% 0;
+  padding: 13% 0;
   height: 100vh;
-  background: $nin-white;
+  background: $transparent-background;
+  position: relative;
+
+  #logo {
+    position: relative;
+
+    img {
+      position: absolute;
+      top: -70px;
+      left: 45%;
+      box-shadow: $shadow-box-loginImg;
+      border-radius: 50%;
+    }
+  }
 
   form {
     width: 30%;
     margin: 0 auto;
     padding: 20px 0;
-    border: 2px solid $nin-black;
+    // border: 2px solid $nin-black;
     border-radius: 20px;
+    box-shadow: $shadow-box-loginForm;
+    background: white;
 
-    #loginTitle {
-      margin-bottom: 20px;
-
-      p {
-        margin: 0;
-        text-align: center;
-      }
-
-      .title {
-        font-size: 22px;
-        font-weight: bold;
-      }
-      .subtitle {
-        font-size:20px;
-      }
+    #fields {
+      margin-top: 60px;
     }
 
     .form-group {
@@ -63,7 +69,7 @@ export default {
     }
 
     i {
-      background: $nin-redDeactivated;
+      background: $nin-redDesactivated;
       width:30%;
       text-align:center;
       font-size: 16px;
@@ -76,7 +82,7 @@ export default {
     }
 
     button {
-      background: $nin-redDeactivated;
+      background: $nin-redDesactivated;
       display:flex;
       align-content: center;
       justify-content:center;
@@ -86,6 +92,23 @@ export default {
       &:hover {
         background: $nin-redActivated;
       }
+    }
+  }
+
+  #info {
+    text-align: center;
+    color: white;
+    margin-top: 30px;
+
+    p {margin: 0}
+
+    .forgot {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .copyright {
+      font-size: 16px;
     }
   }
 }

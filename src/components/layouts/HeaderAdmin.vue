@@ -27,6 +27,8 @@
 
     #logo {
       text-align: center;
+
+      img {width: 40%}
     }
 	}
 
