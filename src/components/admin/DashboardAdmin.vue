@@ -1,9 +1,11 @@
 <template lang="pug">
   #dashAdmin
-    header-admin
-     
-    .container#main-container
-      h1(v-model="usuarioLogeado") {{ usuar }}
+    #header
+      header-admin
+
+    .container.main-container#page-wrap
+      h1(v-model="usuarioLogeado") {{  }}
+      
       short-departments
 
       .row
@@ -62,8 +64,9 @@
 
   #dashAdmin {
 
-    #main-container {
+    .main-container {
       margin-top: -30px;
+      height: 100vh;
     }
   }
 </style>
