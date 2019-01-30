@@ -3,15 +3,15 @@
     #logo
       img(src="../assets/login-logo.png")
 
-    form
+    form(v-on:submit.prevent="loginAPI")
       #fields
         .form-group
           i.fas.fa-at
-          input.form-control(type="email", placeholder="Correo electrónico")
+          input.form-control(type="email", placeholder="Correo electrónico", v-model="usuario.correo")
 
         .form-group
           i.fas.fa-key
-          input.form-control(type="password", placeholder="Contraseña")
+          input.form-control(type="password", placeholder="Contraseña",v-model="usuario.password")
 
       button.btn.btn-primary(type="submit") Ingresar
 
@@ -23,6 +23,47 @@
 <script>
 export default {
   name: 'app',
+  data(){
+    return {
+      usuario: {
+        correo: '',
+        password: ''
+      }
+    }
+   
+  },
+  methods: {
+    loginAPI(){
+      //const axios = require('axios');
+      console.log(this.usuario);
+      this.$http.post('http://localhost:8000/api/login',{
+        correo: this.usuario.correo,
+        password: this.usuario.password   
+      })
+        .then(response => { 
+          console.log(response)
+          if (response.body.usuario.acceso_usuario == "admin"){
+              let token = response.body.usuario.api_token;
+              let usuarioLogeado = response.body;
+              localStorage.setItem('token',token);
+              localStorage.setItem('usuarioLogeado',JSON.stringify(usuarioLogeado));
+              console.log(usuarioLogeado)
+
+              console.log(token);
+              
+              this.$router.push({ 
+                path:'dashboard/admin', 
+                params: this.usuario
+              })
+          }
+          
+        })
+        .catch(error => {
+            console.log(error.response)
+        });
+
+    }
+  }
 
 }
 </script>

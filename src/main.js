@@ -18,10 +18,14 @@ import bCarousel from 'bootstrap-vue/es/components/carousel/carousel'
 import VueFormWizard from 'vue-form-wizard'
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
-Vue.use(VueRouter)
+import VueResource from 'vue-resource'//vue resource nos permite obtener datos de manera remota
 
+
+Vue.use(VueRouter)
+Vue.use(VueResource);//implementando la dependencia
 Vue.use(BootstrapVue)
 Vue.component('b-carousel', bCarousel)
+Vue.use(axios)
 
 Vue.use(VueFormWizard)
 

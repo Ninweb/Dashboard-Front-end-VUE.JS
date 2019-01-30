@@ -1,22 +1,23 @@
 <template lang="pug">
   #dashAdmin
     header-admin
-
+     
     .container#main-container
-      //- short-departments
+      h1(v-model="usuarioLogeado") {{ usuar }}
+      short-departments
 
-      //- .row
-      //-   .col-md-6
-      //-     short-profile
+      .row
+        .col-md-6
+          short-profile
 
-      //-   .col-md-6
-      //-     short-projects
+        .col-md-6
+          short-projects
 
-      //- carousel-employees
+      carousel-employees
 
     //- full-list-employees
 
-    create-user-form
+    //- create-user-form
 
 
 </template>
@@ -31,6 +32,11 @@
   import CreateUserForm from '../forms/CreateUser.vue'
 
   export default {
+    data() {
+      return {
+        usuarioLogeado: ''
+      }
+    },
     components: {
       HeaderAdmin,
       ShortDepartments,
@@ -39,6 +45,14 @@
       ShortProjects,
       FullListEmployees,
       CreateUserForm
+    },
+    mounted () {
+      let token = localStorage.getItem('token');
+      let usuarioLogeado = localStorage.getItem('usuarioLogeado');
+
+      this.usuarioLogeado = usuarioLogeado;
+      console.log(JSON.parse(usuarioLogeado));
+      console.log(token);
     }
   }
 </script>
