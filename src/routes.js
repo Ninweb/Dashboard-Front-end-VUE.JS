@@ -16,7 +16,7 @@ const routes = [
   {path: '/dashboard/admin', name: 'dash-admin', component: DashboardAdmin, 
     children: [
       {path: 'profile', name: 'profile', component: FullProfile},
-      {path: 'create/user', name: 'create-user', component: CreateUser},
+      //{path: 'create/user', name: 'create-user', component: CreateUser},
       {path: 'create/project', name: 'create-project', component: CreateProject},
     ]
   },
@@ -35,7 +35,8 @@ const routes = [
     ]
   },
 
-  {path: 'employees', name: 'employees', component: Employees}
+  {path: 'employees', name: 'employees', component: Employees},
+  {path: '/create/user', name: 'create-user', component: CreateUser},
 ]
 
 export default routes
