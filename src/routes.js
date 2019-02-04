@@ -51,6 +51,11 @@ const routes = [
   },
   {path: 'profile', name: 'profile', component: FullProfile},
 
+<<<<<<< HEAD
+=======
+  {path: 'employees', name: 'employees', component: Employees},
+  {path: '/create/user', name: 'create-user', component: CreateUser},
+>>>>>>> dce7e17a1a42bcffbcf528e8d0345e48c3a1e854
 ]
 
 export default routes

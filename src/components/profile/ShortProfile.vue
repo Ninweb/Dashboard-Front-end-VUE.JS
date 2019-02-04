@@ -6,8 +6,8 @@
           img(src='../../assets/default-profile-pic.png')
           #primaryData
             p
-              b Nombre:
-              |  prueba
+              b Nombre: 
+              |  
             p
               b Apellido:
             p
@@ -23,7 +23,22 @@
 
 <script>
   export default {
-    name: 'short-profile'
+    name: 'short-profile',
+    data (){
+      return{
+        empleado: localStorage.getItem('empleado'),
+        
+      }
+       
+    },
+    created() { //
+        //la funcion de abajo depende de la dependencia vue-resource
+        // .then es una promesa de js
+        /*this.$http.get('https://jsonplaceholder.typicode.com/users')
+            .then(res=> {
+                this.users = res.body
+            });*/
+    }
   }
 </script>
 
