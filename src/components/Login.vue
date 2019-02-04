@@ -52,7 +52,7 @@ export default {
               console.log(token);
               
               this.$router.push({ 
-                path:'dashboard/admin', 
+                path:'admin', 
                 params: this.usuario
               })
           }
