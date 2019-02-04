@@ -26,18 +26,25 @@
     name: 'short-profile',
     data (){
       return{
-        empleado: localStorage.getItem('empleado'),
-        
+        id_persona: localStorage.getItem('id_persona'),
+        usuarioLogeado: JSON.parse(localStorage.getItem('usuarioLogeado')),
+        persona: ''
       }
        
     },
     created() { //
         //la funcion de abajo depende de la dependencia vue-resource
         // .then es una promesa de js
-        /*this.$http.get('https://jsonplaceholder.typicode.com/users')
-            .then(res=> {
-                this.users = res.body
-            });*/
+      /*this.$http.get('http://localhost:8000/api/personas/'+this.id_persona,this.usuarioLogeado)
+          .then(response => { 
+            console.log(response);
+            /*this.persona = response.body[0];
+            localStorage.setItem('persona',this.persona);
+            console.log(this.persona);
+          })
+          .catch(error => {
+              console.log(error)
+          });*/
     }
   }
 </script>

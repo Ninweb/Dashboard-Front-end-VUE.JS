@@ -47,9 +47,9 @@ export default {
               let usuarioLogeado = response.body;
               localStorage.setItem('token',token);
               localStorage.setItem('usuarioLogeado',JSON.stringify(usuarioLogeado));
-              console.log(usuarioLogeado)
+              //console.log(usuarioLogeado)
 
-              console.log(token);
+              //console.log(token);
               
               this.$router.push({ 
                 path:'dashboard/admin', 

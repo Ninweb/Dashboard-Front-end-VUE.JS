@@ -19,13 +19,14 @@ import VueFormWizard from 'vue-form-wizard'
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
 import VueResource from 'vue-resource'//vue resource nos permite obtener datos de manera remota
-
+import babelPolyfill from 'babel-polyfill'
 
 Vue.use(VueRouter)
 Vue.use(VueResource);//implementando la dependencia
 Vue.use(BootstrapVue)
 Vue.component('b-carousel', bCarousel)
 Vue.use(axios)
+Vue.use(babelPolyfill)
 
 Vue.use(VueFormWizard)
 
