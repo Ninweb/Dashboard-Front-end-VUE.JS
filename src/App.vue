@@ -4,11 +4,11 @@
 </template>
 
 <script>
-import HeaderUser from './components/layouts/HeaderUser.vue'
 
 export default {
   name: 'app',
 }
+
 </script>
 
 <style lang="scss">
@@ -17,5 +17,6 @@ export default {
 #app {
   font-family: 'Open Sans', sans-serif;
   background: $nin-white;
+  padding-left:0px;
 }
 </style>

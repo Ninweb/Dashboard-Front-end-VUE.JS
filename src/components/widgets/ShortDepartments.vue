@@ -12,22 +12,19 @@
           .icon-dep
             i.fas.fa-drafting-compass
           .info-dep
-            p Diseño
-            | Gráfico
+            p Diseño Gráfico
 
         .col-md.marketing#box
           .icon-dep
             i.fas.fa-bullhorn
           .info-dep
-            p Marketing &
-            | Social Media
+            p Community Manager
 
         .col-md.web#box
           .icon-dep
             i.fas.fa-laptop-code
           .info-dep
-            p Desarrollo
-            | Web
+            p Desarrollo Web
 
 
 </template>
@@ -46,10 +43,10 @@
     #box {
       margin: 10px;
       padding: 20px 10px;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: bold;
       height: 100%;
-      display: flex;
+      text-align: center;
       cursor: pointer;
       transition: .3s;
 
@@ -60,8 +57,6 @@
 
       .icon-dep {
         font-size: 40px;
-        padding-right: 30px;
-        padding-left: 10px;
         text-align: center;
       }
 

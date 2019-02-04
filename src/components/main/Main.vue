@@ -1,10 +1,7 @@
 <template lang="pug">
   #dashAdmin
-    #header
-      header-admin
-
-    .container.main-container#page-wrap
-      h1(v-model="usuarioLogeado")
+    .container.main-container
+      h1(v-model="usuarioLogeado") {{  }}
       
       short-departments
 
@@ -25,7 +22,6 @@
 </template>
 
 <script>
-  import HeaderAdmin from '../layouts/HeaderAdmin.vue'
   import ShortDepartments from '../widgets/ShortDepartments.vue'
   import ShortProfile from '../profile/ShortProfile.vue'
   import CarouselEmployees from '../widgets/CarouselEmployees.vue'
@@ -36,7 +32,6 @@
 
   export default {
     components: {
-      HeaderAdmin,
       ShortDepartments,
       ShortProfile,
       CarouselEmployees,
