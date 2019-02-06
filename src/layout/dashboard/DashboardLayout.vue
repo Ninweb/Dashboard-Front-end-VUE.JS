@@ -10,7 +10,7 @@
         <sidebar-link to="/" :name="$t('Proyectos')" icon="tim-icons icon-sound-wave"/>
         <sidebar-link to="/maps" :name="$t('Clientes')" icon="tim-icons icon-world"/>
         <sidebar-link to="/table-list" :name="$t('Mis dominios')" icon="tim-icons icon-puzzle-10"/>
-        <sidebar-link to="/typography" :name="$t('Cerrar Sesión')" icon="tim-icons icon-simple-remove"/>
+        <sidebar-link to="/login" :name="$t('Cerrar Sesión')" icon="tim-icons icon-simple-remove"/>
       </template>
     </side-bar>
     <div class="main-panel">
