@@ -1,48 +1,44 @@
 {
-  "name": "dashboard-front",
-  "description": "A Vue.js project",
+  "name": "vue-black-dashboard",
   "version": "1.0.0",
-  "author": "crarrivillaga <carlosra210@gmail.com>",
-  "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "vue-cli-service build",
+    "e2e": "node test/e2e/runner.js",
+    "lint": "vue-cli-service lint",
+    "lint-fix": "vue-cli-service lint --fix",
+    "dev": "vue-cli-service serve --open",
+    "serve": "vue-cli-service serve --open"
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "bootstrap-vue": "^2.0.0-rc.11",
-    "jquery": "^3.3.1",
-    "pug": "^2.0.3",
-    "save": "^2.3.3",
-    "sweetalert2": "^8.0.1",
-    "vue": "^2.5.11",
-    "vue-burger-menu": "^2.0.0",
-    "vue-form-wizard": "^0.8.4",
-    "vue-resource": "^1.5.1",
-    "vue-router": "^3.0.2",
-    "vuex": "^3.1.0"
+    "chart.js": "^2.7.2",
+    "es6-promise": "^4.2.4",
+    "vue": "^2.5.17",
+    "vue-chartjs": "^3.4.0",
+    "vue-i18n": "^8.0.0",
+    "vue-router": "^3.0.1",
+    "vue2-transitions": "^0.2.3"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-plugin-eslint": "^3.2.1",
+    "@vue/cli-service": "^3.2.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "node-sass": "^4.10.0",
+    "sass-loader": "^7.1.0",
+    "vue-cli-plugin-i18n": "^0.5.0",
+    "vue-template-compiler": "^2.5.17"
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
   ],
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-transform-regenerator": "^6.26.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-stage-3": "^6.24.1",
-    "cross-env": "^5.0.5",
-    "css-loader": "^0.28.7",
-    "file-loader": "^1.1.4",
-    "node-sass": "^4.5.3",
-    "sass-loader": "^6.0.6",
-    "vue-loader": "^13.0.5",
-    "vue-template-compiler": "^2.4.4",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+  "description": "A sample admin dashboard based on paper dashboard UI template",
+  "author": "cristian.jora <joracristi@gmail.com>",
+  "engines": {
+    "node": ">= 8.1.4",
+    "npm": ">= 5.0.0"
   }
 }
