@@ -8,7 +8,8 @@
         <div class="block block-three prueba2"></div>
         <div class="block block-four prueba2"></div>
         <a href="#">
-          <img class="avatar prueba6" src="img/gabriel.jpg" alt="...">
+          <img class="avatar prueba6" v-bind:src="assetsDocumentos + imagePerfil.ruta" alt="...">
+          <h4 class="title">{{imagePerfil.ruta}}</h4>
           <h4 class="title">{{persona.nombre +' '+ persona.apellido}}</h4>
         </a>
         <p class="description">
@@ -40,12 +41,16 @@
       return {
         empleado: '',
         persona:'',
-        id_persona : ''
+        id_persona : '',
+        imagePerfil: '',
+        assetsDocumentos :'http://localhost:8000/documentos/'
       }
     },
     created: function(){
       this.getEmpleado();
       this.getPersona();
+      this.getPhotoUser();
+
     },
     methods: {
       async getEmpleado(){
@@ -69,9 +74,21 @@
           .catch(err => {
               console.log(err)
           });
+      },
+
+      async getPhotoUser(){
+        await axios.get('http://localhost:8000/api/documentos/'+1)
+          .then(  (res) => { 
+            this.imagePerfil = res.data
+            console.log(this.imagePerfil)
+          })
+          .catch(err => {
+              console.log(err)
+          });
       }
-    
     },
+
+   
     mounted (){
         
           
