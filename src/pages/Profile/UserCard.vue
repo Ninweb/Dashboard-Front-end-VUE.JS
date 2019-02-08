@@ -1,5 +1,8 @@
 <template>
+  <div>
     <card type="user">
+       
+     
       <p class="card-text">
       </p>
       <div class="author">
@@ -7,22 +10,31 @@
         <div class="block block-two prueba2"></div>
         <div class="block block-three prueba2"></div>
         <div class="block block-four prueba2"></div>
-        <a href="#">
-          <img class="avatar prueba6" src="img/gabriel.jpg" alt="...">
-          <h4 class="title">{{persona.nombre +' '+ persona.apellido}}</h4>
-        </a>
-        <p class="description">
-          <strong>Cargo: </strong>{{empleado.descripcion_cargo}}
-        </p>
-        <p class="description">
-          <strong>Status: </strong>{{empleado.estado_empleado}}
-        </p>
-        <p class="description">
-          <strong>Departamento: </strong>Programación
-        </p>
-      </div>
-      <p></p>
+        <div v-if="cargando">
+          <div class="lds-dual-ring2"></div>
+        </div>
+        <div v-if="!cargando">
+          <a href="#">
+            <img class="avatar prueba6" src="img/gabriel.jpg" alt="...">
+            <h4 class="title">{{persona.nombre +' '+ persona.apellido}}</h4>
+          </a>
+          <p class="description">
+            <strong>Cargo: </strong>{{empleado.descripcion_cargo}}
+          </p>
+          <p class="description">
+            <strong>Status: </strong>{{empleado.estado_empleado}}
+          </p>
+          <p class="description">
+            <strong>Departamento: </strong>Programación
+          </p>
+        </div>
+        <p></p>
+        </div>
+        
     </card>
+   
+  </div>
+    
 </template>
 <script>
   import axios from 'axios';
@@ -34,23 +46,35 @@
         default: () => {
           return {};
         }
-      }
+      },
+     
     },
     data() {
       return {
+        usuarioLogeado: '',
         empleado: '',
         persona:'',
-        id_persona : ''
+        id_persona : '',
+        cargando: true
       }
     },
     created: function(){
+      this.getUsuarioLogeado();
       this.getEmpleado();
       this.getPersona();
     },
     methods: {
+      getUsuarioLogeado(){
+        let usuarioLogeado = JSON.parse(localStorage.getItem('usuarioLogeado'));
+        this.usuarioLogeado = usuarioLogeado;
+        console.log(usuarioLogeado); 
+      },
       async getEmpleado(){
+        console.log(this.usuarioLogeado);
+      
+      
       //BUSCANDO INFORMACIÓN DEL EMPLEADO
-        await axios.get('http://localhost:8000/api/usuario/empleados/'+1)
+        await axios.get('http://localhost:8000/api/usuario/empleados/'+this.usuarioLogeado.usuario.id)
           .then(  (response) => { 
             this.empleado = response.data[0];
             this.id_persona = this.empleado.id_persona;
@@ -61,10 +85,11 @@
           });
       },  
       async getPersona(){
-        await axios.get('http://localhost:8000/api/personas/'+1)
+        await axios.get('http://localhost:8000/api/personas/'+this.id_persona)
           .then(  (res) => { 
-            this.persona = res.data
-            console.log(this.persona)
+            this.persona = res.data[0];
+            console.log(this.persona);
+            this.cargando = false
           })
           .catch(err => {
               console.log(err)
@@ -72,9 +97,8 @@
       }
     
     },
-    mounted (){
+    mounted () {
         
-          
     },  
     computed:{//metodos computados los cuales se ejecutan en segundo plano
       
@@ -89,4 +113,23 @@
  .prueba6{
    border: 2px solid #cccccc!important;
  }
+
+ .lds-dual-ring2 {
+  display: inline-block;
+  position: relative;
+  top:30px;
+  width: 84px;
+  height: 84px;
+}
+.lds-dual-ring2:after {
+  content: " ";
+  display: block;
+  width: 80px;
+  height: 80px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 10px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
 </style>

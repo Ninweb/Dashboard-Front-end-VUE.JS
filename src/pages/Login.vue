@@ -7,20 +7,38 @@
                     <img src="img/login-logo.png" alt="Avatar">
                 </div>           
                 <div class="grupo col-md-12">
-                    <div class="form-group">
-                        <input type="text" class="form-control input-lg" v-model="usuario.correo" name="correo" placeholder="Correo" required="required">	
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control input-lg" name="password" v-model="usuario.password" placeholder="Contraseña" required="required">
-                    </div>        
-                    <div class="form-group clearfix">
+                    <div class="row">
+                        <div class="form-group  col-md-12" >
+                            <div class="errores" v-if="error.correo">
+                                <p>{{error.informacion}}</p>
+                            </div>
+                            <input type="text" class="form-control input-lg" v-model="usuario.correo" name="correo" placeholder="Correo" required="required">	
+                        </div>
+                        <div class="form-group col-md-12" >
+                            <div class="errores" v-if="error.password">
+                                <p>{{error.informacion}}</p>
+                            </div>
+                            <input type="password" class="form-control input-lg" name="password" v-model="usuario.password" placeholder="Contraseña" required="required">
+                        </div>        
+                        <div class="form-group col-md-12">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <br>
+                                    <div class="offset-md-4">
+                                        <button type="submit" class="btn btn-lg col-md-12 align-middle" v-if="!cargando">Entrar</button>
+                                    </div>
+                                    <div class="lds-dual-ring offset-md-1" v-if="cargando"></div>
+                                    
+                                    
+                                </div>
+                            </div>
                         
-                        <button type="submit" class="btn btn-lg pull-right">Entrar</button>
-                    </div>	
-                </div>   
-                <div class="hint-text">¿Olvidaste tu contraseña? <a href="#">Recupera tu contraseña</a></div> 
+                            
+                        </div>
+                        <div class="recuperarContraseña col-md-12">¿Olvidaste tu contraseña? <a href="#">Recupera tu contraseña</a></div> 
+                    </div>    
+                </div>    
             </form>
-            
             
         
         </div>
@@ -37,38 +55,48 @@
                 usuario: {
                     correo: '',
                     password: ''
+                },
+                cargando: false,
+                error:{
+                    correo:false,
+                    password:false,
+                    informacion:''
                 }
             }
         
         },
         methods: {
             loginAPI(){
-            //const axios = require('axios');
-            console.log(this.usuario);
-            axios.post('http://localhost:8000/api/login',{
-                correo: this.usuario.correo,
-                password: this.usuario.password   
-            })
-            .then(response => { 
-                console.log(response)
-                if (response.body.usuario.acceso_usuario == "admin"){
-                    let token = response.body.usuario.api_token;
-                    let usuarioLogeado = response.data;
-                    
-                    console.log(usuarioLogeado)
-
-                    //console.log(token);
-                    
-                    /*this.$router.push({ 
-                        name:'main-view', 
-                        params: this.usuario
-                    })*/
-                }
-            })
-            .catch(error => {
-                console.log(error.response)
-            });
-
+                this.cargando = true;
+                axios.post('http://localhost:8000/api/login',{
+                    correo: this.usuario.correo,
+                    password: this.usuario.password   
+                })
+                .then(response => { 
+                    if(response.data.status == "error"){
+                        this.error.informacion = response.data.message;
+                        if(response.data.message == "Correo no valido"){
+                            this.error.correo = true
+                            this.error.password = false
+                        }else{
+                            this.error.correo = false
+                            this.error.password = true
+                        }
+                        this.cargando = false;
+                    }else if (response.data.usuario.acceso_usuario == "admin"){
+                        let token = response.data.usuario.api_token;
+                        let usuarioLogeado = response.data;
+                        console.log(usuarioLogeado)
+                        localStorage.setItem('usuarioLogeado',JSON.stringify(usuarioLogeado));
+                        this.$router.push({ 
+                            name:'dashboard', 
+                            params: this.usuario
+                        })
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                });
             }
         }
     }
@@ -178,13 +206,41 @@
 	.login-form a:hover {
 		text-decoration: underline;
 	}
-	.hint-text {
-		color: #999;
+	.recuperarContraseña{
+		color: #ffffff;
         text-align: center;
-		padding-bottom: 15px;
+		
 	}
     .grupo{
         position: relative;
         top: -100px!important;
+    }
+    
+    .errores p{
+        color: #ac1b2f!important;
+    }
+    .lds-dual-ring {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    }
+    .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 5px solid #1b64a8;
+    border-color: #1b64a8 transparent #1b64a8 transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+    }
+    @keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
     }
 </style>

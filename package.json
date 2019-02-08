@@ -11,10 +11,15 @@
     "serve": "vue-cli-service serve --open"
   },
   "dependencies": {
+    "@chenfengyuan/vue-carousel": "^1.0.0",
     "axios": "^0.18.0",
     "chart.js": "^2.7.2",
     "es6-promise": "^4.2.4",
-    "vue": "^2.5.17",
+    "jquery": "^3.3.1",
+    "slick-carousel": "^1.8.1",
+    "vue": "^2.6.3",
+    "vue-agile": "^0.3.7",
+    "vue-carousel": "^0.17.0",
     "vue-chartjs": "^3.4.0",
     "vue-i18n": "^8.0.0",
     "vue-router": "^3.0.1",
@@ -28,7 +33,7 @@
     "node-sass": "^4.10.0",
     "sass-loader": "^7.1.0",
     "vue-cli-plugin-i18n": "^0.5.0",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.6.3"
   },
   "browserslist": [
     "> 1%",

@@ -1,24 +1,60 @@
 <template>
-  <div class="row">
-    <div class="col-md-8">
-      <edit-profile-form :model="model">
-      </edit-profile-form>
+
+  <div>
+    <div class="row">
+      <div class="col-md-12">
+        <my-profile/>
+      </div>
     </div>
-    <div class="col-md-4">
-      <user-card :user="user"></user-card>
+     <div class="row">
+      <div class="col-md-12">
+        <my-employment/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <my-family/>
+      </div>
+      <div class="col-md-6">
+        <my-references/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <edit-profile-form :model="model">
+        </edit-profile-form>
+      </div>
+      <div class="col-md-4">
+        <user-card :user="user"></user-card>
+      </div>
     </div>
   </div>
+  
 </template>
 <script>
   import EditProfileForm from './Profile/EditProfileForm';
   import UserCard from './Profile/UserCard'
+  import MyProfile from './Profile/MyProfile'
+  import MyFamily from './Profile/MyFamily'
+  import MyReferences from './Profile/MyReferences'
+  import MyEmployment from './Profile/MyEmployment'
+
   export default {
     components: {
       EditProfileForm,
-      UserCard
+      UserCard,
+      MyProfile,
+      MyFamily,
+      MyReferences,
+      MyEmployment
     },
     data() {
       return {
+         data: [
+          '<div>asasa</div>',
+          '<div>asasa 2</div>',
+          '<div>Slide 3</div>',
+        ],
         model: {
           company: 'Creative Code Inc.',
           email: 'mike@email.com',
@@ -40,4 +76,6 @@
   }
 </script>
 <style>
+
+
 </style>

@@ -3,9 +3,8 @@
     <h5 slot="header" class="title">Editar Perfil</h5>
     <div class="row">
       <div class="col-md-5 pr-md-1">
-        <base-input label="Company (disabled)"
-                  placeholder="Company"
-                  v-model="model.company"
+        <base-input label="Empresa"
+                  placeholder="Ninweb"
                   disabled>
         </base-input>
       </div>
@@ -32,29 +31,60 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
-        <base-input label="Direccion"
-                  v-model="model.address"
-                  placeholder="Home Address">
+      <div class="col-md-2 pl-md-3">
+        <base-input label="Sexo"
+                  v-model="model.lastName"
+                  placeholder="Sexo">
+        </base-input>
+      </div>
+      <div class="col-md-4 pl-md-0 form-group">
+        <label for="fechaNacimiento">fecha de nacimiento</label>
+        <input type="date" class="form-control ">
+      </div>
+      <div class="col-md-3 pl-md-1">
+        <base-input label="Cédula"
+                  v-model="model.lastName"
+                  placeholder="Cedula">
+        </base-input>
+      </div>
+      <div class="col-md-3 pl-md-0">
+        <base-input label="Profesion"
+                  v-model="model.lastName"
+                  placeholder="Profesion">
         </base-input>
       </div>
     </div>
+    
     <div class="row">
-      <div class="col-md-4 pr-md-1">
+      <div class="col-md-3 pr-md-1">
         <base-input label="Ciudad"
                   v-model="model.city"
                   placeholder="City">
         </base-input>
       </div>
-      <div class="col-md-4 px-md-1">
-        <base-input label="País"
-                  v-model="model.country"
-                  placeholder="Country">
-        </base-input>
-      </div>
-      <div class="col-md-4 pl-md-1">
+      <div class="col-md-3 pl-md-1">
         <base-input label="Municipio"
                   placeholder="">
+        </base-input>
+      </div>
+      <div class="col-md-3 px-md-1">
+        <base-input label="Alcaldía"
+                  v-model="model.country"
+                  placeholder="Alcaldía">
+        </base-input>
+      </div>
+      
+      <div class="col-md-3 pl-md-1">
+        <base-input label="Parroquía"
+                  placeholder="Parroquía">
+        </base-input>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <base-input label="Zona"
+                  v-model="model.address"
+                  placeholder="Zona">
         </base-input>
       </div>
     </div>

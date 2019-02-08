@@ -8,6 +8,8 @@ import i18n from "./i18n"
 Vue.use(BlackDashboard);
 Vue.use(axios);
 
+
+
 /* eslint-disable no-new */
 new Vue({
   router,
