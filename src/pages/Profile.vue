@@ -1,17 +1,17 @@
 <template>
 
   <div>
-    <div class="row">
+    <div class="row fuentes">
       <div class="col-md-12">
         <my-profile/>
       </div>
     </div>
-     <div class="row">
+     <div class="row fuentes">
       <div class="col-md-12">
         <my-employment/>
       </div>
     </div>
-    <div class="row">
+    <div class="row fuentes">
       <div class="col-md-6">
         <my-family/>
       </div>
@@ -24,9 +24,7 @@
         <edit-profile-form :model="model">
         </edit-profile-form>
       </div>
-      <div class="col-md-4">
-        <user-card :user="user"></user-card>
-      </div>
+      
     </div>
   </div>
   
@@ -76,6 +74,9 @@
   }
 </script>
 <style>
-
+  .fuentes p{
+    font-size: 18px!important;
+    font-weight:350;
+  }
 
 </style>

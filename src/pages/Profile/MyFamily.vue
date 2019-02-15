@@ -17,29 +17,29 @@
             <div class="row">
                 <div class="col-md-4">
                     <p><strong>Parentezco</strong></p>
-                    <h4>Padre</h4>
+                    <h5>Padre</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Nombre</strong></p>
-                    <h4>Arnaldo</h4>
+                    <h5>Arnaldo</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Apellido</strong></p>
-                    <h4>Ortega</h4>
+                    <h5>Ortega</h5>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <p><strong>Sexo</strong></p>
-                    <h4>Masculino</h4>
+                    <h5>Masculino</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Telefono</strong></p>
-                    <h4>04129998328</h4>
+                    <h5>04129998328</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Ocupación</strong></p>
-                    <h4>Tecnico Electronico</h4>
+                    <h5>Tecnico Electronico</h5>
                 </div>
             </div>
             <div class="row">
@@ -48,29 +48,29 @@
             <div class="row">
                 <div class="col-md-4">
                     <p><strong>Parentezco</strong></p>
-                    <h4>Padre</h4>
+                    <h5>Padre</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Nombre</strong></p>
-                    <h4>Arnaldo</h4>
+                    <h5>Arnaldo</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Apellido</strong></p>
-                    <h4>Ortega</h4>
+                    <h5>Ortega</h5>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <p><strong>Sexo</strong></p>
-                    <h4>Masculino</h4>
+                    <h5>Masculino</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Telefono</strong></p>
-                    <h4>04129998328</h4>
+                    <h5>04129998328</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Ocupación</strong></p>
-                    <h4>Tecnico Electronico</h4>
+                    <h5>Tecnico Electronico</h5>
                 </div>
             </div>
             <div class="row">

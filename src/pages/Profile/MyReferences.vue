@@ -18,29 +18,29 @@
                 
                 <div class="col-md-4">
                     <p><strong>Nombre</strong></p>
-                    <h4>Wilmer</h4>
+                    <h5>Wilmer</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Apellido</strong></p>
-                    <h4>Sanchez</h4>
+                    <h5>Sanchez</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Tiempo conocido</strong></p>
-                    <h4>3 meses</h4>
+                    <h5>3 meses</h5>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <p><strong>Sexo</strong></p>
-                    <h4>Masculino</h4>
+                    <h5>Masculino</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Telefono</strong></p>
-                    <h4>04129998328</h4>
+                    <h5>04129998328</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Ocupación</strong></p>
-                    <h4>Programador</h4>
+                    <h5>Programador</h5>
                 </div>
             </div>
             <div class="row">
@@ -50,29 +50,29 @@
                 
                 <div class="col-md-4">
                     <p><strong>Nombre</strong></p>
-                    <h4>Wilmer</h4>
+                    <h5>Wilmer</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Apellido</strong></p>
-                    <h4>Sanchez</h4>
+                    <h5>Sanchez</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Tiempo conocido</strong></p>
-                    <h4>3 meses</h4>
+                    <h5>3 meses</h5>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <p><strong>Sexo</strong></p>
-                    <h4>Masculino</h4>
+                    <h5>Masculino</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Telefono</strong></p>
-                    <h4>04129998328</h4>
+                    <h5>04129998328</h5>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Ocupación</strong></p>
-                    <h4>Programador</h4>
+                    <h5>Programador</h5>
                 </div>
                 
             </div>
