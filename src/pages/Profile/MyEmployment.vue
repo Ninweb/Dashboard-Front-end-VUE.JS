@@ -13,19 +13,19 @@
                         <div class="row">
                         <div class="col-md-3">
                             <p><strong>Fecha de ingreso</strong></p>
-                            <H3>07-12-2018</H3>
+                            <h4>07-12-2018</h4>
                         </div>
                         <div class="col-md-3">
                             <p><strong>Fecha de Retiro</strong></p>
-                            <H3>No aplica</H3>
+                            <h4>No aplica</h4>
                         </div>
                         <div class="col-md-3">
                             <p><strong>Transporte de ida</strong></p>
-                            <H3>Metro</H3>
+                            <h4>Metro</h4>
                         </div>
                         <div class="col-md-3">
                             <p><strong>Transporte de vuelta</strong></p>
-                            <H3>Camioneta</H3>
+                            <h4>Camioneta</h4>
                         </div>
                     </div>
                 </div>
@@ -33,29 +33,26 @@
                         <div class="row">
                         <div class="col-md-3">
                             <p><strong>Número de habitación</strong></p>
-                            <H3>02124317189</H3>
+                            <h4>02124317189</h4>
                         </div>
                         <div class="col-md-3">
                             <p><strong>Número de celular</strong></p>
-                            <H3>04122024414</H3>
+                            <h4>04122024414</h4>
                         </div>
                         <div class="col-md-3">
                             <p><strong>Tipo de sangre</strong></p>
-                            <H3>A++</H3>
+                            <h4>A++</h4>
                         </div>
                         <div class="col-md-3">
                             <p><strong>Estado Civil</strong></p>
-                            <H3>Soltero</H3>
+                            <h4>Soltero</h4>
                         </div>
                     </div>
                 </div>
                 <hr style="border: 0.5px solid #ccc; width:100%;">
                 <div class="col-md-12">
                         <div class="row">
-                        <div class="col-md-3">
-                            <p><strong>Educacion</strong></p>
-                            <H3>Universitaria</H3>
-                        </div>
+                        
                         
                         <div class="col-md-4 offset-md-4">
                             <button type="button" class=" btnEditar p-3"><i class="far fa-edit iconBtn"></i>Editar</button>

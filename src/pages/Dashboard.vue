@@ -1,7 +1,8 @@
 <template>
   <div>
 
-    <div class="row">
+    <div class="row">   
+
       <div class="col-md-4">
         <user-card></user-card>
       </div>
@@ -136,7 +137,8 @@
   import config from '@/config';
   import UserCard from './Profile/UserCard'
   import DepartamentosCards from './Profile/DepartamentosCards'
- 
+  
+  import store from '../store/index.js'
   export default {
     components: {
       LineChart,
@@ -229,15 +231,9 @@
       }
     },
     computed: {
-      enableRTL() {
-        return this.$route.query.enableRTL;
-      },
-      isRTL() {
-        return this.$rtl.isRTL;
-      },
-      bigLineChartCategories() {
-        return this.$t('dashboard.chartCategories');
-      }
+    },
+    created(){
+
     },
     methods: {
       initBigChart(index) {
