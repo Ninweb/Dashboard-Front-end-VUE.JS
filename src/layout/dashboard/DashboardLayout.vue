@@ -5,7 +5,7 @@
         <sidebar-link to="/dashboard" :name="$t('Resumen')" icon="tim-icons icon-chart-pie-36"/>
         <sidebar-link to="/notifications" :name="$t('Notificaciones')" icon="tim-icons icon-bell-55"/>
         <sidebar-link to="/profile" :name="$t('Mi perfil')" icon="tim-icons icon-single-02"/>
-        <sidebar-link to="/icons" :name="$t('Departamentos')" icon="tim-icons icon-vector"/>
+        <sidebar-link to="/departamentos" :name="$t('Departamentos')" icon="tim-icons icon-vector"/>
         <sidebar-link to="/empleados" :name="$t('Empleados')" icon="tim-icons icon-satisfied"/>
         <sidebar-link to="/" :name="$t('Proyectos')" icon="tim-icons icon-sound-wave"/>
         <!-- <sidebar-link to="/maps" :name="$t('Clientes')" icon="tim-icons icon-world"/> -->

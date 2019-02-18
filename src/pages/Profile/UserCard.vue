@@ -26,6 +26,7 @@
         </p>
       </div>
       <p></p>
+      <div class="lds-dual-ring offset-md-1" v-if="cargando"></div>
     </card>
 
   </div>

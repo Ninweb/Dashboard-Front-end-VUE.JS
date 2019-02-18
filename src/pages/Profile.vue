@@ -7,7 +7,6 @@
           <button type="button" class="btn btn-outline-primary" @click="mostrar_perfil">Perfil</button>
           <button type="button" class="btn btn-outline-primary" @click="mostrar_familiar">Familiares</button>
           <button type="button" class="btn btn-outline-primary" @click="mostrar_referencia">Referencias</button>
-          <button type="button" class="btn btn-outline-primary" @click="mostrar_empleado">Empleado</button>
         </div>
       </div>
     </div>
@@ -17,6 +16,7 @@
         <transition name="fade">
           <div v-if="showProfile">
             <my-profile/>
+            <my-employment/>
           </div>
         </transition>
 
@@ -29,12 +29,6 @@
         <transition name="fade">
           <div v-if="showReferencia">
             <my-references/>
-          </div>
-        </transition>
-
-        <transition name="fade">
-          <div v-if="showEmpleado">
-            <my-employment/>
           </div>
         </transition>
       </div>
@@ -74,11 +68,9 @@
 
     data() {
       return {
-        show: true,
         showProfile: true,
         showFamiliar: false,
         showReferencia: false,
-        showEmpleado: false,
 
         data: [
           '<div>asasa</div>',
@@ -108,28 +100,18 @@
         this.showProfile = true
         this.showFamiliar = false
         this.showReferencia = false
-        this.showEmpleado = false
       },
 
       mostrar_familiar () {
         this.showProfile = false
         this.showFamiliar = true
         this.showReferencia = false
-        this.showEmpleado = false
       },
 
       mostrar_referencia () {
         this.showProfile = false
         this.showFamiliar = false
         this.showReferencia = true
-        this.showEmpleado = false
-      },
-
-      mostrar_empleado () {
-        this.showProfile = false
-        this.showFamiliar = false
-        this.showReferencia = false
-        this.showEmpleado = true
       }
     }
   }
@@ -142,11 +124,11 @@
 
   .fade-enter-active, .fade-leave-active {
     transition: opacity .3s;
-    transition-delay: .4s;
+    transition-delay: .5s;
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
-    transition-delay: .8s;
+    transition-delay: .1s;
   }
 
 </style>
