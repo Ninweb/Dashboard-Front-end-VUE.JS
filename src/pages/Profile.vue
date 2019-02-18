@@ -2,32 +2,55 @@
 
   <div>
     <div class="row fuentes">
-      <div class="col-md-12">
-        <my-profile/>
+      <div class="col-md-12 align-center">
+        <div>
+          <button type="button" class="btn btn-outline-primary" @click="mostrar_perfil">Perfil</button>
+          <button type="button" class="btn btn-outline-primary" @click="mostrar_familiar">Familiares</button>
+          <button type="button" class="btn btn-outline-primary" @click="mostrar_referencia">Referencias</button>
+          <button type="button" class="btn btn-outline-primary" @click="mostrar_empleado">Empleado</button>
+        </div>
       </div>
     </div>
-     <div class="row fuentes">
-      <div class="col-md-12">
-        <my-employment/>
-      </div>
-    </div>
+
     <div class="row fuentes">
-      <div class="col-md-6">
-        <my-family/>
-      </div>
-      <div class="col-md-6">
-        <my-references/>
+      <div class="col-md-12">
+        <transition name="fade">
+          <div v-if="showProfile">
+            <my-profile/>
+          </div>
+        </transition>
+
+        <transition name="fade">
+          <div v-if="showFamiliar">
+            <my-family/>
+          </div>
+        </transition>
+
+        <transition name="fade">
+          <div v-if="showReferencia">
+            <my-references/>
+          </div>
+        </transition>
+
+        <transition name="fade">
+          <div v-if="showEmpleado">
+            <my-employment/>
+          </div>
+        </transition>
       </div>
     </div>
-    <div class="row">
+
+    <!-- <div class="row">
       <div class="col-md-8">
         <edit-profile-form :model="model">
         </edit-profile-form>
       </div>
-      
-    </div>
+
+    </div> -->
+
+
   </div>
-  
+
 </template>
 <script>
   import EditProfileForm from './Profile/EditProfileForm';
@@ -36,6 +59,7 @@
   import MyFamily from './Profile/MyFamily'
   import MyReferences from './Profile/MyReferences'
   import MyEmployment from './Profile/MyEmployment'
+  import { SlideXRightTransition } from 'vue2-transitions'
 
   export default {
     components: {
@@ -44,11 +68,19 @@
       MyProfile,
       MyFamily,
       MyReferences,
-      MyEmployment
+      MyEmployment,
+      SlideXRightTransition
     },
+
     data() {
       return {
-         data: [
+        show: true,
+        showProfile: true,
+        showFamiliar: false,
+        showReferencia: false,
+        showEmpleado: false,
+
+        data: [
           '<div>asasa</div>',
           '<div>asasa 2</div>',
           '<div>Slide 3</div>',
@@ -70,6 +102,35 @@
           description: `Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...`,
         }
       }
+    },
+    methods: {
+      mostrar_perfil () {
+        this.showProfile = true
+        this.showFamiliar = false
+        this.showReferencia = false
+        this.showEmpleado = false
+      },
+
+      mostrar_familiar () {
+        this.showProfile = false
+        this.showFamiliar = true
+        this.showReferencia = false
+        this.showEmpleado = false
+      },
+
+      mostrar_referencia () {
+        this.showProfile = false
+        this.showFamiliar = false
+        this.showReferencia = true
+        this.showEmpleado = false
+      },
+
+      mostrar_empleado () {
+        this.showProfile = false
+        this.showFamiliar = false
+        this.showReferencia = false
+        this.showEmpleado = true
+      }
     }
   }
 </script>
@@ -77,6 +138,15 @@
   .fuentes p{
     font-size: 18px!important;
     font-weight:350;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .3s;
+    transition-delay: .4s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    transition-delay: .8s;
   }
 
 </style>

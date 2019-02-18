@@ -3,11 +3,11 @@
     <div class="container-fluid">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" href="http://www.creative-tim.com">
-            Creative Tim
+          <a class="nav-link" href="https://www.ninweb.net/mailer-templates/" target="_blank">
+            Email Templates
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="http://blog.creative-tim.com">
             Blog
           </a>
@@ -16,12 +16,11 @@
           <a class="nav-link" href="http://www.creative-tim.com/license">
             Licenses
           </a>
-        </li>
+        </li> -->
       </ul>
       <div class="copyright">
         © {{year}} made with <i class="tim-icons icon-heart-2"></i> by
-        <a href="https://www.binarcode.com" target="_blank">Binar Code</a>&nbsp;&
-        <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+        <a href="http://www.ninweb.net" target="_blank">NINWEB, C.A.</a>
       </div>
     </div>
   </footer>

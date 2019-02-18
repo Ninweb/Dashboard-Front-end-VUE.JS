@@ -11,6 +11,9 @@ import Maps from "@/pages/Maps.vue";
 import Typography from "@/pages/Typography.vue";
 import TableList from "@/pages/TableList.vue";
 import Login from '@/pages/Login.vue';
+import Empleados from '@/pages/Empleados.vue'
+import ListEmpleados from '@/pages/Empleados/ListEmpleados.vue'
+import CrearEmpleado from '@/pages/Empleados/CrearEmpleado.vue'
 
 const routes = [
   {
@@ -27,6 +30,24 @@ const routes = [
         path: "profile",
         name: "profile",
         component: Profile
+      },
+      {
+        path: "empleados",
+        name: "empleados",
+        component: Empleados,
+        redirect: "/empleados/list",
+        children : [
+          {
+            path: "list",
+            name: "list",
+            component: ListEmpleados
+          },
+          {
+            path: "crear",
+            name: "crear",
+            component: CrearEmpleado
+          }
+        ]
       },
       {
         path: "notifications",
@@ -62,6 +83,57 @@ const routes = [
     component: Login
   }
 ];
+
+// {
+//   path: "/",
+//   name: "login",
+//   component: Login,
+//   children: [
+//     {
+//       path: "dashboard",
+//       name: "dashboard",
+//       component: DashboardLayout,
+//       redirect: "/main",
+//       children: [
+//         {
+//           path: "main",
+//           name: "main",
+//           component: Dashboard
+//         },
+//         {
+//           path: "profile",
+//           name: "profile",
+//           component: Profile
+//         },
+//         {
+//           path: "notifications",
+//           name: "notifications",
+//           component: Notifications
+//         },
+//         {
+//           path: "icons",
+//           name: "icons",
+//           component: Icons
+//         },
+//         {
+//           path: "maps",
+//           name: "maps",
+//           component: Maps
+//         },
+//         {
+//           path: "typography",
+//           name: "typography",
+//           component: Typography
+//         },
+//         {
+//           path: "table-list",
+//           name: "table-list",
+//           component: TableList
+//         }
+//       ]
+//     }
+//   ]
+// }
 
 /**
  * Asynchronously load view (Webpack Lazy loading compatible)

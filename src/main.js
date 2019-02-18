@@ -6,10 +6,10 @@ import axios from 'axios'
 
 import BlackDashboard from "./plugins/blackDashboard";
 import i18n from "./i18n"
+
+
 Vue.use(BlackDashboard);
 Vue.use(axios);
-
-
 
 
 
