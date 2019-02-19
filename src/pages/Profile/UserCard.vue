@@ -12,7 +12,6 @@
         <div class="block block-four prueba2"></div>
         <a href="#">
           <img class="avatar prueba6" v-bind:src="assetsDocumentos + imagePerfil.ruta" alt="...">
-          <h4 class="title">{{imagePerfil.ruta}}</h4>
           <h4 class="title">{{persona.nombre +' '+ persona.apellido}}</h4>
         </a>
         <p class="description">
