@@ -2,13 +2,14 @@
   <div>
 
     <div class="row">
+
       <div class="col-md-4">
         <user-card></user-card>
       </div>
       <div class="col-md-8">
         <departamentos-cards></departamentos-cards>
       </div>
-      <div class="col-12">
+      <!-- <div class="col-12">
         <card type="chart">
           <template slot="header">
             <div class="row">
@@ -45,9 +46,13 @@
             </line-chart>
           </div>
         </card>
-      </div>
+      </div> -->
     </div>
-    <div class="row">
+
+    <div>
+      <carousel-user/>
+    </div>
+    <!-- <div class="row">
       <div class="col-lg-4" :class="{'text-right': isRTL}">
         <card type="chart">
           <template slot="header">
@@ -94,8 +99,8 @@
           </div>
         </card>
       </div>
-    </div>
-    <div class="row">
+    </div> -->
+    <!-- <div class="row">
       <div class="col-lg-6 col-md-12">
         <card type="tasks" :header-classes="{'text-right': isRTL}">
           <template slot="header">
@@ -124,7 +129,7 @@
           </div>
         </card>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -136,7 +141,9 @@
   import config from '@/config';
   import UserCard from './Profile/UserCard'
   import DepartamentosCards from './Profile/DepartamentosCards'
- 
+  import CarouselUser from '@/components/CarouselUserCard.vue'
+
+  import store from '../store/index.js'
   export default {
     components: {
       LineChart,
@@ -144,7 +151,8 @@
       TaskList,
       UserTable,
       UserCard,
-      DepartamentosCards
+      DepartamentosCards,
+      CarouselUser
     },
     data() {
       return {
@@ -229,15 +237,9 @@
       }
     },
     computed: {
-      enableRTL() {
-        return this.$route.query.enableRTL;
-      },
-      isRTL() {
-        return this.$rtl.isRTL;
-      },
-      bigLineChartCategories() {
-        return this.$t('dashboard.chartCategories');
-      }
+    },
+    created(){
+
     },
     methods: {
       initBigChart(index) {

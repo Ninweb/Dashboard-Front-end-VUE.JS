@@ -12,6 +12,7 @@
       <div class="col-md-7 pl-md-1">
         <base-input label="Correo"
                   type="email"
+                  v-model="usuarioLogeado.usuario.correo"
                   placeholder="empleado@ninweb.com">
         </base-input>
       </div>
@@ -113,6 +114,8 @@
   </card>
 </template>
 <script>
+ import axios from 'axios';
+ 
   export default {
     props: {
       model: {
@@ -121,7 +124,69 @@
           return {};
         }
       }
-    }
+    },
+    data() {
+      return {
+        usuarioLogeado: '',
+        empleado: '',
+        persona:'',
+        id_persona : '',
+        cargando: true,
+        imagePerfil: '',
+        assetsDocumentos :'http://localhost:8000/documentos/'
+      }
+    },
+    created: function(){
+      this.getUsuarioLogeado();
+      this.getEmpleado();
+      this.getPersona();
+      this.getPhotoUser();
+
+    },
+    methods: {
+      getUsuarioLogeado(){
+        let usuarioLogeado = JSON.parse(localStorage.getItem('usuarioLogeado'));
+        this.usuarioLogeado = usuarioLogeado;
+        console.log('estoy cargando en editar profile')
+        console.log(usuarioLogeado); 
+      },
+      async getEmpleado(){
+        console.log(this.usuarioLogeado);
+      //BUSCANDO INFORMACIÓN DEL EMPLEADO
+        await axios.get('http://localhost:8000/api/usuario/empleados/'+this.usuarioLogeado.usuario.id)
+          .then(  (response) => { 
+            this.empleado = response.data[0];
+            this.id_persona = this.empleado.id_persona;
+            console.log(this.empleado)
+          })
+          .catch(error => {
+              console.log(error)
+          });
+      },  
+      async getPersona(){
+        await axios.get('http://localhost:8000/api/personas/'+this.id_persona)
+          .then(  (res) => { 
+            this.persona = res.data[0];
+            console.log(this.persona);
+            this.cargando = false
+          })
+          .catch(err => {
+              console.log(err)
+          });
+      },
+
+      async getPhotoUser(){
+        await axios.get('http://localhost:8000/api/documentos/'+1)
+          .then(  (res) => { 
+            this.imagePerfil = res.data
+            console.log(this.imagePerfil)
+          })
+          .catch(err => {
+              console.log(err)
+          });
+      }
+    },
+
   }
 </script>
 <style>

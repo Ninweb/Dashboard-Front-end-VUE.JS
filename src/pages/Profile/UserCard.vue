@@ -1,8 +1,8 @@
 <template>
   <div>
     <card type="user">
-       
-     
+
+
       <p class="card-text">
       </p>
       <div class="author">
@@ -25,10 +25,11 @@
         </p>
       </div>
       <p></p>
+      <div class="lds-dual-ring offset-md-1" v-if="cargando"></div>
     </card>
-   
+
   </div>
-    
+
 </template>
 <script>
   import axios from 'axios';
@@ -41,7 +42,7 @@
           return {};
         }
       },
-     
+
     },
     data() {
       return {
@@ -65,15 +66,15 @@
       getUsuarioLogeado(){
         let usuarioLogeado = JSON.parse(localStorage.getItem('usuarioLogeado'));
         this.usuarioLogeado = usuarioLogeado;
-        console.log(usuarioLogeado); 
+        console.log(usuarioLogeado);
       },
       async getEmpleado(){
         console.log(this.usuarioLogeado);
-      
-      
+
+
       //BUSCANDO INFORMACIÓN DEL EMPLEADO
         await axios.get('http://localhost:8000/api/usuario/empleados/'+this.usuarioLogeado.usuario.id)
-          .then(  (response) => { 
+          .then(  (response) => {
             this.empleado = response.data[0];
             this.id_persona = this.empleado.id_persona;
             console.log(this.empleado)
@@ -81,10 +82,10 @@
           .catch(error => {
               console.log(error)
           });
-      },  
+      },
       async getPersona(){
         await axios.get('http://localhost:8000/api/personas/'+this.id_persona)
-          .then(  (res) => { 
+          .then(  (res) => {
             this.persona = res.data[0];
             console.log(this.persona);
             this.cargando = false
@@ -96,7 +97,7 @@
 
       async getPhotoUser(){
         await axios.get('http://localhost:8000/api/documentos/'+1)
-          .then(  (res) => { 
+          .then(  (res) => {
             this.imagePerfil = res.data
             console.log(this.imagePerfil)
           })
@@ -106,19 +107,24 @@
       }
     },
 
-   
+
     mounted (){
-        
-    },  
+
+    },
     computed:{//metodos computados los cuales se ejecutan en segundo plano
-      
+
     }
   }
-  
+
 </script>
 <style>
  .prueba2{
-   background-image: linear-gradient(to bottom, rgba(43, 110, 211, 0.3), rgba(18, 87, 199, 0.3), rgba(0, 65, 186, 0.3), rgba(0, 40, 170, 0.3), hsla(240, 95%, 31%, 0.3))!important;
+   background-image: linear-gradient(to bottom,
+  rgba(43, 110, 211, 0.3),
+  rgba(18, 87, 199, 0.3),
+  rgba(0, 65, 186, 0.3),
+  rgba(0, 40, 170, 0.3),
+  hsla(240, 95%, 31%, 0.3))!important;
  }
  .prueba6{
    border: 2px solid #cccccc!important;

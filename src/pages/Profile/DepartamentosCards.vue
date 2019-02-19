@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div class="col-md-6">
-                <router-link :to="{ name: 'notifications' }">
+                <router-link :to="{ name: 'web' }">
                     <card type="user cartaDepartamento">
                         <p class="card-text">
                         </p>
@@ -23,7 +23,7 @@
                 </router-link>
             </div>
             <div class="col-md-6">
-                <router-link :to="{ name: 'notifications' }">
+                <router-link :to="{ name: 'design' }">
                     <card type="user cartaDepartamento">
                         <p class="card-text">
                         </p>
@@ -44,7 +44,7 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <router-link :to="{ name: 'notifications' }">
+                <router-link :to="{ name: 'community' }">
                     <card type="user cartaDepartamento">
                         <p class="card-text">
                         </p>
@@ -55,7 +55,7 @@
                             <div class="block block-four colorMarketing"></div>
                             <div class="encima">
                                 <i class="fas fa-bullseye"></i>
-                                <h4 class="title">Marketing y Redes Sociales</h4>
+                                <h4 class="title">Community Manager</h4>
                             </div>
                                 
                                 
@@ -66,7 +66,7 @@
                 </router-link>
             </div>
             <div class="col-md-6">
-                <router-link :to="{ name: 'notifications' }">
+                <router-link :to="{ name: 'recursos' }">
                     <card type="user cartaDepartamento">
                         <p class="card-text">
                         </p>
