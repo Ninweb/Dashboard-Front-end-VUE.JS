@@ -19,19 +19,19 @@
             <div class="row">
               <div class="col-md-3">
                 <p><strong>Fecha de ingreso</strong></p>
-                <h4>07-12-2018</h4>
+                <h4> {{empleado.fecha_ingreso}} </h4>
               </div>
               <div class="col-md-3">
                 <p><strong>Fecha de Retiro</strong></p>
-                <h4>No aplica</h4>
+                <h4>{{empleado.fecha_retirado}}</h4>
               </div>
               <div class="col-md-3">
                 <p><strong>Transporte de ida</strong></p>
-                <h4>Metro</h4>
+                <h4>{{empleado.descripcion_transporte_ida}}</h4>
               </div>
               <div class="col-md-3">
                 <p><strong>Transporte de vuelta</strong></p>
-                <h4>Camioneta</h4>
+                <h4>{{empleado.descripcion_transporte_vuelta}}</h4>
               </div>
             </div>
           </div>
@@ -40,19 +40,19 @@
             <div class="row">
               <div class="col-md-3">
                 <p><strong>Número de habitación</strong></p>
-                <h4>02124317189</h4>
+                <h4>{{empleado.numero_habitacion}}</h4>
               </div>
               <div class="col-md-3">
                 <p><strong>Número de celular</strong></p>
-                <h4>04122024414</h4>
+                <h4>{{empleado.numero_celular}}</h4>
               </div>
               <div class="col-md-3">
                 <p><strong>Tipo de sangre</strong></p>
-                <h4>A++</h4>
+                <h4>{{empleado.tipo_sangre}}</h4>
               </div>
               <div class="col-md-3">
                 <p><strong>Estado Civil</strong></p>
-                <h4>Soltero</h4>
+                <h4>{{empleado.estado_civil}}</h4>
               </div>
             </div>
           </div>
@@ -77,7 +77,20 @@
 
 <script>
 export default {
-    
+  data() {
+      return {
+        empleado: '',
+      }
+    },
+    created: function(){
+      this.getUsuarioLogeado();
+    },
+    methods: {
+      getUsuarioLogeado(){
+        let empleadox = JSON.parse(localStorage.getItem('empleadox'));
+        this.empleado = empleadox
+      },
+    }
 }
 </script>
 

@@ -58,11 +58,11 @@
                         </div>
                         <div class="col-md-3">
                             <p><strong>Ciudad</strong></p>
-                            <h4>Caracas</h4>
+                            <h4>{{ direccion_empleado.ciudad  }}</h4>
                         </div>
                         <div class="col-md-3">
                             <p><strong>Municipio</strong></p>
-                            <h4>Libertador</h4>
+                            <h4>{{ direccion_empleado.municipio  }}</h4>
                         </div>
                     </div>
                 </div>
@@ -70,15 +70,15 @@
                         <div class="row">
                         <div class="col-md-3">
                             <p><strong>Alcaldía</strong></p>
-                            <h4>Gran Caracas</h4>
+                            <h4>{{ direccion_empleado.alcaldia  }}</h4>
                         </div>
                         <div class="col-md-3">
                             <p><strong>Parroquía</strong></p>
-                            <h4>Caricuao</h4>
+                            <h4>{{ direccion_empleado.parroquia  }}</h4>
                         </div>
                         <div class="col-md-6">
                             <p><strong>Zona</strong></p>
-                            <h4>UD-4 , Mucuritas , Bloque 15 , Piso 03</h4>
+                            <h4>{{ direccion_empleado.zona  }}</h4>
                         </div>
                     </div>
                 </div>
@@ -87,19 +87,19 @@
                         <div class="row">
                         <div class="col-md-3">
                             <p><strong>Departamento</strong></p>
-                            <h4>Programación</h4>
+                            <h4>{{ departamento.nombre_departamento }}</h4>
                         </div>
                         <div class="col-md-3">
                             <p><strong>Cargo</strong></p>
-                            <h4>Programador</h4>
+                            <h4>{{ empleado.descripcion_cargo }}</h4>
                         </div>
                         <div class="col-md-3">
                             <p><strong>Status</strong></p>
-                            <h4>Activo</h4>
+                            <h4> {{ empleado.estado_empleado }} </h4>
                         </div>
                         <div class="col-md-3">
                             <p><strong>Educación</strong></p>
-                            <h4>Universitaria</h4>
+                            <h4>{{empleado.educacion }}</h4>
                         </div>
                     </div>
                 </div>
@@ -123,6 +123,8 @@ export default {
         persona:'',
         direccion_empleado:'',
         id_persona : '',
+        departamento:'',
+        id_departamento:'',
         cargando: true,
         imagePerfil: '',
         assetsDocumentos :'http://localhost:8000/documentos/'
@@ -132,7 +134,6 @@ export default {
       this.getUsuarioLogeado();
       this.getEmpleado();
       this.getPersona();
-      this.getDireccion();
       this.getPhotoUser();
 
     },
@@ -149,7 +150,11 @@ export default {
         await axios.get('http://localhost:8000/api/usuario/empleados/'+this.usuarioLogeado.usuario.id)
           .then(  (response) => { 
             this.empleado = response.data[0];
+            localStorage.setItem('empleadox',JSON.stringify(this.empleado));
+            this.id_departamento = this.empleado.id_departamento
             this.id_persona = this.empleado.id_persona;
+            this.getDireccion();
+            this.getDepartamento()
             console.log(this.empleado)
           })
           .catch(error => {
@@ -178,14 +183,22 @@ export default {
               console.log(err)
           });
       },
-      async getDireccion(){
+      async getDireccion(){ 
+        
         await axios.get('http://localhost:8000/api/direcciones/'+this.id_persona)
           .then(  (res) => { 
-            console.log('hola mundo')
-            console.log(res);
-            this.direccion_empleado = res.data[0];
-            console.log(this.direccion_empleado);
-            
+            this.direccion_empleado = res.data[0]
+            console.log(this.direccion_empleado)
+          })
+          .catch(err => {
+              console.log(err)
+          });
+      },
+      async getDepartamento(){ 
+        await axios.get('http://localhost:8000/api/departamentos/'+this.id_departamento)
+          .then(  (res) => { 
+            this.departamento = res.data
+            console.log(this.departamento)
           })
           .catch(err => {
               console.log(err)
