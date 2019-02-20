@@ -10,26 +10,62 @@
       </div>
 
       <div class="col-md-6">
-        <form>
-          <label>Nombre</label> <br>
-          <base-input type="text" v-model="nombre"></base-input> <br>
-          <label>Apellido</label> <br>
-          <base-input type="text" v-model="apellido" @mouseleave="createEmail"></base-input> <br>
-          <label>Email personal</label> <br>
-          <base-input type="text" v-model="correoPersonal"></base-input> <br>
-          <label>Contraseña</label> <br>
-          <base-input type="password" v-model="pass"></base-input> <br>
+        <form-wizard shape="circle" color="#1B3F65">
+          <tab-content icon="fas fa-user">
+            <label>Nombre</label> <br>
+            <base-input type="text" v-model="nombre"></base-input> <br>
+            <label>Apellido</label> <br>
+            <base-input type="text" v-model="apellido" @keyup="createEmail"></base-input> <br>
+            <label>Cedula de identidad</label> <br>
+            <base-input type="text" v-model="cedula"></base-input> <br>
+            <label>Fecha de nacimiento</label> <br>
+            <base-input type="text" v-model="nacimiento"></base-input> <br>
+            <label>Sexo</label> <br>
+            <base-input type="text" v-model="sexo"></base-input> <br>
+            <label>Profesión</label> <br>
+            <base-input type="text" v-model="profesion"></base-input> <br>
+            <label>Email personal</label> <br>
+            <base-input type="text" v-model="correoPersonal"></base-input> <br>
+            <label>Contraseña</label> <br>
+            <base-input type="password" v-model="pass"></base-input> <br>
+          </tab-content>
 
-          <div class="row justify-content-center align-items-center">
-            <base-button slot="footer" class="prueba" fill>Crear usuario</base-button>
+          <tab-content>
+            My second tab content
+          </tab-content>
+
+          <tab-content >
+            Yuhuuu! This seems pretty damn simple
+          </tab-content>
+
+          <!-- <div class="wizard-footer-left">
+            <wizard-button 
+              v-if="props.activeTabIndex > 0 && !props.isLastStep" 
+              @click.native="props.prevTab()" 
+              :style="props.fillButtonStyle">Anterior</wizard-button>
           </div>
-        </form>
+          <div class="wizard-footer-right">
+            <wizard-button 
+              v-if="!props.isLastStep"@click.native="props.nextTab()" 
+              class="wizard-footer-right" 
+              :style="props.fillButtonStyle">Siguiente</wizard-button>
+
+            <wizard-button 
+              v-else @click.native="alert('Done')" 
+              class="wizard-footer-right finish-button" 
+              :style="props.fillButtonStyle"> {{props.isLastStep ? 'Crear usuario' : 'Siguiente'}}</wizard-button>
+          </div> -->
+        </form-wizard>
       </div>
 
       <div class="col-md-6">
         <card class="ficha">
           Nombre: {{this.nombre}} <br><br>
           Apellido: {{this.apellido}} <br><br>
+          Cédula de identidad: {{this.cedula}} <br><br>
+          Fecha de nacimiento: {{this.nacimiento}} <br><br>
+          Sexo: {{this.sexo}} <br><br>
+          Profesión: {{this.profesion}} <br><br>
           Email personal: {{this.correoPersonal}} <br>
           <hr>
           Email empresarial: {{this.correoEmpresarial}}@ninweb.net<br><br>
@@ -54,6 +90,10 @@ export default {
 
       nombre: '',
       apellido: '',
+      cedula: '',
+      nacimiento: '',
+      sexo: '',
+      profesion: '',
       correoPersonal: '',
 
       correoEmpresarial: '',
@@ -67,7 +107,11 @@ export default {
       var firstLetter = this.nombre.charAt(0)
       this.correoEmpresarial = firstLetter + this.apellido
     }
-  }
+  },
+
+  // mounted() {
+  //   axios.post('')
+  // }
 }
 </script>
 
