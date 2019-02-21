@@ -56,8 +56,10 @@
                     correo: '',
                     password: ''
                 },
+
                 cargando: false,
-                error:{
+
+                error: {
                     correo:false,
                     password:false,
                     informacion:''
@@ -89,7 +91,7 @@
                         console.log(usuarioLogeado)
                         localStorage.setItem('usuarioLogeado',JSON.stringify(usuarioLogeado));
                         this.$router.push({ 
-                            name:'dashboard', 
+                            name:'main', 
                             params: this.usuario
                         })
                     }
@@ -104,8 +106,6 @@
 
 <style>
     body {
-
-		
 		background-image:url('../../public/img/fondoLogin.jpg');
         background-repeat: no-repeat;
         background-size: 100% 100%;

@@ -30,9 +30,9 @@
 
           <tab-content icon="fas fa-key">
             <label>Email empresarial</label> <br>
-            <base-input type="text" v-model="correoEmpresarial"></base-input> <br>
+            <base-input type="text" v-model="usuario.correoEmpresarial"></base-input> <br>
             <label>Contraseña</label> <br>
-            <base-input type="password" v-model="pass"></base-input> <br>
+            <base-input type="password" v-model="usuario.pass"></base-input> <br>
           </tab-content>
 
           <tab-content icon="fas fa-check-circle">
@@ -74,7 +74,7 @@
             Profesión: {{this.persona.profesion}} <br><br>
             Email personal: {{this.persona.correoPersonal}} <br>
             <hr>
-            Email empresarial: {{this.correoEmpresarial}}@ninweb.net<br><br>
+            Email empresarial: {{this.usuario.correoEmpresarial}}@ninweb.net<br><br>
             Contraseña: {{this.passMsg}} <br><br>
             Status: {{this.newUser}}
           </card>
@@ -103,10 +103,12 @@ export default {
         cedula: '',
         profesion: '',
         correoPersonal: ''
-      },      
+      },
 
-      correoEmpresarial: '',
-      pass: ''
+      usuario: {
+        correoEmpresarial: '',
+        password: '',
+      }
     }
   },
 
@@ -114,11 +116,11 @@ export default {
     createEmail () {
       this.persona.nombre.toLowerCase()
       var firstLetter = this.persona.nombre.charAt(0)
-      this.correoEmpresarial = firstLetter + this.apellido
+      this.usuario.correoEmpresarial = firstLetter + this.persona.apellido
     },
 
-    crearPersona () {
-      axios.post('http://localhost:8000/api/personas', this.persona).then(response => {
+    async crearPersona () {
+      await axios.post('http://localhost:8000/api/personas', this.persona).then(response => {
         console.log(response)
       }).catch(error => {
         console.log(error)

@@ -29,6 +29,103 @@ import RecursosDepartment from '@/pages/Departamentos/RecursosDepartment.vue'
 const routes = [
   {
     path: "/",
+    name: "login",
+    component: Login,
+    children: [
+      {
+        path: "dashboard",
+        name: "dashboard",
+        component: DashboardLayout,
+        redirect: "/dashboard/main",
+        children: [
+          {
+            path: "main",
+            name: "main",
+            component: Dashboard
+          },
+          {
+            path: "profile",
+            name: "profile",
+            component: Profile
+          },
+          {
+            path: "empleados",
+            name: "empleados",
+            component: Empleados,
+            redirect: "/empleados/list",
+            children : [
+              {
+                path: "list",
+                name: "list",
+                component: ListEmpleados
+              },
+              {
+                path: "crear",
+                name: "crear",
+                component: CrearEmpleado
+              }
+            ]
+          },
+          {
+            path: "departamentos",
+            name: "departamentos",
+            redirect: "/departamentos/departments",
+            component: Departamentos,
+            children: [
+              {
+                path: "departments",
+                name: "departments",
+                component: MainDepartments
+              },
+              {
+                path: "web",
+                name: "web",
+                component: WebDepartment
+              },
+              {
+                path: "design",
+                name: "design",
+                component: DesignDepartment
+              },
+              {
+                path: "community",
+                name: "community",
+                component: CommunityDepartment
+              },
+              {
+                path: "recursos",
+                name: "recursos",
+                component: RecursosDepartment
+              },
+            ]
+          },
+          {
+            path: "icons",
+            name: "icons",
+            component: Icons
+          },
+          {
+            path: "maps",
+            name: "maps",
+            component: Maps
+          },
+          {
+            path: "typography",
+            name: "typography",
+            component: Typography
+          },
+          {
+            path: "table-list",
+            name: "table-list",
+            component: TableList
+          }
+        ]
+      }
+    ]
+  }
+/*
+  {
+    path: "/",
     component: DashboardLayout,
     //redirect: "/dashboard",
     children: [
@@ -121,58 +218,10 @@ const routes = [
     name: "login",
     component: Login
   }
+*/
 ];
 
-// {
-//   path: "/",
-//   name: "login",
-//   component: Login,
-//   children: [
-//     {
-//       path: "dashboard",
-//       name: "dashboard",
-//       component: DashboardLayout,
-//       redirect: "/main",
-//       children: [
-//         {
-//           path: "main",
-//           name: "main",
-//           component: Dashboard
-//         },
-//         {
-//           path: "profile",
-//           name: "profile",
-//           component: Profile
-//         },
-//         {
-//           path: "notifications",
-//           name: "notifications",
-//           component: Notifications
-//         },
-//         {
-//           path: "icons",
-//           name: "icons",
-//           component: Icons
-//         },
-//         {
-//           path: "maps",
-//           name: "maps",
-//           component: Maps
-//         },
-//         {
-//           path: "typography",
-//           name: "typography",
-//           component: Typography
-//         },
-//         {
-//           path: "table-list",
-//           name: "table-list",
-//           component: TableList
-//         }
-//       ]
-//     }
-//   ]
-// }
+
 
 /**
  * Asynchronously load view (Webpack Lazy loading compatible)
