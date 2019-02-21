@@ -12,7 +12,7 @@ import i18n from "./i18n"
 
 
 Vue.use(BlackDashboard);
-Vue.use(axios);
+// Vue.use(axios);
 Vue.use(VueFormWizard)
 window.axios = axios
 
