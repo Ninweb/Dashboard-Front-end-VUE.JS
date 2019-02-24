@@ -82,6 +82,7 @@
         .then(response => { 
           if(response.data.status == "error"){
             this.error.informacion = response.data.message;
+            this.$emit('loggedIn', response)
             if(response.data.message == "Correo no valido"){
               this.error.correo = true
               this.error.password = false
