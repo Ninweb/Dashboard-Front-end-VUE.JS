@@ -10,6 +10,8 @@ import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 import BlackDashboard from "./plugins/blackDashboard";
 import i18n from "./i18n"
 
+import store from './store/index'
+
 
 Vue.use(BlackDashboard);
 // Vue.use(axios);
@@ -22,5 +24,6 @@ window.axios = axios
 new Vue({
   router,
   i18n,
+  store,
   render: h => h(App)
 }).$mount("#app");

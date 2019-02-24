@@ -1,6 +1,6 @@
 <template>
   <div>
-    <notifications></notifications>
+    <!-- <notifications></notifications> -->
     <router-view :key="$route.fullPath"></router-view>
   </div>
 </template>

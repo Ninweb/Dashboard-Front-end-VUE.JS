@@ -4,7 +4,7 @@
     <div class="row fuentes">
       <div class="col-md-12 align-center">
         <div>
-          <router-link to="/empleados/crear">
+          <router-link :to="{path: '/dashboard/empleados/crear'}">
             <button type="button" class="btn btn-outline-primary">Crear empleado</button>
           </router-link>
         </div>

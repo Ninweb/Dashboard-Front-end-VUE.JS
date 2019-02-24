@@ -11,7 +11,7 @@
 
       <div class="col-md-6">
         <form-wizard shape="circle" color="#1B3F65" background="red">
-          <tab-content icon="fas fa-user" :before-change="crearPersona">
+          <tab-content icon="fas fa-user icon-tab" :before-change="crearPersona">
             <label>Nombre</label> <br>
             <base-input type="text" v-model="persona.nombre"></base-input> <br>
             <label>Apellido</label> <br>
@@ -19,23 +19,23 @@
             <label>Sexo</label> <br>
             <base-input type="text" v-model="persona.sexo"></base-input> <br>
             <label>Fecha de nacimiento</label> <br>
-            <base-input type="date" v-model="persona.nacimiento"></base-input> <br>
+            <base-input type="date" v-model="persona.fecha_nacimiento"></base-input> <br>
             <label>Cedula de identidad</label> <br>
             <base-input type="text" v-model="persona.cedula"></base-input> <br>
             <label>Profesión</label> <br>
             <base-input type="text" v-model="persona.profesion"></base-input> <br>
-            <label>Email personal</label> <br>
-            <base-input type="text" v-model="persona.correoPersonal"></base-input>
+            <!-- <label>Email personal</label> <br>
+            <base-input type="text" v-model="persona.correoPersonal"></base-input> -->
           </tab-content>
 
-          <tab-content icon="fas fa-key">
+          <tab-content icon="fas fa-key icon-tab">
             <label>Email empresarial</label> <br>
             <base-input type="text" v-model="usuario.correoEmpresarial"></base-input> <br>
             <label>Contraseña</label> <br>
             <base-input type="password" v-model="usuario.pass"></base-input> <br>
           </tab-content>
 
-          <tab-content icon="fas fa-check-circle">
+          <tab-content icon="fas fa-check-circle icon-tab">
             Por favor verifíque la información y haga click en <b>Crear usuario</b>
           </tab-content>
 
@@ -69,10 +69,10 @@
             Nombre: {{this.persona.nombre}} <br><br>
             Apellido: {{this.persona.apellido}} <br><br>
             Sexo: {{this.persona.sexo}} <br><br>
-            Fecha de nacimiento: {{this.persona.nacimiento}} <br><br>
+            Fecha de nacimiento: {{this.persona.fecha_nacimiento}} <br><br>
             Cédula de identidad: {{this.persona.cedula}} <br><br>
             Profesión: {{this.persona.profesion}} <br><br>
-            Email personal: {{this.persona.correoPersonal}} <br>
+            <!-- Email personal: {{this.persona.correoPersonal}} <br> -->
             <hr>
             Email empresarial: {{this.usuario.correoEmpresarial}}@ninweb.net<br><br>
             Contraseña: {{this.passMsg}} <br><br>
@@ -99,10 +99,10 @@ export default {
         nombre: '', 
         apellido: '',
         sexo: '',
-        nacimiento: '',
+        fecha_nacimiento: '',
         cedula: '',
         profesion: '',
-        correoPersonal: ''
+        // correoPersonal: ''
       },
 
       usuario: {
@@ -112,6 +112,15 @@ export default {
     }
   },
 
+  mounted: {
+    getUsuarioLogeado(){
+      let usuarioLogeado = JSON.parse(localStorage.getItem('usuarioLogeado'));
+      this.usuarioLogeado = usuarioLogeado;
+      console.log('estoy cargando en editar profile')
+      console.log(usuarioLogeado); 
+    },
+  },
+
   methods: {
     createEmail () {
       this.persona.nombre.toLowerCase()
@@ -119,8 +128,9 @@ export default {
       this.usuario.correoEmpresarial = firstLetter + this.persona.apellido
     },
 
-    async crearPersona () {
-      await axios.post('http://localhost:8000/api/personas', this.persona).then(response => {
+    crearPersona () {
+      console.log(this.usuarioLogeado)
+      axios.post('http://localhost:8000/api/personas', this.persona).then(response => {
         console.log(response)
       }).catch(error => {
         console.log(error)
@@ -151,7 +161,7 @@ export default {
     display: none;
   }
 
-  .fas {
+  .icon-tab {
     color: #1B3F65;
     font-size: 22px;
   }
