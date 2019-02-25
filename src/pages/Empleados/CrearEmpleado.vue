@@ -129,11 +129,15 @@ export default {
     },
 
     crearPersona () {
-      console.log(this.usuarioLogeado)
-      axios.post('http://localhost:8000/api/personas', this.persona).then(response => {
-        console.log(response)
-      }).catch(error => {
-        console.log(error)
+      console.log(this.$store.state.token)
+      return new Promise((resolve, reject) => {
+        axios.post('http://localhost:8000/api/personas', this.persona).then(response => {
+          console.log(response)
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+          console.log(error)
+        })
       })
     },
 

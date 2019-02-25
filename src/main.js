@@ -12,7 +12,6 @@ import i18n from "./i18n"
 
 import store from './store/index'
 
-
 Vue.use(BlackDashboard);
 // Vue.use(axios);
 Vue.use(VueFormWizard)

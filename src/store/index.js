@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state:{ //= data
-    token: localStorage.getItem('token') || '',
+    token: '',
     status: ''
   },
 
@@ -44,14 +44,14 @@ const store = new Vuex.Store({
             }
             this.cargando = false;
           }else if (response.data.usuario.acceso_usuario == "admin"){
-            let api_token = response.data.usuario.api_token;
-            context.commit('authSuccess', token)
+            let access_token = response.data.usuario.api_token;
+            context.commit('authSuccess', access_token)
 
             let usuarioLogeado = response.data;
             console.log(usuarioLogeado)
 
-            // localStorage.setItem('usuarioLogeado', JSON.stringify(usuarioLogeado));
-            localStorage.setItem('token', api_token)
+            localStorage.setItem('usuarioLogeado', JSON.stringify(usuarioLogeado));
+            localStorage.setItem('token', access_token)
             axios.defaults.headers.common['Authorization'] = "Bearer " + window.token
 
             resolve(response)
@@ -66,9 +66,14 @@ const store = new Vuex.Store({
       })
     },
 
-    // logout(context){
+    logout(context){
+      return new Promise((resolve, reject) => {
+        localStorage.removeItem('token')
+        delete axios.defaults.headers.common['Authorization']
 
-    // }
+        resolve()
+      })
+    }
   }
 })
 

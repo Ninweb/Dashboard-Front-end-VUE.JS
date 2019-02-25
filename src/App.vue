@@ -6,6 +6,8 @@
 </template>
 
 <script>
+  // import EventBus from './services/eventBus'
+  
   export default {
     methods: {
       disableRTL() {
@@ -18,9 +20,16 @@
         root.classList.toggle('nav-open');
       }
     },
+
     mounted() {
       this.$watch('$route', this.disableRTL, { immediate: true });
       this.$watch('$sidebar.showSidebar', this.toggleNavOpen)
+    },
+
+    computed: {
+      initStore() {
+        return this.$store.state.token
+      }
     }
   };
 </script>

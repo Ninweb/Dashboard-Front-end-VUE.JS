@@ -11,20 +11,20 @@
       </div>
     </div>
 
-    <table class="table tablesorter" :class="tableClass">
-      <thead :class="theadClasses">
-      <tr>
-        <slot name="columns">
+    <table class="table tablesorter">
+      <!-- <thead :class="theadClasses"> -->
+      <tr class="tableHeader">
+        <!-- <slot name="columns"> -->
           <th>Nombre</th>
           <th>Apellido</th>
           <th>Correo electrónico</th>
           <th>Departamento</th>
           <th>Status</th>
           <th>Acciones</th>
-        </slot>
+        <!-- </slot> -->
       </tr>
-      </thead>
-      <tbody :class="tbodyClasses">
+      <!-- </thead> -->
+      <!-- <tbody :class="tbodyClasses"> -->
       <tr>
         <td>Carlos</td>
         <td>Rodriguez</td>
@@ -77,7 +77,7 @@
           </div>
         </td>
       </tr>
-      </tbody>
+      <!-- </tbody> -->
     </table>
 
     <hr>
@@ -89,6 +89,10 @@
 <style>
   table {
     text-align: center;
+  }
+
+  .tableHeader {
+    color: white;
   }
 
   hr {

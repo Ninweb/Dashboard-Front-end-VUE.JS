@@ -1,41 +1,41 @@
 <template>
   <div>
-      <div class="login-form ">
+    <div class="login-form ">
 
-        <form class="form row" v-on:submit.prevent="loginAPI">
-          <div class="avatar">
-            <img src="img/login-logo.png" alt="Avatar">
-          </div>           
-          <div class="grupo col-md-12">
-            <div class="row">
-              <div class="form-group  col-md-12" >
-                <div class="errores" v-if="error.correo">
-                  <p>{{error.informacion}}</p>
-                </div>
-                <input type="text" class="form-control input-lg" v-model="usuario.correo" name="correo" placeholder="Correo" required="required">	
+      <form class="form row" v-on:submit.prevent="loginAPI">
+        <div class="avatar">
+          <img src="img/login-logo.png" alt="Avatar">
+        </div>           
+        <div class="grupo col-md-12">
+          <div class="row">
+            <div class="form-group  col-md-12" >
+              <div class="errores" v-if="error.correo">
+                <p>{{error.informacion}}</p>
               </div>
-              <div class="form-group col-md-12" >
-                <div class="errores" v-if="error.password">
-                  <p>{{error.informacion}}</p>
-                </div>
-                <input type="password" class="form-control input-lg" name="password" v-model="usuario.password" placeholder="Contraseña" required="required">
-              </div>        
-              <div class="form-group col-md-12">
-                <div class="container-fluid">
-                  <div class="row">
-                    <br>
-                    <div class="offset-md-4">
-                      <button type="submit" class="btn btn-lg col-md-12 align-middle" v-if="!cargando">Entrar</button>
-                    </div>
-                    <div class="lds-dual-ring offset-md-1" v-if="cargando"></div>
+              <input type="text" class="form-control input-lg" v-model="usuario.correo" name="correo" placeholder="Correo" required="required">	
+            </div>
+            <div class="form-group col-md-12" >
+              <div class="errores" v-if="error.password">
+                <p>{{error.informacion}}</p>
+              </div>
+              <input type="password" class="form-control input-lg" name="password" v-model="usuario.password" placeholder="Contraseña" required="required">
+            </div>        
+            <div class="form-group col-md-12">
+              <div class="container-fluid">
+                <div class="row">
+                  <br>
+                  <div class="offset-md-4">
+                    <button type="submit" class="btn btn-lg col-md-12 align-middle" v-if="!cargando">Entrar</button>
                   </div>
+                  <div class="lds-dual-ring offset-md-1" v-if="cargando"></div>
                 </div>
               </div>
-              <div class="recuperarContraseña col-md-12">¿Olvidaste tu contraseña? <a href="#">Recupera tu contraseña</a></div> 
-            </div>    
+            </div>
+            <div class="recuperarContraseña col-md-12">¿Olvidaste tu contraseña? <a href="#">Recupera tu contraseña</a></div> 
           </div>    
-        </form>
-      </div>
+        </div>    
+      </form>
+    </div>
   </div>  
 </template>
 
@@ -65,46 +65,48 @@
       loginAPI(){
         this.cargando = true;
 
-        // this.$store.dispatch('login', {
-        //   correo: this.usuario.correo,
-        //   password: this.usuario.password   
-        // }).then(() => {
-        //   this.$router.push({ 
-        //     name:'dashboard', 
-        //     params: this.usuario
-        //   })
-        // })
-
-        axios.post('http://localhost:8000/api/login',{
+        this.$store.dispatch('login', {
           correo: this.usuario.correo,
           password: this.usuario.password   
+        }).then(() => {
+          this.$router.push({ 
+            name:'dashboard', 
+            params: this.usuario
+          })
         })
-        .then(response => { 
-          if(response.data.status == "error"){
-            this.error.informacion = response.data.message;
-            this.$emit('loggedIn', response)
-            if(response.data.message == "Correo no valido"){
-              this.error.correo = true
-              this.error.password = false
-            }else{
-              this.error.correo = false
-              this.error.password = true
-            }
-            this.cargando = false;
-          }else if (response.data.usuario.acceso_usuario == "admin"){
-            let token = response.data.usuario.api_token;
-            let usuarioLogeado = response.data;
-            console.log(usuarioLogeado)
-            localStorage.setItem('usuarioLogeado',JSON.stringify(usuarioLogeado));
-            this.$router.push({ 
-              name:'dashboard', 
-              params: this.usuario
-            })
-          }
-        })
-        .catch(error => {
-          console.log(error)
-        });
+
+        // axios.post('http://localhost:8000/api/login',{
+        //   correo: this.usuario.correo,
+        //   password: this.usuario.password   
+        // })
+        // .then(response => { 
+        //   if(response.data.status == "error"){
+        //     this.error.informacion = response.data.message;
+        //     this.$emit('loggedIn', response)
+        //     if(response.data.message == "Correo no valido"){
+        //       this.error.correo = true
+        //       this.error.password = false
+        //     }else{
+        //       this.error.correo = false
+        //       this.error.password = true
+        //     }
+        //     this.cargando = false;
+        //   }else if (response.data.usuario.acceso_usuario == "admin"){
+        //     let token = response.data.usuario.api_token;
+        //     let usuarioLogeado = response.data;
+        //     this.$emit('loggedIn', response)
+        //     console.log('esto', usuarioLogeado)
+        //     console.log('esto', usuarioLogeado.usuario.api_token)
+        //     // localStorage.setItem('usuarioLogeado',JSON.stringify(usuarioLogeado));
+        //     // this.$router.push({ 
+        //     //   name:'dashboard', 
+        //     //   params: this.usuario
+        //     // })
+        //   }
+        // })
+        // .catch(error => {
+        //   console.log(error)
+        // });
       }
     }
   }
