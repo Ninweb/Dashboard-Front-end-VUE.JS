@@ -128,17 +128,21 @@ export default {
       this.usuario.correoEmpresarial = firstLetter + this.persona.apellido
     },
 
-    crearPersona () {
-      console.log(this.$store.state.token)
+    crearPersona: function () {
+      // console.log(this.$store.state.token)
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:8000/api/personas', this.persona).then(response => {
-          console.log(response)
+          // console.log(response)
           resolve(response)
+          return true
         }).catch(error => {
           reject(error)
-          console.log(error)
+          // console.log(error)
+          return false
         })
       })
+
+      
     },
 
     crearUsuario () {
