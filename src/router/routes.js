@@ -29,65 +29,80 @@ import RecursosDepartment from '@/pages/Departamentos/RecursosDepartment.vue'
 const routes = [
   {
     path: "/",
+    redirect: "login"
+  },
+
+  {
+    path: "/login",
+    name: "login",
+    component: Login
+  },
+
+  {
+    path: "/dashboard",
+    name: "dashboard",
     component: DashboardLayout,
-    //redirect: "/dashboard",
+    meta: {
+      // authenticated: true
+    },
+    redirect: "/dashboard/resume",
     children: [
       {
-        path: "dashboard",
-        name: "dashboard",
+        path: "/dashboard/resume",
+        name: "resume",
         component: Dashboard
       },
       {
-        path: "profile",
+        path: "/dashboard/profile",
         name: "profile",
         component: Profile
       },
       {
-        path: "empleados",
+        path: "/dashboard/empleados",
         name: "empleados",
         component: Empleados,
-        redirect: "/empleados/list",
+        redirect: "/dashboard/empleados/list",
         children : [
           {
-            path: "list",
+            path: "/dashboard/empleados/list",
             name: "list",
             component: ListEmpleados
           },
           {
-            path: "crear",
+            path: "/dashboard/empleados/crear",
             name: "crear",
             component: CrearEmpleado
           }
         ]
       },
       {
-        path: "departamentos",
+        path: "/dashboard/departamentos",
         name: "departamentos",
-        redirect: "/departamentos/main",
+        redirect: "main",
         component: Departamentos,
         children: [
           {
-            path: "main",
+            path: "/dashboard/departamentos/main",
             name: "main",
             component: MainDepartments
           },
           {
-            path: "web",
+            path: "/dashboard/departamentos/web",
             name: "web",
             component: WebDepartment
           },
           {
-            path: "design",
+            path: "/dashboard/departamentos/design",
             name: "design",
             component: DesignDepartment
           },
           {
-            path: "community",
+            path: "/dashboard/departamentos/community",
             name: "community",
             component: CommunityDepartment
           },
           {
-            path: "recursos",
+            path: "/dashboard/departamentos/recursos",
             name: "recursos",
             component: RecursosDepartment
           },
@@ -115,64 +130,20 @@ const routes = [
       }
     ]
   },
+
   { path: "*", component: NotFound },
-  {
-    path: "/login",
-    name: "login",
-    component: Login
-  }
+
 ];
 
-// {
-//   path: "/",
-//   name: "login",
-//   component: Login,
-//   children: [
-//     {
-//       path: "dashboard",
-//       name: "dashboard",
-//       component: DashboardLayout,
-//       redirect: "/main",
-//       children: [
-//         {
-//           path: "main",
-//           name: "main",
-//           component: Dashboard
-//         },
-//         {
-//           path: "profile",
-//           name: "profile",
-//           component: Profile
-//         },
-//         {
-//           path: "notifications",
-//           name: "notifications",
-//           component: Notifications
-//         },
-//         {
-//           path: "icons",
-//           name: "icons",
-//           component: Icons
-//         },
-//         {
-//           path: "maps",
-//           name: "maps",
-//           component: Maps
-//         },
-//         {
-//           path: "typography",
-//           name: "typography",
-//           component: Typography
-//         },
-//         {
-//           path: "table-list",
-//           name: "table-list",
-//           component: TableList
-//         }
-//       ]
-//     }
-//   ]
-// }
+// routes.beforeEach((to, from, next) => {
+//   let authorization = to.matched.some(record => record.meta.authorization)
+
+//   if (authorization && !user) {
+//     next({path: '/login'})
+//   }
+// })
+
+
 
 /**
  * Asynchronously load view (Webpack Lazy loading compatible)
