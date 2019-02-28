@@ -25,7 +25,7 @@
                                 <a href="#">
                                 <img class="avatar prueba6" alt="...">
                                 <h4 class="title">Prueba</h4>
-                                <h4 class="title">Nombre Y Apellido</h4>
+                                <h4 class="title">{{empleado.persona.nombre }}</h4>
                                 </a>
                                 <p class="description">
                                 <strong>Cargo: </strong>{{empleado.descripcion_cargo}}
