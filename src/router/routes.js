@@ -10,7 +10,9 @@ import Icons from "@/pages/Icons.vue";
 import Maps from "@/pages/Maps.vue";
 import Typography from "@/pages/Typography.vue";
 import TableList from "@/pages/TableList.vue";
+
 import Login from '@/pages/Login.vue';
+import FirstLogin from '@/pages/FirstLogin.vue'
 
 import Empleados from '@/pages/Empleados.vue'
 import ListEmpleados from '@/pages/Empleados/ListEmpleados.vue'
@@ -36,6 +38,12 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login
+  },
+
+  {
+    path: "/complete-info",
+    name: "first_login",
+    component: FirstLogin
   },
 
   {
@@ -78,7 +86,7 @@ const routes = [
       {
         path: "/dashboard/departamentos",
         name: "departamentos",
-        redirect: "main",
+        redirect: "/dashboard/departamentos/main",
         component: Departamentos,
         children: [
           {

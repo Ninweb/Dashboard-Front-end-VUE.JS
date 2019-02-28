@@ -10,7 +10,13 @@
       </div>
 
       <div class="col-md-6">
-        <form-wizard shape="circle" color="#1B3F65" background="red">
+        <form-wizard 
+          shape="circle" 
+          color="#1B3F65" 
+          next-button-text="Siguiente"
+          back-button-text="Anterior"
+          finish-button-text="Crear usuario"
+          @on-complete="crearUsuario">
           <tab-content icon="fas fa-user icon-tab" :before-change="crearPersona">
             <label>Nombre</label> <br>
             <base-input type="text" v-model="persona.nombre"></base-input> <br>
@@ -30,16 +36,14 @@
 
           <tab-content icon="fas fa-key icon-tab">
             <label>Email empresarial</label> <br>
-            <base-input type="text" v-model="usuario.correoEmpresarial"></base-input> <br>
+            <base-input type="text" v-model="usuario.correo">{{this.usuario.correo}}</base-input> <br>
             <label>Contraseña</label> <br>
-            <base-input type="password" v-model="usuario.pass"></base-input> <br>
+            <base-input type="password" v-model="usuario.password"></base-input> <br>
+            <label>Tipo de usuario</label> <br>
+            <base-input type="text" v-model="usuario.acceso_usuario" readonly>{{this.usuario.acceso_usuario}}</base-input> <br>
           </tab-content>
 
-          <tab-content icon="fas fa-check-circle icon-tab">
-            Por favor verifíque la información y haga click en <b>Crear usuario</b>
-          </tab-content>
-
-          <div slot="footer" slot-scope="props">
+          <!-- <div slot="footer" slot-scope="props">
             <div class="wizard-footer-left">
               <wizard-button 
                 v-if="props.activeTabIndex > 0 && !props.isLastStep" 
@@ -57,7 +61,7 @@
                 class="wizard-footer-right finish-button" 
                 :style="props.fillButtonStyle"> {{props.isLastStep ? 'Crear usuario' : 'Siguiente'}}</wizard-button>
             </div>
-          </div>
+          </div> -->
 
           
         </form-wizard>
@@ -74,9 +78,9 @@
             Profesión: {{this.persona.profesion}} <br><br>
             <!-- Email personal: {{this.persona.correoPersonal}} <br> -->
             <hr>
-            Email empresarial: {{this.usuario.correoEmpresarial}}@ninweb.net<br><br>
+            Email empresarial: {{this.usuario.correo}}<br><br>
             Contraseña: {{this.passMsg}} <br><br>
-            Status: {{this.newUser}}
+            Status: {{this.usuario.first_login}}
           </card>
 
           <div id="info">
@@ -92,7 +96,6 @@
 export default {
   data () {
     return {
-      newUser: 1,
       passMsg: 'La que ingreso',
 
       persona: {
@@ -106,13 +109,16 @@ export default {
       },
 
       usuario: {
-        correoEmpresarial: '',
+        correo: '',
         password: '',
+        acceso_usuario: 'empleado',
+        first_login: 1        
       }
     }
   },
 
   mounted: {
+    
     getUsuarioLogeado(){
       let usuarioLogeado = JSON.parse(localStorage.getItem('usuarioLogeado'));
       this.usuarioLogeado = usuarioLogeado;
@@ -123,30 +129,34 @@ export default {
 
   methods: {
     createEmail () {
+      console.log('acceso ', this.$store.state.acceso_usuario)
+      console.log('usuario loegado ', this.$store.state.usuarioLogeado)
       this.persona.nombre.toLowerCase()
       var firstLetter = this.persona.nombre.charAt(0)
-      this.usuario.correoEmpresarial = firstLetter + this.persona.apellido
+      this.usuario.correo = firstLetter + this.persona.apellido + '@ninweb.net'
     },
 
-    crearPersona: function () {
-      // console.log(this.$store.state.token)
+    crearPersona () {
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:8000/api/personas', this.persona).then(response => {
-          // console.log(response)
-          resolve(response)
-          return true
+          resolve(true)
         }).catch(error => {
-          reject(error)
-          // console.log(error)
-          return false
+          reject(false)
         })
       })
-
-      
     },
 
     crearUsuario () {
-      
+      return new Promise((resolve, reject) => {
+        axios.post('http://localhost:8000/api/usuarios', this.usuario).then(response => {
+          console.log('success ', response)
+          alert('Done!')
+          resolve(true)
+        }).catch(error => {
+          console.log('error ', response)
+          reject(false)
+        })
+      })
     }
   }
 }

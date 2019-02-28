@@ -6,6 +6,8 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state:{ //= data
+    usuarioLogeado: '',
+    acceso_usuario: '',
     token: '',
     status: ''
   },
@@ -46,6 +48,9 @@ const store = new Vuex.Store({
           }else if (response.data.usuario.acceso_usuario == "admin"){
             let access_token = response.data.usuario.api_token;
             context.commit('authSuccess', access_token)
+
+            this.state.acceso_usuario = response.data.usuario.acceso_usuario
+            this.state.usuarioLogeado = response.data
 
             let usuarioLogeado = response.data;
             console.log(usuarioLogeado)

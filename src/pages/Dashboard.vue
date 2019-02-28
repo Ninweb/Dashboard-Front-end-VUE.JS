@@ -133,27 +133,29 @@
   </div>
 </template>
 <script>
-  import LineChart from '@/components/Charts/LineChart';
-  import BarChart from '@/components/Charts/BarChart';
-  import * as chartConfigs from '@/components/Charts/config';
-  import TaskList from './Dashboard/TaskList';
-  import UserTable from './Dashboard/UserTable';
+  // import LineChart from '@/components/Charts/LineChart';
+  // import BarChart from '@/components/Charts/BarChart';
+  // import * as chartConfigs from '@/components/Charts/config';
+  // import TaskList from './Dashboard/TaskList';
+  // import UserTable from './Dashboard/UserTable';
   import config from '@/config';
   import UserCard from './Profile/UserCard'
   import DepartamentosCards from './Profile/DepartamentosCards'
   import CarouselUser from '@/components/CarouselUserCard.vue'
 
   import store from '../store/index.js'
+  
   export default {
     components: {
-      LineChart,
-      BarChart,
-      TaskList,
-      UserTable,
+      // LineChart,
+      // BarChart,
+      // TaskList,
+      // UserTable,
       UserCard,
       DepartamentosCards,
       CarouselUser
     },
+    /*
     data() {
       return {
         bigLineChart: {
@@ -266,6 +268,7 @@
         this.bigLineChart.activeIndex = index;
       }
     },
+    */
     mounted() {
       this.i18n = this.$i18n;
       if (this.enableRTL) {
