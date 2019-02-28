@@ -1,46 +1,91 @@
 <template>
   <div>
     <form-wizard 
-      :start-index="1"
       shape="circle" 
       color="#1B3F65" 
       next-button-text="Siguiente"
       back-button-text="Anterior"
-      finish-button-text="Crear usuario"
+      finish-button-text="Completar"
       @on-complete="crearUsuario">
 
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-6">
+      <!-- <div class="container"> -->
+        <!-- <div class="row justify-content-center"> -->
+          <!-- <div class="col-md-6"> -->
 
             <!-- Persona - empleado -->
-            <tab-content icon="fas fa-user icon-tab" :before-change="crearPersona">
+            <tab-content icon="fas fa-user icon-tab">
+              <p>Datos personales del empleado</p>
               <label>Nombre</label> <br>
-              <base-input type="text" v-model="persona.nombre"></base-input> <br>
+              <base-input type="text" v-model="personaEmpleado.nombre"></base-input> <br>
               <label>Apellido</label> <br>
-              <base-input type="text" v-model="persona.apellido" @keyup="createEmail"></base-input> <br>
+              <base-input type="text" v-model="personaEmpleado.apellido" @keyup="createEmail"></base-input> <br>
               <label>Sexo</label> <br>
-              <base-input type="text" v-model="persona.sexo"></base-input> <br>
+              <base-input type="text" v-model="personaEmpleado.sexo"></base-input> <br>
               <label>Fecha de nacimiento</label> <br>
-              <base-input type="date" v-model="persona.fecha_nacimiento"></base-input> <br>
+              <base-input type="date" v-model="personaEmpleado.fecha_nacimiento"></base-input> <br>
               <label>Cedula de identidad</label> <br>
-              <base-input type="text" v-model="persona.cedula"></base-input> <br>
+              <base-input type="text" v-model="personaEmpleado.cedula"></base-input> <br>
               <label>Profesión</label> <br>
-              <base-input type="text" v-model="persona.profesion"></base-input> <br>
+              <base-input type="text" v-model="personaEmpleado.profesion"></base-input> <br>
             </tab-content>
 
             <!-- Empleado -->
             <tab-content icon="fas fa-key icon-tab">
-              <label>Email empresarial</label> <br>
-              <base-input type="text" v-model="usuario.correo">{{this.usuario.correo}}</base-input> <br>
-              <label>Contraseña</label> <br>
-              <base-input type="password" v-model="usuario.password"></base-input> <br>
-              <label>Tipo de usuario</label> <br>
-              <base-input type="text" v-model="usuario.acceso_usuario" readonly>{{this.usuario.acceso_usuario}}</base-input> <br>
+              <p>Datos del empleado</p>
+              <label>Descripción del cargo</label> <br>
+              <base-input type="text" v-model="empleado.descripcion_cargo"></base-input> <br>
+              <label>Fecha de ingreso</label> <br>
+              <base-input type="date" v-model="empleado.fecha_ingreso"></base-input> <br>
+              <label>Estatus del empleado</label> <br>
+              <base-input type="text" v-model="empleado.estado_empleado"></base-input> <br>
+              <label>Descripción de la ruta hogar - oficina</label> <br>
+              <base-input type="text" v-model="empleado.descripcion_transporte_ida"></base-input> <br>
+              <label>Descripción de la ruta oficina - hogar</label> <br>
+              <base-input type="text" v-model="empleado.descripcion_transporte_ida"></base-input> <br>
+              <label>Número de habitación</label> <br>
+              <base-input type="text" v-model="empleado.numero_habitacion"></base-input> <br>
+              <label>Número de celular</label> <br>
+              <base-input type="text" v-model="empleado.numero_celular"></base-input> <br>
+              <label>Tipo de sangre</label> <br>
+              <base-input type="text" v-model="empleado.tipo_sangre"></base-input> <br>
+              <label>Profesión</label> <br>
+              <base-input type="text" v-model="empleado.profesion"></base-input> <br>
+              <label>Estado civil</label> <br>
+              <base-input type="text" v-model="empleado.estado_civil"></base-input> <br>
+              <label>Educación</label> <br>
+              <base-input type="text" v-model="empleado.educacion"></base-input> <br>
             </tab-content>
-          </div>
-        </div>
-      </div>
+
+            <!-- Salario -->
+            <tab-content icon="fas fa-key icon-tab">
+              <p>Sueldo del empleado</p>
+              <label>Sueldo base</label> <br>
+              <base-input type="text" v-model="salario.salario_base"></base-input> <br>
+              <label>Cesta Ticket</label> <br>
+              <base-input type="date" v-model="salario.salario_ticket"></base-input> <br>
+              <label>Seguro</label> <br>
+              <base-input type="text" v-model="salario.salario_seguro"></base-input> <br>
+              <label>Fecha de inicio del sueldo</label> <br>
+              <base-input type="date" v-model="salario.fecha_inicio"></base-input> <br>
+            </tab-content>
+
+            <!-- Direccion -->
+            <tab-content icon="fas fa-key icon-tab">
+              <p>Dirección del empleado</p>
+              <label>Parroquia</label> <br>
+              <base-input type="text" v-model="direccion.parroquia"></base-input> <br>
+              <label>Município</label> <br>
+              <base-input type="date" v-model="direccion.municipio"></base-input> <br>
+              <label>Alcaldía</label> <br>
+              <base-input type="text" v-model="direccion.alcaldia"></base-input> <br>
+              <label>Ciudad</label> <br>
+              <base-input type="date" v-model="direccion.ciudad"></base-input> <br>
+              <label>Zona</label> <br>
+              <base-input type="date" v-model="direccion.zona"></base-input> <br>
+            </tab-content>
+          <!-- </div> -->
+        <!-- </div> -->
+      <!-- </div> -->
     </form-wizard>
   </div>
 </template>
@@ -70,7 +115,7 @@ export default {
         descripcion_cargo: '',
         fecha_ingreso: '',
         fecha_retirado: '',
-        estado_empleado: '',
+        estado_empleado: 'activo',
         descripcion_transporte_ida: '',
         descripcion_transporte_vuelta: '',
         numero_habitacion: '',
