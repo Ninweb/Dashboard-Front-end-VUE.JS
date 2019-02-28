@@ -49,7 +49,12 @@
 export default {
   data () {
     return {
-      passMsg: 'La que ingreso',
+      usuario: {
+        correo: '',
+        password: '',
+        acceso_usuario: 'empleado',
+        first_login: 1        
+      },
 
       personaEmpleado: {
         nombre: '', 
@@ -62,10 +67,37 @@ export default {
       },
 
       empleado: {
-
+        descripcion_cargo: '',
+        fecha_ingreso: '',
+        fecha_retirado: '',
+        estado_empleado: '',
+        descripcion_transporte_ida: '',
+        descripcion_transporte_vuelta: '',
+        numero_habitacion: '',
+        numero_celular: '',
+        tipo_sangre: '',
+        profesion: '',
+        estado_civil: '',
+        educacion: ''
       },
 
-      personaFamiliar: {
+      salario: {
+        salario_base: '',
+        salario_ticket: '',
+        salario_seguro: '',
+        fecha_inicio: '',
+        fecha_fin: ''
+      },
+
+      direccion: {
+        parroquia: '',
+        municipio: '',
+        alcaldia: '',
+        ciudad: '',
+        zona: ''
+      },
+
+      personaReferenciaFamiliar: {
         nombre: '', 
         apellido: '',
         sexo: '',
@@ -75,7 +107,13 @@ export default {
         // correoPersonal: ''
       },
 
-      personaReferencia: {
+      referenciaFamiliar: {
+        parentezco: '',
+        telefono: '',
+        sexo: ''
+      },
+
+      personaReferenciaSecundaria: {
         nombre: '', 
         apellido: '',
         sexo: '',
@@ -85,11 +123,10 @@ export default {
         // correoPersonal: ''
       },
 
-      usuario: {
-        correo: '',
-        password: '',
-        acceso_usuario: 'empleado',
-        first_login: 1        
+      referenciaSecundaria: {
+        parentezco: '',
+        tiempo_conocido: '',
+        telefono: ''
       }
     }
   },
