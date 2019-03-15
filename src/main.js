@@ -6,6 +6,7 @@ import axios from 'axios'
 import VueFormWizard from 'vue-form-wizard'
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
+import Swal from 'sweetalert2'
 
 import BlackDashboard from "./plugins/blackDashboard";
 import i18n from "./i18n"
@@ -15,6 +16,7 @@ import store from './store/index'
 Vue.use(BlackDashboard);
 // Vue.use(axios);
 Vue.use(VueFormWizard)
+window.Swal = Swal
 window.axios = axios
 
 

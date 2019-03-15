@@ -17,6 +17,7 @@
     "es6-promise": "^4.2.4",
     "jquery": "^3.3.1",
     "slick-carousel": "^1.8.1",
+    "sweetalert2": "^8.5.0",
     "vue": "^2.6.3",
     "vue-agile": "^0.3.7",
     "vue-carousel": "^0.17.0",

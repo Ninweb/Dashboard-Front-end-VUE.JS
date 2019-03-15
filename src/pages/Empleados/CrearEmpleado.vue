@@ -260,6 +260,11 @@ export default {
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:8000/api/salarios', this.salario).then(response => {
           console.log('success3 ', response)
+          Swal.fire({
+            type: 'success',
+            title: '¡Genial!',
+            text: 'Se ha creado el perfil de empleado con éxito. :thumbsup:'
+          })
           resolve(true)
         }).catch(error => {
           console.log('error3 ', response)
