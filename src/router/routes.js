@@ -41,10 +41,10 @@ const routes = [
   },
 
   {
-    path: "/complete-info",
+    path: "/complete-info/user:id",
     name: "first_login",
     component: FirstLogin
-  },
+  },  
 
   {
     path: "/dashboard",

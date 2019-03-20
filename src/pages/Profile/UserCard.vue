@@ -75,9 +75,11 @@
       //BUSCANDO INFORMACIÓN DEL EMPLEADO
         await axios.get('http://localhost:8000/api/usuario/empleados/'+this.usuarioLogeado.usuario.id)
           .then(  (response) => {
+            console.log('response', response)
             this.empleado = response.data[0];
-            this.id_persona = this.empleado.id_persona;
-            console.log(this.empleado)
+            this.id_persona = response.data[0].id_persona;
+            console.log('empleado', this.empleado)
+            console.log('id-ersona', this.id_persona)
           })
           .catch(error => {
               console.log(error)
@@ -86,8 +88,11 @@
       async getPersona(){
         await axios.get('http://localhost:8000/api/personas/'+this.id_persona)
           .then(  (res) => {
-            this.persona = res.data[0];
-            console.log(this.persona);
+            console.log('res', res)
+            var idPersona = this.id_persona
+            console.log('idid', idPersona)
+            this.persona = res.data[idPersona];
+            console.log('persona', this.persona);
             this.cargando = false
           })
           .catch(err => {

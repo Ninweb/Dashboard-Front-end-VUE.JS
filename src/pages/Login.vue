@@ -69,44 +69,23 @@
           correo: this.usuario.correo,
           password: this.usuario.password   
         }).then(() => {
-          this.$router.push({ 
-            name:'dashboard', 
-            params: this.usuario
-          })
+          
+          // console.log('user ', this.$store.state.usuarioLogeado)
+          var first = this.$store.state.usuarioLogeado.usuario.first_login
+          
+          if (first == 0) {
+            this.$router.push({ 
+              name:'dashboard', 
+              params: this.usuario
+            })
+          }else{
+            this.$router.push({ 
+              name:'first_login', 
+              params: this.usuario
+            })
+          }
+          
         })
-
-        // axios.post('http://localhost:8000/api/login',{
-        //   correo: this.usuario.correo,
-        //   password: this.usuario.password   
-        // })
-        // .then(response => { 
-        //   if(response.data.status == "error"){
-        //     this.error.informacion = response.data.message;
-        //     this.$emit('loggedIn', response)
-        //     if(response.data.message == "Correo no valido"){
-        //       this.error.correo = true
-        //       this.error.password = false
-        //     }else{
-        //       this.error.correo = false
-        //       this.error.password = true
-        //     }
-        //     this.cargando = false;
-        //   }else if (response.data.usuario.acceso_usuario == "admin"){
-        //     let token = response.data.usuario.api_token;
-        //     let usuarioLogeado = response.data;
-        //     this.$emit('loggedIn', response)
-        //     console.log('esto', usuarioLogeado)
-        //     console.log('esto', usuarioLogeado.usuario.api_token)
-        //     // localStorage.setItem('usuarioLogeado',JSON.stringify(usuarioLogeado));
-        //     // this.$router.push({ 
-        //     //   name:'dashboard', 
-        //     //   params: this.usuario
-        //     // })
-        //   }
-        // })
-        // .catch(error => {
-        //   console.log(error)
-        // });
       }
     }
   }

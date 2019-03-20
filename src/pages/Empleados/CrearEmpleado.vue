@@ -149,7 +149,7 @@
             <b>Cesta Ticket:</b> {{this.salario.salario_ticket}} Bs<br><br>
             <b>Seguro:</b> {{this.salario.salario_seguro}} Bs<br><br>
             <b>Fecha de inicio del sueldo:</b> {{this.salario.fecha_inicio}}<br><br>
-            <b>Fecha de cierre del sueldo:</b> {{this.salario.fecha_fin}}<br><br>     
+            <b>Fecha de cierre del sueldo:</b> {{this.salario.fecha_fin}} <br><br>     
           </card>
         </div>
       </div>
@@ -289,6 +289,8 @@ export default {
             type: 'success',
             title: '¡Genial!',
             text: 'Se ha creado el perfil de empleado con éxito. &#128077;'
+          }).then(() => {
+            this.$refs.wizard.reset()
           })
         }).catch(error => {
           console.log('error3 ', response)
