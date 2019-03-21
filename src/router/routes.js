@@ -26,8 +26,6 @@ import CommunityDepartment from '@/pages/Departamentos/CommunityDepartment.vue'
 import RecursosDepartment from '@/pages/Departamentos/RecursosDepartment.vue'
 
 
-
-
 const routes = [
   {
     path: "/",
