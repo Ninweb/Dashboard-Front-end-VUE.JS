@@ -67,7 +67,8 @@
         this.usuarioLogeado = usuarioLogeado;
         console.log(usuarioLogeado);
       },
-      async getEmpleado(){
+
+      /*async getEmpleado(){
         console.log(this.usuarioLogeado);
 
 
@@ -83,15 +84,16 @@
           .catch(error => {
               console.log(error)
           });
-      },
+      },*/
+
       async getPersona(){
-        await axios.get('http://localhost:8000/api/personas/'+this.id_persona)
+        await axios.get('http://localhost:8000/api/personas/'+this.$store.state.id_persona)
           .then(  (res) => {
             console.log('res', res)
-            var idPersona = JSON.stringify(this.id_persona)
-            console.log('idid', idPersona)
-            this.persona = res.data[idPersona];
-            console.log('persona', this.persona);
+            // var idPersona = JSON.stringify(this.$store.state.id_persona)
+            // console.log('idid', idPersona)
+            this.persona = res.data[this.$store.state.id_persona];
+            // console.log('persona', this.persona);
             this.cargando = false
           })
           .catch(err => {
@@ -99,16 +101,16 @@
           });
       },
 
-      // async getPhotoUser(){
-      //   await axios.get('http://localhost:8000/api/documentos/'+1)
-      //     .then(  (res) => {
-      //       this.imagePerfil = res.data
-      //       console.log(this.imagePerfil)
-      //     })
-      //     .catch(err => {
-      //         console.log(err)
-      //     });
-      // }
+      /*async getPhotoUser(){
+        await axios.get('http://localhost:8000/api/documentos/'+1)
+          .then(  (res) => {
+            this.imagePerfil = res.data
+            console.log(this.imagePerfil)
+          })
+          .catch(err => {
+              console.log(err)
+          });
+      }*/
     },
     computed:{//metodos computados los cuales se ejecutan en segundo plano
 
