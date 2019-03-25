@@ -7,36 +7,25 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state:{ //= data
     usuarioLogeado: '',
-    acceso_usuario: '',
-    id_persona: '',
     token: '',
-    status: ''
-  },
+    acceso_usuario: '',
+    first: '',
 
-  getters:{ // = compuedd properties
-    isAuthenticated: state => !!state.token,
-    authStatus: state => state.status
-  },
+    empleado: '',
+    id_persona: '',
 
-  mutations:{
-    // toda funcion debe tener nombreFuncion(state , parametros ...)
-    authSuccess(state, token){
-      state.token = token
-      state.status = 'success'
-    },
+    persona: '',
 
-    authError(state){
-      state.token = ''
-      state.status = 'error'
-    }
   },
 
   actions: {
-    login(context, payload) {
+    login(context, payload) { 
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:8000/api/login', payload)
         .then(response => { 
+
           if(response.data.status == "error"){
+
             this.error.informacion = response.data.message;
             if(response.data.message == "Correo no valido"){
               this.error.correo = true
@@ -45,23 +34,18 @@ const store = new Vuex.Store({
               this.error.correo = false
               this.error.password = true
             }
+
             this.cargando = false;
-          }else if (response.data.usuario.acceso_usuario == "admin"){
-            let access_token = response.data.usuario.api_token;
-            context.commit('authSuccess', access_token)
-
-            this.state.usuarioLogeado = response.data
-            this.state.acceso_usuario = response.data.usuario.acceso_usuario
-
-            let usuarioLogeado = response.data;
-            console.log(usuarioLogeado)
-
-            localStorage.setItem('usuarioLogeado', JSON.stringify(usuarioLogeado));
-            // localStorage.setItem('token', access_token)
-            // axios.defaults.headers.common['Authorization'] = "Bearer " + window.token
-
-            resolve(response)
           }
+
+          let usuarioLogeado = response.data.usuario
+
+          context.commit('authSuccess', usuarioLogeado)
+
+          localStorage.setItem('usuarioLogeado', JSON.stringify(usuarioLogeado));
+          localStorage.setItem('token', usuarioLogeado.api_token)
+
+          resolve(response)
         })
         .catch(error => {
           localStorage.removeItem('token')
@@ -72,15 +56,40 @@ const store = new Vuex.Store({
       })
     },
 
-    getEmpleado(context, payload){
+    getPersona({ commit }){
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8000/api/usuario/empleados/'+this.state.usuarioLogeado.usuario.id, payload)
+        axios.get('http://localhost:8000/api/personas/'+this.state.id_persona)
           .then((response) => {
-            console.log('response', response)
-            this.empleado = response.data[0];
-            this.state.id_persona = response.data[0].id_persona-1;
-            console.log('empleado', this.empleado)
-            console.log('id-ersona', this.id_persona)
+            console.log('res', response)
+            // var idPersona = JSON.stringify(this.$store.state.id_persona)
+            // console.log('idid', idPersona)
+            let persona = response.data[this.state.id_persona-1];
+            // console.log('persona', this.persona);
+
+            commit('personData', persona)
+            this.cargando = false
+            resolve(response)
+          })
+          .catch(err => {
+            console.log(err)
+            reject(response)
+          });
+      })
+    },    
+
+    getEmployer({ commit }){
+      console.log('userlogeado-employer1', this.state.usuarioLogeado)      
+      return new Promise((resolve, reject) => {
+        axios.get('http://localhost:8000/api/usuario/empleados/'+this.state.usuarioLogeado.id)
+          .then((response) => {
+            console.log('response-employer', response)
+            console.log('userlogeado-employer2', this.state.usuarioLogeado)
+            let empleado = response.data[0];
+            
+            commit('employerData', empleado)
+
+            console.log('empleado', this.state.empleado)
+            console.log('id-ersona', this.state.id_persona)
 
             resolve(response)
           })
@@ -91,6 +100,16 @@ const store = new Vuex.Store({
       })
     },
 
+    getDepartamento({ commit }){
+      return new Promise((resolve, reject) => {
+        axios.get('http://localhost:8000/api/departamentos/'+this.state.usuarioLogeado.id)
+        .then((response) => {
+          let departamento = response.data.nombre_departamento
+          comm
+        })
+      })
+    },
+
     logout(context){
       return new Promise((resolve, reject) => {
         localStorage.removeItem('token')
@@ -98,6 +117,65 @@ const store = new Vuex.Store({
 
         resolve()
       })
+    }
+  },  
+
+  getters:{ // = compuedd properties
+    // access(state){
+    //   return state.usuarioLogeado
+    // }
+  },
+
+  mutations:{
+    // toda funcion debe tener nombreFuncion(state , parametros ...)
+    authSuccess(state, usuarioLogeado){
+      state.usuarioLogeado = usuarioLogeado
+      state.token = usuarioLogeado.api_token
+      state.acceso_usuario = usuarioLogeado.acceso_usuario
+      state.first = usuarioLogeado.first_login
+      state.status = 'success'
+    },
+
+    authError(state){
+      state.token = ''
+      state.status = 'error'
+    },
+
+    personData(state, persona){
+      state.persona = persona
+    },
+
+    employerData(state, empleado){
+      state.empleado = empleado
+      state.id_persona = empleado.id_persona
+    },    
+
+    departmentData(state, departamento){
+
+    },
+
+    salaryData(state, salario){
+
+    },
+
+    directionData(state, direccion){
+
+    },
+
+    personFamilyData(state, personFamiliar){
+
+    },
+
+    personReferenceData(state, personaReferencia){
+
+    },
+
+    familiarData(state, referFamiliar){
+
+    },
+
+    referenceData(state, reference){
+
     }
   }
 })

@@ -39,8 +39,8 @@ const routes = [
   },
 
   {
-    path: "/complete-info/user:id",
-    name: "first_login",
+    path: "/complete",
+    name: "complete",
     component: FirstLogin
   },  
 

@@ -12,6 +12,7 @@ import BlackDashboard from "./plugins/blackDashboard";
 import i18n from "./i18n"
 
 import store from './store/index'
+import apiRoutes from './services/config'
 
 Vue.use(BlackDashboard);
 // Vue.use(axios);
@@ -26,5 +27,6 @@ new Vue({
   router,
   i18n,
   store,
+  apiRoutes,
   render: h => h(App)
 }).$mount("#app");

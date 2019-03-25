@@ -2,7 +2,7 @@
   <div>
     <div class="login-form ">
 
-      <form class="form row" v-on:submit.prevent="loginAPI">
+      <form class="form row" v-on:submit.prevent="login">
         <div class="avatar">
           <img src="img/login-logo.png" alt="Avatar">
         </div>           
@@ -41,6 +41,7 @@
 
 <script>
   import axios from 'axios'
+  import { mapState } from 'vuex'
 
   export default {
     name: 'app',
@@ -61,32 +62,46 @@
       }
     
     },
+
     methods: {
-      loginAPI(){
+      login(){
         this.cargando = true;
 
         this.$store.dispatch('login', {
           correo: this.usuario.correo,
           password: this.usuario.password   
-        }).then(() => {
+        }).then((response) => {
+
+          // console.log('response vuex', response)
+          // console.log('user ', this.usuarioLogeado)
+          // console.log('first-component', this.first)
+
+          // var first = JSON.stringify()
           
-          // console.log('user ', this.$store.state.usuarioLogeado)
-          var first = this.$store.state.usuarioLogeado.usuario.first_login
-          
-          if (first == 0) {
+          if (this.first == '0') {
+            // console.log('dash-first', this.first)
             this.$router.push({ 
               name:'dashboard', 
               params: this.usuario
             })
           }else{
+            // console.log('primera-first', this.first)
             this.$router.push({ 
-              name:'first_login', 
+              name:'complete', 
               params: this.usuario
             })
           }
           
         })
       }
+    },
+
+    computed: {
+      // access(){
+      //   return this.$store.getters.access
+      // },
+
+      ...mapState(['usuarioLogeado', 'first'])
     }
   }
 </script>

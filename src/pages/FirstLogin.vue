@@ -217,13 +217,12 @@ export default {
     }
   },
 
-  mounted: {
-    
-    getUsuarioLogeado(){      
-      user_id = this.$store.state.usuarioLogeado.usuario.id
-
-      // this.personaEmpleado.nombre = 
-    },
+  mounted () {
+    Swal.fire({
+      type: 'info',
+      title: '¡Bienvenido ninwebniano &#128526!',
+      text: 'Hemos creado un perfil de empleado para usar nuestro sistema. Casi terminamos, solo falta completar la información para continuar. Esto será una sola vez'
+    })
   }
 }
 </script>

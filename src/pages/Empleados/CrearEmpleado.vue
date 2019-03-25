@@ -27,7 +27,7 @@
             <label>Nombre</label> <br>
             <base-input type="text" v-model="persona.nombre"></base-input> <br>
             <label>Apellido</label> <br>
-            <base-input type="text" v-model="persona.apellido" @keyup="createEmail"></base-input> <br>
+            <base-input type="text" v-model="persona.apellido"></base-input> <br>
             <label>Sexo</label> <br>
             <select v-model="persona.sexo">
               <option>Masculino</option>
@@ -44,7 +44,7 @@
           <tab-content icon="fas fa-key icon-tab" :before-change="crearUsuario">
             <p id="subtitle-form">Datos del usuario</p>
             <label>Email empresarial</label> <br>
-            <base-input type="text" v-model="usuario.correo">{{this.usuario.correo}}</base-input> <br>
+            <base-input type="text" v-model="usuario.correo" @mouseleave="createEmail"></base-input> <br>
             <label>Contraseña</label> <br>
             <base-input type="password" v-model="usuario.password"></base-input> <br>
             <label>Tipo de usuario</label> <br>
@@ -207,7 +207,49 @@ export default {
         salario_seguro: '',
         fecha_inicio: '',
         fecha_fin: ''
-      }     
+      },
+
+    /*
+      direccion: {
+        parroquia: 'Completar por el usuario',
+        municipio: 'Completar por el usuario',
+        alcaldia: 'Completar por el usuario',
+        ciudad: 'Completar por el usuario',
+        zona: 'Completar por el usuario'
+      },
+
+      personaReferenciaFamiliar: {
+        nombre: 'Completar por el usuario', 
+        apellido: 'Completar por el usuario',
+        sexo: 'Completar por el usuario',
+        fecha_nacimiento: 'Completar por el usuario',
+        cedula: 'Completar por el usuario',
+        profesion: 'Completar por el usuario',
+        // correoPersonal: ''
+      },
+
+      referenciaFamiliar: {
+        parentezco: 'Completar por el usuario',
+        telefono: 'Completar por el usuario',
+        sexo: 'Completar por el usuario'
+      },
+
+      personaReferenciaSecundaria: {
+        nombre: 'Completar por el usuario', 
+        apellido: 'Completar por el usuario',
+        sexo: 'Completar por el usuario',
+        fecha_nacimiento: 'Completar por el usuario',
+        cedula: 'Completar por el usuario',
+        profesion: 'Completar por el usuario',
+        // correoPersonal: ''
+      },
+
+      referenciaSecundaria: {
+        parentezco: 'Completar por el usuario',
+        tiempo_conocido: 'Completar por el usuario',
+        telefono: 'Completar por el usuario'
+      }
+    */
     }
   },
 
@@ -221,14 +263,19 @@ export default {
   },
 
   methods: {
+    
     createEmail () {
       // console.log('acceso ', this.$store.state.acceso_usuario)
       // console.log('usuario loegado ', this.$store.state.usuarioLogeado)
-      this.persona.nombre.toLowerCase()
-      var firstLetter = this.persona.nombre.charAt(0)
-      this.usuario.correo = firstLetter + this.persona.apellido + '@ninweb.net'
-      this.usuario.correo.toLowerCase()
+
+      // this.persona.nombre.toLowerCase()
+      // var firstLetter = this.persona.nombre.charAt(0)
+      // this.usuario.correo = firstLetter + this.persona.apellido + '@ninweb.net'
+      // this.usuario.correo.toLowerCase()
+      
+      this.usuario.correo = this.usuario.correo + '@ninweb.net'     
     },
+    
 
     crearPersona () {
       return new Promise((resolve, reject) => {
@@ -291,10 +338,15 @@ export default {
             text: 'Se ha creado el perfil de empleado con éxito. &#128077;'
           }).then(() => {
             this.$refs.wizard.reset()
-          })
+          })  
         }).catch(error => {
           console.log('error3 ', response)
           reject(false)
+          Swal.fire({
+            type: 'error',
+            title: 'Oh no! &#9785;',
+            text: 'Ocurrió un problema, por favor verifica la información ingresada.'
+          })
         })
       })
     }
