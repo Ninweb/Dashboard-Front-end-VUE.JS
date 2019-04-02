@@ -84,12 +84,14 @@
               name:'dashboard', 
               params: this.usuario
             })
+            // this.allowed = true
           }else{
             // console.log('primera-first', this.first)
             this.$router.push({ 
               name:'complete', 
               params: this.usuario
             })
+            // this.allowed = false
           }
           
         })
@@ -101,7 +103,7 @@
       //   return this.$store.getters.access
       // },
 
-      ...mapState(['usuarioLogeado', 'first'])
+      ...mapState(['usuarioLogeado', 'first', 'allowed'])
     }
   }
 </script>

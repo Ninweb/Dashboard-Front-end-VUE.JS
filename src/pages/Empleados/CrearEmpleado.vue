@@ -19,7 +19,7 @@
           color="#1B3F65" 
           next-button-text="Siguiente"
           back-button-text="Anterior"
-          finish-button-text="Completar"
+          finish-button-text="Crear perfil"
           @on-complete="crearSalario">
 
           <tab-content icon="fas fa-user icon-tab" :before-change="crearPersona">
@@ -107,6 +107,20 @@
             <label>Fecha de cierre del sueldo</label> <br>
             <base-input type="date" v-model="salario.fecha_fin"></base-input> <br>
           </tab-content>
+
+          <!-- <tab-content icon="fas fa-dollar-sign icon-tab">
+            <p id="subtitle-form">¿Verificaste toda la información? De ser así, haz click en <b>Crear Perfil</b> para finalizar el registro. Esto puede durar unos segundos.</p>
+            <label>Sueldo base</label> <br>
+            <base-input type="text" v-model="salario.salario_base"></base-input> Bs <br>
+            <label>Cesta Ticket</label> <br>
+            <base-input type="text" v-model="salario.salario_ticket"></base-input> <br>
+            <label>Seguro</label> <br>
+            <base-input type="text" v-model="salario.salario_seguro"></base-input> <br>
+            <label>Fecha de inicio del sueldo</label> <br>
+            <base-input type="date" v-model="salario.fecha_inicio"></base-input> <br>
+            <label>Fecha de cierre del sueldo</label> <br>
+            <base-input type="date" v-model="salario.fecha_fin"></base-input> <br>
+          </tab-content> -->
         </form-wizard>
       </div>
 
@@ -161,8 +175,9 @@
 export default {
   data () {
     return {
-      // defaultValue: 'Completar',
       passMsg: 'La que ingreso',
+      id_persona: '',
+      id_empleado: '',
 
       persona: {
         nombre: '', 
@@ -171,7 +186,6 @@ export default {
         fecha_nacimiento: '',
         cedula: 'Completar por el usuario',
         profesion: 'Completar por el usuario',
-        // correoPersonal: ''
       },
 
       usuario: {
@@ -225,7 +239,6 @@ export default {
         fecha_nacimiento: 'Completar por el usuario',
         cedula: 'Completar por el usuario',
         profesion: 'Completar por el usuario',
-        // correoPersonal: ''
       },
 
       referenciaFamiliar: {
@@ -234,17 +247,16 @@ export default {
         sexo: 'Completar por el usuario'
       },
 
-      personaReferenciaSecundaria: {
+      personaReferenciaPersonal: {
         nombre: 'Completar por el usuario', 
         apellido: 'Completar por el usuario',
         sexo: 'Completar por el usuario',
         fecha_nacimiento: 'Completar por el usuario',
         cedula: 'Completar por el usuario',
         profesion: 'Completar por el usuario',
-        // correoPersonal: ''
       },
 
-      referenciaSecundaria: {
+      referenciaPersonal: {
         parentezco: 'Completar por el usuario',
         tiempo_conocido: 'Completar por el usuario',
         telefono: 'Completar por el usuario'

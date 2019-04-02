@@ -6,15 +6,18 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state:{ //= data
+    status: '',
+
     usuarioLogeado: '',
     token: '',
     acceso_usuario: '',
     first: '',
 
-    empleado: '',
+    empleadoData: '',
     id_persona: '',
 
-    persona: '',
+    personaData: '',
+    sexo: '',
 
   },
 
@@ -60,7 +63,7 @@ const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios.get('http://localhost:8000/api/personas/'+this.state.id_persona)
           .then((response) => {
-            console.log('res', response)
+            console.log('persona', response.data)
             // var idPersona = JSON.stringify(this.$store.state.id_persona)
             // console.log('idid', idPersona)
             let persona = response.data[this.state.id_persona-1];
@@ -88,7 +91,7 @@ const store = new Vuex.Store({
             
             commit('employerData', empleado)
 
-            console.log('empleado', this.state.empleado)
+            console.log('empleado', this.state.empleadoData)
             console.log('id-ersona', this.state.id_persona)
 
             resolve(response)
@@ -100,15 +103,15 @@ const store = new Vuex.Store({
       })
     },
 
-    getDepartamento({ commit }){
-      return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8000/api/departamentos/'+this.state.usuarioLogeado.id)
-        .then((response) => {
-          let departamento = response.data.nombre_departamento
-          comm
-        })
-      })
-    },
+    // getDepartamento({ commit }){
+    //   return new Promise((resolve, reject) => {
+    //     axios.get('http://localhost:8000/api/departamentos/'+this.state.usuarioLogeado.id)
+    //     .then((response) => {
+    //       let departamento = response.data.nombre_departamento
+    //       comm
+    //     })
+    //   })
+    // },
 
     logout(context){
       return new Promise((resolve, reject) => {
@@ -133,7 +136,12 @@ const store = new Vuex.Store({
       state.token = usuarioLogeado.api_token
       state.acceso_usuario = usuarioLogeado.acceso_usuario
       state.first = usuarioLogeado.first_login
-      state.status = 'success'
+
+      if(state.first == '0'){
+        state.status = 'success'
+      }else{
+        state.status = 'firstTimeLogin'
+      }      
     },
 
     authError(state){
@@ -142,11 +150,12 @@ const store = new Vuex.Store({
     },
 
     personData(state, persona){
-      state.persona = persona
+      state.personaData = persona
+      state.sexo = persona.sexo
     },
 
     employerData(state, empleado){
-      state.empleado = empleado
+      state.empleadoData = empleado
       state.id_persona = empleado.id_persona
     },    
 

@@ -55,8 +55,11 @@
 
     mounted () {
       console.log('hola hola')
-      this.$store.dispatch('getEmployer')
-      this.$store.dispatch('getPersona')
+
+      if(this.$store.state.allowed == '0') {
+        this.$store.dispatch('getEmployer')
+        this.$store.dispatch('getPersona')
+      }
     },
 
     // mounted: {
@@ -74,7 +77,8 @@
     // },
     computed: mapState([//metodos computados los cuales se ejecutan en segundo plano
       'empleado',
-      'persona'
+      'persona',
+      'allowed'
     ])
 
     
