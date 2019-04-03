@@ -71,6 +71,7 @@
           correo: this.usuario.correo,
           password: this.usuario.password   
         }).then((response) => {
+          this.$store.dispatch('getPersona')
 
           // console.log('response vuex', response)
           // console.log('user ', this.usuarioLogeado)
@@ -103,7 +104,7 @@
       //   return this.$store.getters.access
       // },
 
-      ...mapState(['usuarioLogeado', 'first', 'allowed'])
+      ...mapState(['usuarioLogeado', 'first'])
     }
   }
 </script>

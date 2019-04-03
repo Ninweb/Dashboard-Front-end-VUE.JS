@@ -12,13 +12,13 @@
         <div class="block block-four prueba2"></div>
         <a href="#">
           <img class="avatar prueba6" v-bind:src="assetsDocumentos + imagePerfil.ruta" alt="...">
-          <h4 class="title">{{persona.nombre +' '+ persona.apellido}}</h4>
+          <h4 class="title">{{personaData.nombre +' '+ personaData.apellido}}</h4>
         </a>
         <p class="description">
-          <strong>Cargo: </strong>{{empleado.descripcion_cargo}}
+          <strong>Cargo: </strong>{{empleadoData.descripcion_cargo}}
         </p>
         <p class="description">
-          <strong>Status: </strong>{{empleado.estado_empleado}}
+          <strong>Status: </strong>{{empleadoData.estado_empleado}}
         </p>
         <p class="description">
           <strong>Departamento: </strong>Programación
@@ -55,11 +55,8 @@
 
     mounted () {
       console.log('hola hola')
-
-      if(this.$store.state.allowed == '0') {
-        this.$store.dispatch('getEmployer')
-        this.$store.dispatch('getPersona')
-      }
+      this.$store.dispatch('getEmployer')
+      this.$store.dispatch('getPersona')
     },
 
     // mounted: {
@@ -76,9 +73,8 @@
     //   }*/
     // },
     computed: mapState([//metodos computados los cuales se ejecutan en segundo plano
-      'empleado',
-      'persona',
-      'allowed'
+      'empleadoData',
+      'personaData',
     ])
 
     

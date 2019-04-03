@@ -44,7 +44,7 @@
           <tab-content icon="fas fa-key icon-tab" :before-change="crearUsuario">
             <p id="subtitle-form">Datos del usuario</p>
             <label>Email empresarial</label> <br>
-            <base-input type="text" v-model="usuario.correo" @mouseleave="createEmail"></base-input> <br>
+            <base-input type="text" v-model="usuario.correo"></base-input> <br>
             <label>Contraseña</label> <br>
             <base-input type="password" v-model="usuario.password"></base-input> <br>
             <label>Tipo de usuario</label> <br>
@@ -346,8 +346,8 @@ export default {
           resolve(true)
           Swal.fire({
             type: 'success',
-            title: '¡Genial!',
-            text: 'Se ha creado el perfil de empleado con éxito. &#128077;'
+            title: '¡Genial! &#128077;',
+            text: 'Se ha creado el perfil de empleado con éxito.'
           }).then(() => {
             this.$refs.wizard.reset()
           })  
