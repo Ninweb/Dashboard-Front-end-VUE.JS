@@ -5,10 +5,11 @@
       color="#1B3F65" 
       next-button-text="Siguiente"
       back-button-text="Anterior"
-      finish-button-text="Completar">
+      finish-button-text="Completar"
+      @onComplete="finishProcess">
 
       <!-- Persona - empleado -->
-      <tab-content class="tab-content" icon="fas fa-user icon-tab">
+      <tab-content class="tab-content" icon="fas fa-user icon-tab" :before-change="updatePersonaEmpleadoData">
         <p id="subtitle-form">Datos personales del empleado</p>
         <label>Nombre</label> <br>
         <base-input type="text" v-model="personaEmpleado.nombre"></base-input> <br>
@@ -28,7 +29,7 @@
       </tab-content>
 
       <!-- Empleado -->
-      <tab-content class="tab-content" icon="fas fa-user-tie icon-tab">
+      <tab-content class="tab-content" icon="fas fa-user-tie icon-tab" :before-change="updateEmpleadoData">
         <p id="subtitle-form">Datos del empleado</p>
         <label>Departamento</label> <br>
         <base-input type="text" v-model="departamento.nombre_departamento" readonly></base-input> <br>
@@ -57,7 +58,7 @@
       </tab-content>
 
       <!-- Salario -->
-      <tab-content class="tab-content" icon="fas fa-dollar-sign icon-tab">
+      <tab-content class="tab-content" icon="fas fa-dollar-sign icon-tab" @on-change="showSalaryModal">
         <p id="subtitle-form">Sueldo del empleado</p>
         <label>Sueldo base</label> <br>
         <base-input type="text" v-model="salario.salario_base" readonly></base-input> <br>
@@ -70,7 +71,7 @@
       </tab-content>
 
       <!-- Direccion -->
-      <tab-content class="tab-content" icon="fas fa-map-marked-alt icon-tab">
+      <tab-content class="tab-content" icon="fas fa-map-marked-alt icon-tab" :before-change="createDireccionData">
         <p id="subtitle-form">Dirección del empleado</p>
         <label>Parroquia</label> <br>
         <base-input type="text" v-model="direccion.parroquia"></base-input> <br>
@@ -85,7 +86,7 @@
       </tab-content>
 
       <!-- Persona - referencia familiar -->
-      <tab-content class="tab-content" icon="fas fa-user icon-tab">
+      <tab-content class="tab-content" icon="fas fa-user icon-tab" :before-change="createPersonaReferFamiliar">
         <p id="subtitle-form">Datos de la persona - familiar a referenciar</p>
         <label>Nombre</label> <br>
         <base-input type="text" v-model="personaReferenciaFamiliar.nombre"></base-input> <br>
@@ -102,7 +103,7 @@
       </tab-content>
 
       <!-- Referencia familiar -->
-      <tab-content class="tab-content" icon="fas fa-users icon-tab">
+      <tab-content class="tab-content" icon="fas fa-users icon-tab" :before-change="createReferFamiliar">
         <p id="subtitle-form">Referencia familiar</p>
         <label>Parentezco</label> <br>
         <base-input type="text" v-model="referenciaFamiliar.parentezco"></base-input> <br>
@@ -113,7 +114,7 @@
       </tab-content>
 
       <!-- Persona - referencia Personal -->
-      <tab-content class="tab-content" icon="fas fa-user icon-tab">
+      <tab-content class="tab-content" icon="fas fa-user icon-tab" :before-change="createPersonaReferPersonal">
         <p id="subtitle-form">Datos de la persona - tercera a referenciar</p>
         <label>Nombre</label> <br>
         <base-input type="text" v-model="personaReferenciaPersonal.nombre"></base-input> <br>
@@ -130,7 +131,7 @@
       </tab-content>
 
       <!-- Referencia Personal -->
-      <tab-content id="tab-content" icon="fas fa-users icon-tab">
+      <tab-content id="tab-content" icon="fas fa-users icon-tab" :before-change="createReferPersonal">
         <p id="subtitle-form">Otras referencias</p>
         <label>Parentezco</label> <br>
         <base-input type="text" v-model="referenciaPersonal.parentezco"></base-input> <br>
@@ -288,12 +289,50 @@
           this.salario.salario_ticket = this.$store.state.salarioData.salario_ticket
           this.salario.salario_seguro = this.$store.state.salarioData.salario_seguro
       },
+      
+      showDepartmentToast(){
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: true,
+        })
 
-      updatePersonaEmpleadoData(){},
+        Toast.fire({
+          text:''
+        })
+      },
 
-      updateEmpleadoData() {},
+      showSalaryToast(){},
 
-      createDireccionData(){},
+      updatePersonaEmpleadoData(){
+        return new Promise((resolve, reject) => {
+          axios.put('http://localhost:8000/api/personas'+this.$store.state.id_persona, this.personaEmpleado).then(response => {
+            resolve(true)
+          }).catch(error => {
+            reject(false)
+          })
+        })
+      },
+
+      updateEmpleadoData(){
+        return new Promise((resolve, reject) => {
+          axios.put('http://localhost:8000/api/empleados'+this.$store.state.id_persona, this.empleado).then(response => {
+            resolve(true)
+          }).catch(error => {
+            reject(false)
+          })
+        })
+      },
+
+      createDireccionData(){
+        return new Promise((resolve, reject) => {
+          axios.post('http://localhost:8000/api/direcciones', this.direccion).then(response => {
+            resolve(true)
+          }).catch(error => {
+            reject(false)
+          })
+        })
+      },
 
       createPersonaReferFamiliar(){},
 
@@ -302,6 +341,8 @@
       createPersonaReferPersonal(){},
 
       createReferPersonal(){},
+
+      finishProcess(){}
     },
 
     computed: { //metodos computados los cuales se ejecutan en segundo plano
