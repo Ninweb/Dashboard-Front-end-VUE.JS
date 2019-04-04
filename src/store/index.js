@@ -30,6 +30,7 @@ const store = new Vuex.Store({
   },
 
   actions: {
+    // login
     login(context, payload) { 
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:8000/api/login', payload)
@@ -195,8 +196,23 @@ const store = new Vuex.Store({
       })
     },
 
-    // envio de datos
 
+    // envio de datos
+    updatePersonaEmpleadoData(context, payload){},
+
+    updateEmpleadoData(context, payload){},
+
+    createDireccionData(context, payload){},
+
+    createPersonaReferFamiliar(context, payload){},
+
+    createReferFamiliar(context, payload){},
+
+    createPersonaReferPersonal(context, payload){},
+
+    createReferPersonal(context, payload){},
+
+    // logout
     logout(context){
       return new Promise((resolve, reject) => {
         localStorage.removeItem('token')

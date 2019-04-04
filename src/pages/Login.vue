@@ -71,13 +71,11 @@
           correo: this.usuario.correo,
           password: this.usuario.password   
         }).then((response) => {
+          this.$store.dispatch('getEmployer')
           this.$store.dispatch('getPersona')
-
-          // console.log('response vuex', response)
-          // console.log('user ', this.usuarioLogeado)
-          // console.log('first-component', this.first)
-
-          // var first = JSON.stringify()
+          this.$store.dispatch('getDepartamento')
+          this.$store.dispatch('getDepartamentos')
+          this.$store.dispatch('getSalary')
           
           if (this.first == '0') {
             // console.log('dash-first', this.first)

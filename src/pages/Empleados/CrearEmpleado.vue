@@ -346,7 +346,7 @@ export default {
           resolve(true)
           Swal.fire({
             type: 'success',
-            title: '¡Genial! &#128077;',
+            title: '¡Genial &#128077;!',
             text: 'Se ha creado el perfil de empleado con éxito.'
           }).then(() => {
             this.$refs.wizard.reset()

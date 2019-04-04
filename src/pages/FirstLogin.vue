@@ -15,7 +15,10 @@
         <label>Apellido</label> <br>
         <base-input type="text" v-model="personaEmpleado.apellido"></base-input> <br>
         <label>Sexo</label> <br>
-        <base-input type="text" v-model="personaEmpleado.sexo"></base-input> <br>
+        <select v-model="personaEmpleado.sexo">
+          <option>Masculino</option>
+          <option>Femenino</option>
+        </select> <br><br>
         <label>Fecha de nacimiento</label> <br>
         <base-input type="date" v-model="personaEmpleado.fecha_nacimiento"></base-input> <br>
         <label>Cedula de identidad</label> <br>
@@ -28,13 +31,13 @@
       <tab-content class="tab-content" icon="fas fa-user-tie icon-tab">
         <p id="subtitle-form">Datos del empleado</p>
         <label>Departamento</label> <br>
-        <base-input type="text" v-model="departamento.nombre_departamento"></base-input> <br>
+        <base-input type="text" v-model="departamento.nombre_departamento" readonly></base-input> <br>
         <label>Descripción del cargo</label> <br>
-        <base-input type="text" v-model="empleado.descripcion_cargo"></base-input> <br>
+        <base-input type="text" v-model="empleado.descripcion_cargo" readonly></base-input> <br>
         <label>Fecha de ingreso</label> <br>
-        <base-input type="date" v-model="empleado.fecha_ingreso"></base-input> <br>
+        <base-input type="date" v-model="empleado.fecha_ingreso" readonly></base-input> <br>
         <label>Estatus del empleado</label> <br>
-        <base-input type="text" v-model="empleado.estado_empleado"></base-input> <br>
+        <base-input type="text" v-model="empleado.estado_empleado" readonly></base-input> <br>
         <label>Descripción de la ruta hogar - oficina</label> <br>
         <base-input type="text" v-model="empleado.descripcion_transporte_ida"></base-input> <br>
         <label>Descripción de la ruta oficina - hogar</label> <br>
@@ -57,13 +60,13 @@
       <tab-content class="tab-content" icon="fas fa-dollar-sign icon-tab">
         <p id="subtitle-form">Sueldo del empleado</p>
         <label>Sueldo base</label> <br>
-        <base-input type="text" v-model="salario.salario_base"></base-input> <br>
+        <base-input type="text" v-model="salario.salario_base" readonly></base-input> <br>
         <label>Cesta Ticket</label> <br>
-        <base-input type="date" v-model="salario.salario_ticket"></base-input> <br>
+        <base-input type="date" v-model="salario.salario_ticket" readonly></base-input> <br>
         <label>Seguro</label> <br>
-        <base-input type="text" v-model="salario.salario_seguro"></base-input> <br>
-        <label>Fecha de inicio del sueldo</label> <br>
-        <base-input type="date" v-model="salario.fecha_inicio"></base-input> <br>
+        <base-input type="text" v-model="salario.salario_seguro" readonly></base-input> <br>
+        <!-- <label>Fecha de inicio del sueldo</label> <br>
+        <base-input type="date" v-model="salario.fecha_inicio"></base-input> <br> -->
       </tab-content>
 
       <!-- Direccion -->
@@ -146,42 +149,43 @@
   export default {
     data () {
       return {
+        dataReady: false,
 
         personaEmpleado: {
-          nombre: this.$store.state.personaData.nombre, 
-          apellido: this.$store.state.personaData.apellido,
-          sexo: this.$store.state.personaData.sexo,
-          fecha_nacimiento: this.$store.state.personaData.fecha_nacimiento,
-          cedula: this.$store.state.personaData.cedula,
-          profesion: this.$store.state.personaData.profesion,
+          nombre: '',
+          apellido: '',
+          sexo: '',
+          fecha_nacimiento: '',
+          cedula: '',
+          profesion: ''
           // correoPersonal: ''
         },
 
         empleado: {
-          descripcion_cargo: this.$store.state.empleadoData.descripcion_cargo,
-          fecha_ingreso: this.$store.state.empleadoData.fecha_ingreso,
-          fecha_retirado: this.$store.state.empleadoData.fecha_retirado,
-          estado_empleado: this.$store.state.empleadoData.estado_empleado,
-          descripcion_transporte_ida: this.$store.state.empleadoData.descripcion_transporte_ida,
-          descripcion_transporte_vuelta: this.$store.state.empleadoData.descripcion_transporte_vuelta,
-          numero_habitacion: this.$store.state.empleadoData.numero_habitacion,
-          numero_celular: this.$store.state.empleadoData.numero_celular,
-          tipo_sangre: this.$store.state.empleadoData.tipo_sangre,
-          profesion: this.$store.state.empleadoData.profesion,
-          estado_civil: this.$store.state.empleadoData.estado_civil,
-          educacion: this.$store.state.empleadoData.educacion
+          descripcion_cargo: '',
+          fecha_ingreso: '',
+          fecha_retirado: '',
+          estado_empleado: '',
+          descripcion_transporte_ida: '',
+          descripcion_transporte_vuelta: '',
+          numero_habitacion: '',
+          numero_celular: '',
+          tipo_sangre: '',
+          profesion: '',
+          estado_civil: '',
+          educacion: ''
         },
 
         departamento: {
-          nombre_departamento: this.$store.state.departmentData.nombre_departamento
+          nombre_departamento: ''
         },
 
         salario: {
-          salario_base: this.$store.state.salarioData.salario_base,
-          salario_ticket: this.$store.state.salarioData.salario_ticket,
-          salario_seguro: this.$store.state.salarioData.salario_seguro,
-          // fecha_inicio: this.$store.state.salarioData.fecha_inicio,
-          // fecha_fin: this.$store.state.salarioData.fecha_fin 
+          salario_base: '',
+          salario_ticket: '',
+          salario_seguro: ''
+          // fecha_inicio: '',
+          // fecha_fin: '',
         },
 
         direccion: {
@@ -231,24 +235,17 @@
       }
     },
 
-    mounted () { 
-      // obtencion de datos del empleado
-      this.$store.dispatch('getEmployer')
-      this.$store.dispatch('getPersona')
-      this.$store.dispatch('getDepartamento')
-      this.$store.dispatch('getDepartamentos')
-      this.$store.dispatch('getSalary')
-      
-      
-      // var sexo = JSON.stringify(this.$store.state.personaData.sexo)
+    beforeMount () { 
       // modal de bienvenida
-      console.log('sexo', this.$store.state.personaData.sexo)
-      console.log('nombre ', this.$store.state.personaData.nombre)
+
       if(this.$store.state.sexo == 'Femenino'){
         Swal.fire({
           type: 'info',
           title: '¡Bienvenida ninwebniana &#128526;!',
           text: 'Te hemos creado un perfil de empleado para usar nuestro sistema. Casi terminamos, solo falta completar esta información para continuar. Esto será una sola vez'
+        })
+        .then(() => {
+          this.getData()     
         })
       }else{
         Swal.fire({
@@ -256,15 +253,65 @@
           title: '¡Bienvenido ninwebniano &#128526;!',
           text: 'Te hemos creado un perfil de empleado para usar nuestro sistema. Casi terminamos, solo falta completar esta información para continuar. Esto será una sola vez'
         })
+        .then(() => {
+          this.getData()        
+        })
       }   
     },
 
-    computed: mapState([//metodos computados los cuales se ejecutan en segundo plano
-      'empleadoData',
-      'personaData',
-      'departmentData',
-      'salarioData'
-    ])
+    methods: {
+      // obtencion de datos del empleado
+      getData() {
+          this.personaEmpleado.nombre = this.$store.state.personaData.nombre 
+          this.personaEmpleado.apellido = this.$store.state.personaData.apellido
+          this.personaEmpleado.sexo = this.$store.state.personaData.sexo
+          this.personaEmpleado.fecha_nacimiento = this.$store.state.personaData.fecha_nacimiento
+          this.personaEmpleado.cedula = this.$store.state.personaData.cedula
+          this.personaEmpleado.profesion = this.$store.state.personaData.profesion
+
+          this.empleado.descripcion_cargo = this.$store.state.empleadoData.descripcion_cargo
+          this.empleado.fecha_ingreso = this.$store.state.empleadoData.fecha_ingreso
+          this.empleado.fecha_retirado = this.$store.state.empleadoData.fecha_retirado
+          this.empleado.estado_empleado = this.$store.state.empleadoData.estado_empleado
+          this.empleado.descripcion_transporte_ida = this.$store.state.empleadoData.descripcion_transporte_ida
+          this.empleado.descripcion_transporte_vuelta = this.$store.state.empleadoData.descripcion_transporte_vuelta
+          this.empleado.numero_habitacion = this.$store.state.empleadoData.numero_habitacion
+          this.empleado.numero_celular = this.$store.state.empleadoData.numero_celular
+          this.empleado.tipo_sangre = this.$store.state.empleadoData.tipo_sangre
+          this.empleado.profesion = this.$store.state.empleadoData.profesion
+          this.empleado.estado_civil = this.$store.state.empleadoData.estado_civil
+          this.empleado.educacion = this.$store.state.empleadoData.educacion
+
+          this.departamento.nombre_departamento = this.$store.state.departmentData.nombre_departamento
+
+          this.salario.salario_base = this.$store.state.salarioData.salario_base
+          this.salario.salario_ticket = this.$store.state.salarioData.salario_ticket
+          this.salario.salario_seguro = this.$store.state.salarioData.salario_seguro
+      },
+
+      updatePersonaEmpleadoData(){},
+
+      updateEmpleadoData() {},
+
+      createDireccionData(){},
+
+      createPersonaReferFamiliar(){},
+
+      createReferFamiliar(){},
+
+      createPersonaReferPersonal(){},
+
+      createReferPersonal(){},
+    },
+
+    computed: { //metodos computados los cuales se ejecutan en segundo plano
+      ...mapState([
+        'empleadoData',
+        'personaData',
+        'departmentData',
+        'salarioData'
+      ])
+    } 
   }
 </script>
 
