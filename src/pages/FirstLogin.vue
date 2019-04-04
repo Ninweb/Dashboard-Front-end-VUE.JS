@@ -263,34 +263,34 @@
     methods: {
       // obtencion de datos del empleado
       getData() {
-          this.personaEmpleado.nombre = this.$store.state.personaData.nombre 
-          this.personaEmpleado.apellido = this.$store.state.personaData.apellido
-          this.personaEmpleado.sexo = this.$store.state.personaData.sexo
-          this.personaEmpleado.fecha_nacimiento = this.$store.state.personaData.fecha_nacimiento
-          this.personaEmpleado.cedula = this.$store.state.personaData.cedula
-          this.personaEmpleado.profesion = this.$store.state.personaData.profesion
+        this.personaEmpleado.nombre = this.$store.state.personaData.nombre 
+        this.personaEmpleado.apellido = this.$store.state.personaData.apellido
+        this.personaEmpleado.sexo = this.$store.state.personaData.sexo
+        this.personaEmpleado.fecha_nacimiento = this.$store.state.personaData.fecha_nacimiento
+        this.personaEmpleado.cedula = this.$store.state.personaData.cedula
+        this.personaEmpleado.profesion = this.$store.state.personaData.profesion
 
-          this.empleado.descripcion_cargo = this.$store.state.empleadoData.descripcion_cargo
-          this.empleado.fecha_ingreso = this.$store.state.empleadoData.fecha_ingreso
-          this.empleado.fecha_retirado = this.$store.state.empleadoData.fecha_retirado
-          this.empleado.estado_empleado = this.$store.state.empleadoData.estado_empleado
-          this.empleado.descripcion_transporte_ida = this.$store.state.empleadoData.descripcion_transporte_ida
-          this.empleado.descripcion_transporte_vuelta = this.$store.state.empleadoData.descripcion_transporte_vuelta
-          this.empleado.numero_habitacion = this.$store.state.empleadoData.numero_habitacion
-          this.empleado.numero_celular = this.$store.state.empleadoData.numero_celular
-          this.empleado.tipo_sangre = this.$store.state.empleadoData.tipo_sangre
-          this.empleado.profesion = this.$store.state.empleadoData.profesion
-          this.empleado.estado_civil = this.$store.state.empleadoData.estado_civil
-          this.empleado.educacion = this.$store.state.empleadoData.educacion
+        this.empleado.descripcion_cargo = this.$store.state.empleadoData.descripcion_cargo
+        this.empleado.fecha_ingreso = this.$store.state.empleadoData.fecha_ingreso
+        this.empleado.fecha_retirado = this.$store.state.empleadoData.fecha_retirado
+        this.empleado.estado_empleado = this.$store.state.empleadoData.estado_empleado
+        this.empleado.descripcion_transporte_ida = this.$store.state.empleadoData.descripcion_transporte_ida
+        this.empleado.descripcion_transporte_vuelta = this.$store.state.empleadoData.descripcion_transporte_vuelta
+        this.empleado.numero_habitacion = this.$store.state.empleadoData.numero_habitacion
+        this.empleado.numero_celular = this.$store.state.empleadoData.numero_celular
+        this.empleado.tipo_sangre = this.$store.state.empleadoData.tipo_sangre
+        this.empleado.profesion = this.$store.state.empleadoData.profesion
+        this.empleado.estado_civil = this.$store.state.empleadoData.estado_civil
+        this.empleado.educacion = this.$store.state.empleadoData.educacion
 
-          this.departamento.nombre_departamento = this.$store.state.departmentData.nombre_departamento
+        this.departamento.nombre_departamento = this.$store.state.departmentData.nombre_departamento
 
-          this.salario.salario_base = this.$store.state.salarioData.salario_base
-          this.salario.salario_ticket = this.$store.state.salarioData.salario_ticket
-          this.salario.salario_seguro = this.$store.state.salarioData.salario_seguro
+        this.salario.salario_base = this.$store.state.salarioData.salario_base
+        this.salario.salario_ticket = this.$store.state.salarioData.salario_ticket
+        this.salario.salario_seguro = this.$store.state.salarioData.salario_seguro
       },
       
-      showDepartmentToast(){
+      showSalaryToast(){
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
@@ -298,17 +298,19 @@
         })
 
         Toast.fire({
-          text:''
+          type: 'info',
+          title: 'Este es tu salario',
+          background: 'linear-gradient(0deg, rgb(0,0,0) to rgb(56,56,56))'
         })
       },
-
-      showSalaryToast(){},
 
       updatePersonaEmpleadoData(){
         return new Promise((resolve, reject) => {
           axios.put('http://localhost:8000/api/personas'+this.$store.state.id_persona, this.personaEmpleado).then(response => {
+            console.log('personaEmpleado ', response)
             resolve(true)
           }).catch(error => {
+            console.log('personaEmpleado ', error)
             reject(false)
           })
         })
@@ -334,15 +336,53 @@
         })
       },
 
-      createPersonaReferFamiliar(){},
+      createPersonaReferFamiliar(){
+        return new Promise((resolve, reject) => {
+          axios.post('http://localhost:8000/api/personas', this.personaReferenciaFamiliar).then(response => {
+            resolve(true)
+          }).catch(error => {
+            reject(false)
+          })
+        })
+      },
 
-      createReferFamiliar(){},
+      createReferFamiliar(){
+        return new Promise((resolve, reject) => {
+          axios.post('http://localhost:8000/api/familiares', this.referenciaFamiliar).then(response => {
+            resolve(true)
+          }).catch(error => {
+            reject(false)
+          })
+        })
+      },
 
-      createPersonaReferPersonal(){},
+      createPersonaReferPersonal(){
+        return new Promise((resolve, reject) => {
+          axios.post('http://localhost:8000/api/personas', this.personaReferenciaFamiliar).then(response => {
+            resolve(true)
+          }).catch(error => {
+            reject(false)
+          })
+        })
+      },
 
-      createReferPersonal(){},
+      createReferPersonal(){
+        return new Promise((resolve, reject) => {
+          axios.post('http://localhost:8000/api/personas', this.personaReferenciaPersonal).then(response => {
+            resolve(true)
+          }).catch(error => {
+            reject(false)
+          })
+        })
+      },
 
-      finishProcess(){}
+      finishProcess(){
+        Swal.fire({
+          type: 'info',
+          title: '¡Cool &#129311;!',
+          text: 'Tu información fue almacenada con éxito. Ya puedes interactuar con nuestro sistema.'
+        })
+      }
     },
 
     computed: { //metodos computados los cuales se ejecutan en segundo plano
