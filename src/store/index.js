@@ -14,7 +14,7 @@ const store = new Vuex.Store({
     first: '',
 
     empleadoData: '',
-    id_persona: '',
+    id_usuario: '',
 
     personaData: '',
     // sexo: '',
@@ -81,7 +81,7 @@ const store = new Vuex.Store({
             commit('employerData', empleado)
 
             console.log('empleado', this.state.empleadoData)
-            console.log('id-ersona', this.state.id_persona)
+            console.log('id-ersona', this.state.id_usuario)
 
             resolve(response)
             
@@ -95,12 +95,12 @@ const store = new Vuex.Store({
 
     getPersona({ commit }){
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8000/api/personas/'+this.state.id_persona)
+        axios.get('http://localhost:8000/api/personas/'+this.state.id_usuario)
           .then((response) => {
             console.log('persona', response.data)
-            // var idPersona = JSON.stringify(this.$store.state.id_persona)
+            // var idPersona = JSON.stringify(this.$store.state.id_usuario)
             // console.log('idid', idPersona)
-            let persona = response.data[this.state.id_persona-1];
+            let persona = response.data[this.state.id_usuario-1];
             // console.log('persona', this.persona);
 
             commit('personData', persona)
@@ -117,9 +117,9 @@ const store = new Vuex.Store({
 
     getDepartamento({ commit }){
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8000/api/departamentos/'+this.state.id_persona)
+        axios.get('http://localhost:8000/api/departamentos/'+this.state.id_usuario)
         .then((response) => {
-          let departamento = response.data[this.state.id_persona-1]
+          let departamento = response.data[this.state.id_usuario-1]
 
           console.log('departamento-response', departamento)
           
@@ -176,16 +176,16 @@ const store = new Vuex.Store({
     getSalary({ commit }){
       // console.log('userlogeado-employer1', this.state.usuarioLogeado)      
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8000/api/salarios/'+this.state.id_persona)
+        axios.get('http://localhost:8000/api/salarios/'+this.state.id_usuario)
           .then((response) => {
             console.log('response-salario', response)
             console.log('userlogeado-employer2', this.state.usuarioLogeado)
-            let salario = response.data[this.state.id_persona-1];
+            let salario = response.data[this.state.id_usuario-1];
             
             commit('salaryData', salario)
 
             console.log('salario', this.state.salarioData)
-            console.log('id-ersona', this.state.id_persona)
+            console.log('id-ersona', this.state.id_usuario)
 
             resolve(response)
           })
@@ -251,7 +251,7 @@ const store = new Vuex.Store({
     
     employerData(state, empleado){
       state.empleadoData = empleado
-      state.id_persona = empleado.id_persona
+      state.id_usuario = empleado.id_persona
     },    
     
     personData(state, persona){

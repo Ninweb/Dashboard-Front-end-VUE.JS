@@ -40,9 +40,9 @@
         <label>Estatus del empleado</label> <br>
         <base-input type="text" v-model="empleado.estado_empleado" readonly></base-input> <br>
         <label>Descripción de la ruta hogar - oficina</label> <br>
-        <base-input type="text" v-model="empleado.descripcion_transporte_ida"></base-input> <br>
+        <textarea rows="3" v-model="empleado.descripcion_transporte_ida" readonly></textarea> <br><br>
         <label>Descripción de la ruta oficina - hogar</label> <br>
-        <base-input type="text" v-model="empleado.descripcion_transporte_vuelta"></base-input> <br>
+        <textarea rows="3" v-model="empleado.descripcion_transporte_vuelta" readonly></textarea> <br><br>
         <label>Número de habitación</label> <br>
         <base-input type="text" v-model="empleado.numero_habitacion"></base-input> <br>
         <label>Número de celular</label> <br>
@@ -58,12 +58,12 @@
       </tab-content>
 
       <!-- Salario -->
-      <tab-content class="tab-content" icon="fas fa-dollar-sign icon-tab" @on-change="showSalaryModal">
+      <tab-content class="tab-content" icon="fas fa-dollar-sign icon-tab" @on-change="showSalaryToast">
         <p id="subtitle-form">Sueldo del empleado</p>
         <label>Sueldo base</label> <br>
         <base-input type="text" v-model="salario.salario_base" readonly></base-input> <br>
         <label>Cesta Ticket</label> <br>
-        <base-input type="date" v-model="salario.salario_ticket" readonly></base-input> <br>
+        <base-input type="text" v-model="salario.salario_ticket" readonly></base-input> <br>
         <label>Seguro</label> <br>
         <base-input type="text" v-model="salario.salario_seguro" readonly></base-input> <br>
         <!-- <label>Fecha de inicio del sueldo</label> <br>
@@ -76,7 +76,7 @@
         <label>Parroquia</label> <br>
         <base-input type="text" v-model="direccion.parroquia"></base-input> <br>
         <label>Município</label> <br>
-        <base-input type="date" v-model="direccion.municipio"></base-input> <br>
+        <base-input type="text" v-model="direccion.municipio"></base-input> <br>
         <label>Alcaldía</label> <br>
         <base-input type="text" v-model="direccion.alcaldia"></base-input> <br>
         <label>Ciudad</label> <br>
@@ -288,6 +288,15 @@
         this.salario.salario_base = this.$store.state.salarioData.salario_base
         this.salario.salario_ticket = this.$store.state.salarioData.salario_ticket
         this.salario.salario_seguro = this.$store.state.salarioData.salario_seguro
+
+        this.direccion.id_persona = this.$store.state.id_usuario
+
+        this.referenciaFamiliar.id_persona = this.$store.state.id_usuario
+        this.referenciaFamiliar.id_empleado = this.$store.state.id_usuario
+
+        this.referenciaPersonal.id_persona = this.$store.state.id_usuario
+        this.referenciaPersonal.id_empleado = this.$store.state.id_usuario
+
       },
       
       showSalaryToast(){
@@ -306,8 +315,9 @@
 
       updatePersonaEmpleadoData(){
         return new Promise((resolve, reject) => {
-          axios.put('http://localhost:8000/api/personas'+this.$store.state.id_persona, this.personaEmpleado).then(response => {
-            console.log('personaEmpleado ', response)
+          axios.post('http://localhost:8000/api/personas/'+this.$store.state.id_usuario, this.personaEmpleado)
+          .then(response => {
+            console.log('personaEmpleado-success ', response)
             resolve(true)
           }).catch(error => {
             console.log('personaEmpleado ', error)
@@ -318,9 +328,12 @@
 
       updateEmpleadoData(){
         return new Promise((resolve, reject) => {
-          axios.put('http://localhost:8000/api/empleados'+this.$store.state.id_persona, this.empleado).then(response => {
+          axios.post('http://localhost:8000/api/empleados/'+this.$store.state.id_usuario, this.empleado)
+          .then(response => {
+            console.log('EmpleadoData-success ', response)
             resolve(true)
           }).catch(error => {
+            console.log('EmpleadoData ', error)
             reject(false)
           })
         })
@@ -328,9 +341,12 @@
 
       createDireccionData(){
         return new Promise((resolve, reject) => {
-          axios.post('http://localhost:8000/api/direcciones', this.direccion).then(response => {
+          axios.post('http://localhost:8000/api/direcciones', this.direccion)
+          .then(response => {
+            console.log('createDireccionData-success ', response)
             resolve(true)
           }).catch(error => {
+            console.log('createDireccionData ', error)
             reject(false)
           })
         })
@@ -338,9 +354,12 @@
 
       createPersonaReferFamiliar(){
         return new Promise((resolve, reject) => {
-          axios.post('http://localhost:8000/api/personas', this.personaReferenciaFamiliar).then(response => {
+          axios.post('http://localhost:8000/api/personas', this.personaReferenciaFamiliar)
+          .then(response => {
+            console.log('createPersonaReferFamiliar-success ', response)
             resolve(true)
           }).catch(error => {
+            console.log('createPersonaReferFamiliar ', error)
             reject(false)
           })
         })
@@ -348,9 +367,12 @@
 
       createReferFamiliar(){
         return new Promise((resolve, reject) => {
-          axios.post('http://localhost:8000/api/familiares', this.referenciaFamiliar).then(response => {
+          axios.post('http://localhost:8000/api/familiares', this.referenciaFamiliar)
+          .then(response => {
+            console.log('createReferFamiliar-success ', response)
             resolve(true)
           }).catch(error => {
+            console.log('createReferFamiliar ', error)
             reject(false)
           })
         })
@@ -358,9 +380,12 @@
 
       createPersonaReferPersonal(){
         return new Promise((resolve, reject) => {
-          axios.post('http://localhost:8000/api/personas', this.personaReferenciaFamiliar).then(response => {
+          axios.post('http://localhost:8000/api/personas', this.personaReferenciaFamiliar)
+          .then(response => {
+            console.log('createPersonaReferPersonal-success ', response)
             resolve(true)
           }).catch(error => {
+            console.log('createPersonaReferPersonal ', error)
             reject(false)
           })
         })
@@ -368,9 +393,12 @@
 
       createReferPersonal(){
         return new Promise((resolve, reject) => {
-          axios.post('http://localhost:8000/api/personas', this.personaReferenciaPersonal).then(response => {
+          axios.post('http://localhost:8000/api/personas', this.personaReferenciaPersonal)
+          .then(response => {
+            console.log('createReferPersonal-success ', response)
             resolve(true)
           }).catch(error => {
+            console.log('createReferPersonal ', error)
             reject(false)
           })
         })
