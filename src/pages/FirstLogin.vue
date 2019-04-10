@@ -150,8 +150,6 @@
   export default {
     data () {
       return {
-        dataReady: false,
-
         personaEmpleado: {
           nombre: '',
           apellido: '',
@@ -160,6 +158,13 @@
           cedula: '',
           profesion: ''
           // correoPersonal: ''
+        },
+
+        usuario: {
+          correo: '',
+          password: '',
+          acceso_usuario: 'Empleado',
+          first_login: 0        
         },
 
         empleado: {
@@ -270,6 +275,10 @@
         this.personaEmpleado.cedula = this.$store.state.personaData.cedula
         this.personaEmpleado.profesion = this.$store.state.personaData.profesion
 
+        this.usuario.correo = this.$store.state.usuarioLogeado.correo
+        this.usuario.password = this.$store.state.usuarioLogeado.password
+        this.usuario.acceso_usuario = this.$store.state.usuarioLogeado.acceso_usuario
+
         this.empleado.descripcion_cargo = this.$store.state.empleadoData.descripcion_cargo
         this.empleado.fecha_ingreso = this.$store.state.empleadoData.fecha_ingreso
         this.empleado.fecha_retirado = this.$store.state.empleadoData.fecha_retirado
@@ -298,20 +307,6 @@
         this.referenciaPersonal.id_empleado = this.$store.state.id_usuario
 
       },
-      
-      showSalaryToast(){
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: true,
-        })
-
-        Toast.fire({
-          type: 'info',
-          title: 'Este es tu salario',
-          background: 'linear-gradient(0deg, rgb(0,0,0) to rgb(56,56,56))'
-        })
-      },
 
       updatePersonaEmpleadoData(){
         return new Promise((resolve, reject) => {
@@ -339,7 +334,23 @@
         })
       },
 
+      showSalaryToast(){
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: true,
+        })
+
+        Toast.fire({
+          type: 'info',
+          title: 'Este es tu salario',
+          background: 'linear-gradient(0deg, rgb(0,0,0) to rgb(56,56,56))'
+        })
+      },
+
       createDireccionData(){
+        this.direccion.id_persona = this.$store.state.id_usuario
+
         return new Promise((resolve, reject) => {
           axios.post('http://localhost:8000/api/direcciones', this.direccion)
           .then(response => {
@@ -366,6 +377,9 @@
       },
 
       createReferFamiliar(){
+        this.referenciaFamiliar.id_persona = this.$store.state.id_usuario
+        this.referenciaFamiliar.id_empleado = this.$store.state.id_usuario
+
         return new Promise((resolve, reject) => {
           axios.post('http://localhost:8000/api/familiares', this.referenciaFamiliar)
           .then(response => {
@@ -392,6 +406,9 @@
       },
 
       createReferPersonal(){
+        this.referenciaPersonal.id_persona = this.$store.state.id_usuario
+        this.referenciaPersonal.id_empleado = this.$store.state.id_usuario
+
         return new Promise((resolve, reject) => {
           axios.post('http://localhost:8000/api/personas', this.personaReferenciaPersonal)
           .then(response => {
@@ -405,10 +422,21 @@
       },
 
       finishProcess(){
-        Swal.fire({
-          type: 'info',
-          title: '¡Cool &#129311;!',
-          text: 'Tu información fue almacenada con éxito. Ya puedes interactuar con nuestro sistema.'
+        return new Promise((resolve, reject) => {
+          axios.post('http://localhost:8000/api/usuarios'+this.$store.state.id_usuario, this.usuario)
+          .then(response => {
+            console.log('createReferPersonal-success ', response)
+            resolve(true)
+
+            Swal.fire({
+              type: 'info',
+              title: '¡Cool &#129311;!',
+              text: 'Tu información fue almacenada con éxito. Ya puedes ingresar a nuestro sistema.'
+            })
+          }).catch(error => {
+            console.log('createReferPersonal ', error)
+            reject(false)
+          })
         })
       }
     },
