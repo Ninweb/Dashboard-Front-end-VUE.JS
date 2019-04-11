@@ -1,146 +1,155 @@
 <template>
   <div id="complete">
-    <form-wizard
-      shape="circle" 
-      color="#1B3F65" 
-      next-button-text="Siguiente"
-      back-button-text="Anterior"
-      finish-button-text="Completar"
-      @onComplete="finishProcess">
+    
+    <!-- <div id="loading" v-show="!this.dataReady">
+      <p style="color: white">Cargando...</p>
+    </div> -->
+    
+    <div id="completeForm">
+      <form-wizard
+        shape="circle" 
+        color="#1B3F65" 
+        next-button-text="Siguiente"
+        back-button-text="Anterior"
+        finish-button-text="Completar"
+        @onComplete="finishProcess">
 
-      <!-- Persona - empleado -->
-      <tab-content class="tab-content" icon="fas fa-user icon-tab" :before-change="updatePersonaEmpleadoData">
-        <p id="subtitle-form">Datos personales del empleado</p>
-        <label>Nombre</label> <br>
-        <base-input type="text" v-model="personaEmpleado.nombre"></base-input> <br>
-        <label>Apellido</label> <br>
-        <base-input type="text" v-model="personaEmpleado.apellido"></base-input> <br>
-        <label>Sexo</label> <br>
-        <select v-model="personaEmpleado.sexo">
-          <option>Masculino</option>
-          <option>Femenino</option>
-        </select> <br><br>
-        <label>Fecha de nacimiento</label> <br>
-        <base-input type="date" v-model="personaEmpleado.fecha_nacimiento"></base-input> <br>
-        <label>Cedula de identidad</label> <br>
-        <base-input type="text" v-model="personaEmpleado.cedula"></base-input> <br>
-        <label>Profesión</label> <br>
-        <base-input type="text" v-model="personaEmpleado.profesion"></base-input> <br>
-      </tab-content>
+        <!-- Persona - empleado -->
+        <tab-content class="tab-content" icon="fas fa-user icon-tab" :before-change="updatePersonaEmpleadoData">
+          <p id="subtitle-form">Datos personales del empleado</p>
+          <label>Nombre</label> <br>
+          <base-input type="text" v-model="personaEmpleado.nombre"></base-input> <br>
+          <label>Apellido</label> <br>
+          <base-input type="text" v-model="personaEmpleado.apellido"></base-input> <br>
+          <label>Sexo</label> <br>
+          <select v-model="personaEmpleado.sexo">
+            <option>Masculino</option>
+            <option>Femenino</option>
+          </select> <br><br>
+          <label>Fecha de nacimiento</label> <br>
+          <base-input type="date" v-model="personaEmpleado.fecha_nacimiento"></base-input> <br>
+          <label>Cedula de identidad</label> <br>
+          <base-input type="text" v-model="personaEmpleado.cedula"></base-input> <br>
+          <label>Profesión</label> <br>
+          <base-input type="text" v-model="personaEmpleado.profesion"></base-input> <br>
+        </tab-content>
 
-      <!-- Empleado -->
-      <tab-content class="tab-content" icon="fas fa-user-tie icon-tab" :before-change="updateEmpleadoData">
-        <p id="subtitle-form">Datos del empleado</p>
-        <label>Departamento</label> <br>
-        <base-input type="text" v-model="departamento.nombre_departamento" readonly></base-input> <br>
-        <label>Descripción del cargo</label> <br>
-        <base-input type="text" v-model="empleado.descripcion_cargo" readonly></base-input> <br>
-        <label>Fecha de ingreso</label> <br>
-        <base-input type="date" v-model="empleado.fecha_ingreso" readonly></base-input> <br>
-        <label>Estatus del empleado</label> <br>
-        <base-input type="text" v-model="empleado.estado_empleado" readonly></base-input> <br>
-        <label>Descripción de la ruta hogar - oficina</label> <br>
-        <textarea rows="3" v-model="empleado.descripcion_transporte_ida" readonly></textarea> <br><br>
-        <label>Descripción de la ruta oficina - hogar</label> <br>
-        <textarea rows="3" v-model="empleado.descripcion_transporte_vuelta" readonly></textarea> <br><br>
-        <label>Número de habitación</label> <br>
-        <base-input type="text" v-model="empleado.numero_habitacion"></base-input> <br>
-        <label>Número de celular</label> <br>
-        <base-input type="text" v-model="empleado.numero_celular"></base-input> <br>
-        <label>Tipo de sangre</label> <br>
-        <base-input type="text" v-model="empleado.tipo_sangre"></base-input> <br>
-        <label>Profesión</label> <br>
-        <base-input type="text" v-model="empleado.profesion"></base-input> <br>
-        <label>Estado civil</label> <br>
-        <base-input type="text" v-model="empleado.estado_civil"></base-input> <br>
-        <label>Educación</label> <br>
-        <base-input type="text" v-model="empleado.educacion"></base-input> <br>
-      </tab-content>
+        <!-- Empleado -->
+        <tab-content class="tab-content" icon="fas fa-user-tie icon-tab" :before-change="updateEmpleadoData">
+          <p id="subtitle-form">Datos del empleado</p>
+          <label>Departamento</label> <br>
+          <base-input type="text" v-model="departamento.nombre_departamento" readonly></base-input> <br>
+          <label>Descripción del cargo</label> <br>
+          <base-input type="text" v-model="empleado.descripcion_cargo" readonly></base-input> <br>
+          <label>Fecha de ingreso</label> <br>
+          <base-input type="date" v-model="empleado.fecha_ingreso" readonly></base-input> <br>
+          <label>Estatus del empleado</label> <br>
+          <base-input type="text" v-model="empleado.estado_empleado" readonly></base-input> <br>
+          <label>Descripción de la ruta hogar - oficina</label> <br>
+          <textarea rows="3" v-model="empleado.descripcion_transporte_ida" readonly></textarea> <br><br>
+          <label>Descripción de la ruta oficina - hogar</label> <br>
+          <textarea rows="3" v-model="empleado.descripcion_transporte_vuelta" readonly></textarea> <br><br>
+          <label>Número de habitación</label> <br>
+          <base-input type="text" v-model="empleado.numero_habitacion"></base-input> <br>
+          <label>Número de celular</label> <br>
+          <base-input type="text" v-model="empleado.numero_celular"></base-input> <br>
+          <label>Tipo de sangre</label> <br>
+          <base-input type="text" v-model="empleado.tipo_sangre"></base-input> <br>
+          <label>Profesión</label> <br>
+          <base-input type="text" v-model="empleado.profesion"></base-input> <br>
+          <label>Estado civil</label> <br>
+          <base-input type="text" v-model="empleado.estado_civil"></base-input> <br>
+          <label>Educación</label> <br>
+          <base-input type="text" v-model="empleado.educacion"></base-input> <br>
+        </tab-content>
 
-      <!-- Salario -->
-      <tab-content class="tab-content" icon="fas fa-dollar-sign icon-tab" @on-change="showSalaryToast">
-        <p id="subtitle-form">Sueldo del empleado</p>
-        <label>Sueldo base</label> <br>
-        <base-input type="text" v-model="salario.salario_base" readonly></base-input> <br>
-        <label>Cesta Ticket</label> <br>
-        <base-input type="text" v-model="salario.salario_ticket" readonly></base-input> <br>
-        <label>Seguro</label> <br>
-        <base-input type="text" v-model="salario.salario_seguro" readonly></base-input> <br>
-        <!-- <label>Fecha de inicio del sueldo</label> <br>
-        <base-input type="date" v-model="salario.fecha_inicio"></base-input> <br> -->
-      </tab-content>
+        <!-- Salario -->
+        <tab-content class="tab-content" icon="fas fa-dollar-sign icon-tab" @on-change="showSalaryToast">
+          <p id="subtitle-form">Sueldo del empleado</p>
+          <label>Sueldo base</label> <br>
+          <base-input type="text" v-model="salario.salario_base" readonly></base-input> <br>
+          <label>Cesta Ticket</label> <br>
+          <base-input type="text" v-model="salario.salario_ticket" readonly></base-input> <br>
+          <label>Seguro</label> <br>
+          <base-input type="text" v-model="salario.salario_seguro" readonly></base-input> <br>
+          <!-- <label>Fecha de inicio del sueldo</label> <br>
+          <base-input type="date" v-model="salario.fecha_inicio"></base-input> <br> -->
+        </tab-content>
 
-      <!-- Direccion -->
-      <tab-content class="tab-content" icon="fas fa-map-marked-alt icon-tab" :before-change="createDireccionData">
-        <p id="subtitle-form">Dirección del empleado</p>
-        <label>Parroquia</label> <br>
-        <base-input type="text" v-model="direccion.parroquia"></base-input> <br>
-        <label>Município</label> <br>
-        <base-input type="text" v-model="direccion.municipio"></base-input> <br>
-        <label>Alcaldía</label> <br>
-        <base-input type="text" v-model="direccion.alcaldia"></base-input> <br>
-        <label>Ciudad</label> <br>
-        <base-input type="date" v-model="direccion.ciudad"></base-input> <br>
-        <label>Zona</label> <br>
-        <base-input type="date" v-model="direccion.zona"></base-input> <br>
-      </tab-content>
+        <!-- Direccion -->
+        <tab-content class="tab-content" icon="fas fa-map-marked-alt icon-tab" :before-change="createDireccionData">
+          <p id="subtitle-form">Dirección del empleado</p>
+          <label>Parroquia</label> <br>
+          <base-input type="text" v-model="direccion.parroquia"></base-input> <br>
+          <label>Município</label> <br>
+          <base-input type="text" v-model="direccion.municipio"></base-input> <br>
+          <label>Alcaldía</label> <br>
+          <base-input type="text" v-model="direccion.alcaldia"></base-input> <br>
+          <label>Ciudad</label> <br>
+          <base-input type="text" v-model="direccion.ciudad"></base-input> <br>
+          <label>Zona</label> <br>
+          <base-input type="text" v-model="direccion.zona"></base-input> <br>
+        </tab-content>
 
-      <!-- Persona - referencia familiar -->
-      <tab-content class="tab-content" icon="fas fa-user icon-tab" :before-change="createPersonaReferFamiliar">
-        <p id="subtitle-form">Datos de la persona - familiar a referenciar</p>
-        <label>Nombre</label> <br>
-        <base-input type="text" v-model="personaReferenciaFamiliar.nombre"></base-input> <br>
-        <label>Apellido</label> <br>
-        <base-input type="text" v-model="personaReferenciaFamiliar.apellido"></base-input> <br>
-        <label>Sexo</label> <br>
-        <base-input type="text" v-model="personaReferenciaFamiliar.sexo"></base-input> <br>
-        <label>Fecha de nacimiento</label> <br>
-        <base-input type="date" v-model="personaReferenciaFamiliar.fecha_nacimiento"></base-input> <br>
-        <label>Cedula de identidad</label> <br>
-        <base-input type="text" v-model="personaReferenciaFamiliar.cedula"></base-input> <br>
-        <label>Profesión</label> <br>
-        <base-input type="text" v-model="personaReferenciaFamiliar.profesion"></base-input> <br>
-      </tab-content>
+        <!-- Persona - referencia familiar -->
+        <tab-content class="tab-content" icon="fas fa-user icon-tab" :before-change="createPersonaReferFamiliar">
+          <p id="subtitle-form">Datos de la persona - familiar a referenciar</p>
+          <label>Nombre</label> <br>
+          <base-input type="text" v-model="personaReferenciaFamiliar.nombre"></base-input> <br>
+          <label>Apellido</label> <br>
+          <base-input type="text" v-model="personaReferenciaFamiliar.apellido"></base-input> <br>
+          <label>Sexo</label> <br>
+          <base-input type="text" v-model="personaReferenciaFamiliar.sexo"></base-input> <br>
+          <label>Fecha de nacimiento</label> <br>
+          <base-input type="date" v-model="personaReferenciaFamiliar.fecha_nacimiento"></base-input> <br>
+          <label>Cedula de identidad</label> <br>
+          <base-input type="text" v-model="personaReferenciaFamiliar.cedula"></base-input> <br>
+          <label>Profesión</label> <br>
+          <base-input type="text" v-model="personaReferenciaFamiliar.profesion"></base-input> <br>
+        </tab-content>
 
-      <!-- Referencia familiar -->
-      <tab-content class="tab-content" icon="fas fa-users icon-tab" :before-change="createReferFamiliar">
-        <p id="subtitle-form">Referencia familiar</p>
-        <label>Parentezco</label> <br>
-        <base-input type="text" v-model="referenciaFamiliar.parentezco"></base-input> <br>
-        <label>Teléfono</label> <br>
-        <base-input type="date" v-model="referenciaFamiliar.telefono"></base-input> <br>
-        <label>Sexo</label> <br>
-        <base-input type="text" v-model="referenciaFamiliar.sexo"></base-input> <br>
-      </tab-content>
+        <!-- Referencia familiar -->
+        <tab-content class="tab-content" icon="fas fa-users icon-tab" :before-change="createReferFamiliar">
+          <p id="subtitle-form">Referencia familiar</p>
+          <label>Parentezco</label> <br>
+          <base-input type="text" v-model="referenciaFamiliar.parentezco"></base-input> <br>
+          <label>Teléfono</label> <br>
+          <base-input type="text" v-model="referenciaFamiliar.telefono"></base-input> <br>
+          <!-- <label>Sexo</label> <br>
+          <base-input type="text" v-model="referenciaFamiliar.sexo"></base-input> <br> -->
+        </tab-content>
 
-      <!-- Persona - referencia Personal -->
-      <tab-content class="tab-content" icon="fas fa-user icon-tab" :before-change="createPersonaReferPersonal">
-        <p id="subtitle-form">Datos de la persona - tercera a referenciar</p>
-        <label>Nombre</label> <br>
-        <base-input type="text" v-model="personaReferenciaPersonal.nombre"></base-input> <br>
-        <label>Apellido</label> <br>
-        <base-input type="text" v-model="personaReferenciaPersonal.apellido"></base-input> <br>
-        <label>Sexo</label> <br>
-        <base-input type="text" v-model="personaReferenciaPersonal.sexo"></base-input> <br>
-        <label>Fecha de nacimiento</label> <br>
-        <base-input type="date" v-model="personaReferenciaPersonal.fecha_nacimiento"></base-input> <br>
-        <label>Cedula de identidad</label> <br>
-        <base-input type="text" v-model="personaReferenciaPersonal.cedula"></base-input> <br>
-        <label>Profesión</label> <br>
-        <base-input type="text" v-model="personaReferenciaPersonal.profesion"></base-input> <br>
-      </tab-content>
+        <!-- Persona - referencia Personal -->
+        <tab-content class="tab-content" icon="fas fa-user icon-tab" :before-change="createPersonaReferPersonal">
+          <p id="subtitle-form">Datos de la persona - tercera a referenciar</p>
+          <label>Nombre</label> <br>
+          <base-input type="text" v-model="personaReferenciaPersonal.nombre"></base-input> <br>
+          <label>Apellido</label> <br>
+          <base-input type="text" v-model="personaReferenciaPersonal.apellido"></base-input> <br>
+          <label>Sexo</label> <br>
+          <base-input type="text" v-model="personaReferenciaPersonal.sexo"></base-input> <br>
+          <label>Fecha de nacimiento</label> <br>
+          <base-input type="date" v-model="personaReferenciaPersonal.fecha_nacimiento"></base-input> <br>
+          <label>Cedula de identidad</label> <br>
+          <base-input type="text" v-model="personaReferenciaPersonal.cedula"></base-input> <br>
+          <label>Profesión</label> <br>
+          <base-input type="text" v-model="personaReferenciaPersonal.profesion"></base-input> <br>
+        </tab-content>
 
-      <!-- Referencia Personal -->
-      <tab-content id="tab-content" icon="fas fa-users icon-tab" :before-change="createReferPersonal">
-        <p id="subtitle-form">Otras referencias</p>
-        <label>Parentezco</label> <br>
-        <base-input type="text" v-model="referenciaPersonal.parentezco"></base-input> <br>
-        <label>Tiempo conocido</label> <br>
-        <base-input type="date" v-model="referenciaPersonal.tiempo_conocido"></base-input> <br>
-        <label>Teléfono</label> <br>
-        <base-input type="text" v-model="referenciaPersonal.telefono"></base-input> <br>
-      </tab-content>
-    </form-wizard>
+        <!-- Referencia Personal -->
+        <tab-content class="tab-content" icon="fas fa-users icon-tab" :before-change="finishProcess">
+          <p id="subtitle-form">Otras referencias</p>
+          <label>Parentezco</label> <br>
+          <base-input type="text" v-model="referenciaPersonal.parentezco"></base-input> <br>
+          <label>Tiempo conocido (años)</label> <br>
+          <base-input type="text" v-model="referenciaPersonal.tiempo_conocido"></base-input> <br>
+          <label>Teléfono</label> <br>
+          <base-input type="text" v-model="referenciaPersonal.telefono"></base-input> <br>
+        </tab-content>
+      </form-wizard>
+    </div>
+
+    
   </div>
 </template>
 
@@ -150,6 +159,8 @@
   export default {
     data () {
       return {
+        // dataReady: false, 
+
         personaEmpleado: {
           nombre: '',
           apellido: '',
@@ -218,7 +229,7 @@
           id_empleado: '',
           parentezco: '',
           telefono: '',
-          sexo: ''
+          // sexo: ''
         },
 
         personaReferenciaPersonal: {
@@ -241,7 +252,7 @@
       }
     },
 
-    beforeMount () { 
+    beforeMount () {
       // modal de bienvenida
 
       if(this.$store.state.sexo == 'Femenino'){
@@ -262,7 +273,7 @@
         .then(() => {
           this.getData()        
         })
-      }   
+      }
     },
 
     methods: {
@@ -305,6 +316,8 @@
 
         this.referenciaPersonal.id_persona = this.$store.state.id_usuario
         this.referenciaPersonal.id_empleado = this.$store.state.id_usuario
+
+        // this.dataReady = true
 
       },
 
@@ -394,7 +407,7 @@
 
       createPersonaReferPersonal(){
         return new Promise((resolve, reject) => {
-          axios.post('http://localhost:8000/api/personas', this.personaReferenciaFamiliar)
+          axios.post('http://localhost:8000/api/personas', this.personaReferenciaPersonal)
           .then(response => {
             console.log('createPersonaReferPersonal-success ', response)
             resolve(true)
@@ -410,7 +423,7 @@
         this.referenciaPersonal.id_empleado = this.$store.state.id_usuario
 
         return new Promise((resolve, reject) => {
-          axios.post('http://localhost:8000/api/personas', this.personaReferenciaPersonal)
+          axios.post('http://localhost:8000/api/personas', this.referenciaPersonal)
           .then(response => {
             console.log('createReferPersonal-success ', response)
             resolve(true)
@@ -423,7 +436,7 @@
 
       finishProcess(){
         return new Promise((resolve, reject) => {
-          axios.post('http://localhost:8000/api/usuarios'+this.$store.state.id_usuario, this.usuario)
+          axios.post('http://localhost:8000/api/usuarios/'+this.$store.state.id_usuario, this.usuario)
           .then(response => {
             console.log('createReferPersonal-success ', response)
             resolve(true)
@@ -432,6 +445,8 @@
               type: 'info',
               title: '¡Cool &#129311;!',
               text: 'Tu información fue almacenada con éxito. Ya puedes ingresar a nuestro sistema.'
+            }).then(() => {
+              this.$router.push({ name:'dashboard' })
             })
           }).catch(error => {
             console.log('createReferPersonal ', error)
