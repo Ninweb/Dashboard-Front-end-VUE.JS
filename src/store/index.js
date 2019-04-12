@@ -23,10 +23,11 @@ const store = new Vuex.Store({
 
     salarioData: '',
 
-    webDepEmployers: [],
-    designDepEmployers: [],
-    communityDepEmployers: [],
-    resourcesDepEmployers: [],
+    departments: [],
+    // webDepEmployers: [],
+    // designDepEmployers: [],
+    // communityDepEmployers: [],
+    // resourcesDepEmployers: [],
   },
 
   actions: {
@@ -134,45 +135,8 @@ const store = new Vuex.Store({
           console.log(error)
         });
       })
-    },  
-    
-    getDepartamentos({ commit }){
-      return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8000/api/departamentos')
-        .then((response) => {
-          let departamentos = response
-          let departamentosLength = response.data.length
-
-          console.log('departamentosLength', departamentosLength)
-          console.log('departamentos-response', response)
-
-          for(var i=0; i<=departamentosLength; i++){
-            var nombreDep = departamentos.data[i].nombre_departamento
-
-            if(nombreDep == 'Desarrollo Web'){
-              var webDepEmployerId = departamento.data[i].id
-              commit('',webDepEmployerId)
-            }else if(nombreDep == 'Diseño Gráfico'){
-              var designDepEmployerId = departamento.data[i].id
-              commit('',designDepEmployerId)
-            }else if(nombreDep == 'Community Manager'){
-              var communityDepEmployerId = departamento.data[i].id
-              commit('',communityDepEmployerId)
-            }else if(nombreDep == 'Recursos Humanos'){
-              var resourcesDepEmployerId = departamento.data[i].id
-              commit('',resourcesDepEmployerId)
-            }
-          }
-
-          resolve(response)
-        })
-        .catch(error => {
-          reject(response)
-          console.log(error)
-        });
-      })
-    },
-    
+    },      
+       
     getSalary({ commit }){
       // console.log('userlogeado-employer1', this.state.usuarioLogeado)      
       return new Promise((resolve, reject) => {
@@ -193,6 +157,76 @@ const store = new Vuex.Store({
             reject(response)
             console.log(error)
           });
+      })
+    },
+
+    getDepartamentos({ commit }){
+      return new Promise((resolve, reject) => {
+        axios.get('http://localhost:8000/api/departamentos')
+        .then((response) => {
+          let departamentos = response.data
+          let test = response.data
+          let departamentosLength = response.data.length
+
+          console.log('departamentosLength', departamentosLength)
+          console.log('departamentos-response', response)
+          console.log('test ', test)
+
+          commit('departamentsData', departamentos)
+          console.log('departamentos total ', this.state.departments)
+
+          // for(var i=0; i<departamentosLength; i){
+
+          //   console.log('contador ', i)
+          //   var nombreDep = departamentos.data[i].nombre_departamento
+          //   console.log('nombreDep ', nombreDep)
+
+          //   if(nombreDep == 'Desarrollo Web'){
+
+          //     var webDepEmployerId = departamentos.data[i].id
+          //     console.log('web, ', webDepEmployerId)
+          //     commit('webDepEmployersData', webDepEmployerId)   
+          //     console.log('web array ', this.state.webDepEmployers)       
+
+          //   }else if(nombreDep == 'Diseño Gráfico'){
+
+          //     var designDepEmployerId = departamentos.data[i].id
+          //     console.log('design, ', designDepEmployerId)
+          //     commit('designDepEmployersData', designDepEmployerId)
+          //     console.log('design array ', this.state.designDepEmployers)
+
+          //   }else if(nombreDep == 'Community Manager'){
+
+          //     var communityDepEmployerId = departamentos.data[i].id
+          //     console.log('community, ', communityDepEmployerId)
+          //     commit('communityDepEmployersData', communityDepEmployerId)
+          //     console.log('resources array ', this.state.resourcesDepEmployers)
+
+          //   }else if(nombreDep == 'Recursos Humanos'){
+
+          //     var resourcesDepEmployerId = departamentos.data[i].id
+          //     console.log('resources, ', resourcesDepEmployerId)
+          //     commit('resourcesDepEmployersData', resourcesDepEmployerId)
+          //     console.log('community array ', this.state.communityDepEmployers)
+
+          //   }
+
+          //   // console.log('i nuevo ', i)
+          // }
+
+          // console.log('departaments array ', this.state.departments)
+
+          // console.log('web array final ', this.state.webDepEmployers)
+          // console.log('design array final ', this.state.designDepEmployers)
+          // console.log('community array final ', this.state.communityDepEmployers)
+          // console.log('resources array final ', this.state.resourcesDepEmployers)
+
+          resolve(response)
+        })
+        .catch(error => {
+          reject(response)
+          console.log(error)
+        });
       })
     },
 
@@ -261,6 +295,10 @@ const store = new Vuex.Store({
     
     departmentData(state, departamento){
       state.departmentData = departamento
+    },
+
+    departamentsData(state, departamentos){
+      state.departments = departamentos
     },
 
     webDepEmployersData(state,webDepEmployerId){

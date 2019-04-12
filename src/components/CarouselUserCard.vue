@@ -1,169 +1,60 @@
 <template>
   <div>
-    <div class="row justify-content-center align-items-center fuentes">
-      <div class="col-md-10">
-        <carousel
-          :per-page="1"
-          :min-swipe-distance="20"
-          :mouse-drag="false"
-          :autoplay="true"
-          :loop="true"
-          :autoplayTimeout="5000"
-          :speed="700">
-          <slide>
-            <card type="user">
-              <p class="card-text">
-              </p>
-              <div class="author">
-                <!-- <div class="block block-one prueba2"></div>
-                <div class="block block-two prueba2"></div>
-                <div class="block block-three prueba2"></div>
-                <div class="block block-four prueba2"></div> -->
-                <a href="#">
-                  <img class="avatar prueba6" v-bind:src="assetsDocumentos + imagePerfil.ruta" alt="...">
-                  <h4 class="title">{{imagePerfil.ruta}}</h4>
-                  <h4 class="title">{{persona.nombre +' '+ persona.apellido}}</h4>
-                </a>
-                <p class="description">
-                  <strong>Cargo: </strong>{{empleado.descripcion_cargo}}
-                </p>
-                <p class="description">
-                  <strong>Status: </strong>{{empleado.estado_empleado}}
-                </p>
-                <p class="description">
-                  <strong>Departamento: </strong>Programación
-                </p>
-              </div>
-              <p></p>
-            </card>
-          </slide>
+    <infinite-slide-bar>
+      <div class="slide">
+        <div v-for="departamento in departamentos" :key="departamento.key">
+          <div id="img">
+            <img v-bind:src="apiUrl + dataUser.imageUrl" />
+          </div>
 
-          <slide>
-            <card type="user">
-              <p class="card-text">
-              </p>
-              <div class="author">
-                <!-- <div class="block block-one prueba2"></div>
-                <div class="block block-two prueba2"></div>
-                <div class="block block-three prueba2"></div>
-                <div class="block block-four prueba2"></div> -->
-                <a href="#">
-                  <img class="avatar prueba6" v-bind:src="assetsDocumentos + imagePerfil.ruta" alt="...">
-                  <h4 class="title">{{imagePerfil.ruta}}</h4>
-                  <h4 class="title">{{persona.nombre +' '+ persona.apellido}}</h4>
-                </a>
-                <p class="description">
-                  <strong>Cargo: </strong>{{empleado.descripcion_cargo}}
-                </p>
-                <p class="description">
-                  <strong>Status: </strong>{{empleado.estado_empleado}}
-                </p>
-                <p class="description">
-                  <strong>Departamento: </strong>Programación
-                </p>
-              </div>
-              <p></p>
-            </card>
-          </slide>
-
-          <slide>
-            <card type="user">
-              <p class="card-text">
-              </p>
-              <div class="author">
-                <!-- <div class="block block-one prueba2"></div>
-                <div class="block block-two prueba2"></div>
-                <div class="block block-three prueba2"></div>
-                <div class="block block-four prueba2"></div> -->
-                <a href="#">
-                  <img class="avatar prueba6" v-bind:src="assetsDocumentos + imagePerfil.ruta" alt="...">
-                  <h4 class="title">{{imagePerfil.ruta}}</h4>
-                  <h4 class="title">{{persona.nombre +' '+ persona.apellido}}</h4>
-                </a>
-                <p class="description">
-                  <strong>Cargo: </strong>{{empleado.descripcion_cargo}}
-                </p>
-                <p class="description">
-                  <strong>Status: </strong>{{empleado.estado_empleado}}
-                </p>
-                <p class="description">
-                  <strong>Departamento: </strong>Programación
-                </p>
-              </div>
-              <p></p>
-            </card>
-          </slide>
-
-          <slide>
-            <card type="user">
-              <p class="card-text">
-              </p>
-              <div class="author">
-                <!-- <div class="block block-one prueba2"></div>
-                <div class="block block-two prueba2"></div>
-                <div class="block block-three prueba2"></div>
-                <div class="block block-four prueba2"></div> -->
-                <a href="#">
-                  <img class="avatar prueba6" v-bind:src="assetsDocumentos + imagePerfil.ruta" alt="...">
-                  <h4 class="title">{{imagePerfil.ruta}}</h4>
-                  <h4 class="title">{{persona.nombre +' '+ persona.apellido}}</h4>
-                </a>
-                <p class="description">
-                  <strong>Cargo: </strong>{{empleado.descripcion_cargo}}
-                </p>
-                <p class="description">
-                  <strong>Status: </strong>{{empleado.estado_empleado}}
-                </p>
-                <p class="description">
-                  <strong>Departamento: </strong>Programación
-                </p>
-              </div>
-              <p></p>
-            </card>
-          </slide>
-        </carousel>
+          <div id="data">
+            <p class="dataInfo name">{{dataUser.nombre}} {{dataUser.apellido}}</p>
+            <p class="dataInfo department">{{dataUser.department}}</p>
+          </div>
+        </div>
       </div>
-    </div>
+    </infinite-slide-bar>
   </div>
 
 </template>
 <script>
   import axios from 'axios';
-  import { Carousel, Slide } from 'vue-carousel';
+  import InfiniteSlideBar from 'vue-infinite-slide-bar'
 
   export default {
     components: {
-      Carousel,
-      Slide,
+      InfiniteSlideBar
     },
 
-    props: {
-      user: {
-        type: Object,
-        default: () => {
-          return {};
-        }
-      },
+    // props: {
+    //   user: {
+    //     type: Object,
+    //     default: () => {
+    //       return {};
+    //     }
+    //   },
 
-    },
+    // },
+
+
     data() {
       return {
-        usuarioLogeado: '',
-        empleado: '',
-        persona:'',
-        id_persona : '',
-        cargando: true,
-        imagePerfil: '',
-        assetsDocumentos :'http://localhost:8000/documentos/'
+        dataUser: {
+          nombre: '',
+          apellido: '',
+          cargo: '',
+          imageUrl: ''
+        }
       }
     },
-    created: function(){
+
+    mounted () {
       this.getUsuarioLogeado();
       this.getEmpleado();
       this.getPersona();
       this.getPhotoUser();
-
     },
+
     methods: {
       getUsuarioLogeado(){
         let usuarioLogeado = JSON.parse(localStorage.getItem('usuarioLogeado'));
@@ -208,14 +99,6 @@
           });
       }
     },
-
-
-    mounted (){
-
-    },
-    computed:{//metodos computados los cuales se ejecutan en segundo plano
-
-    }
   }
 
 </script>
