@@ -50,7 +50,7 @@
     </div>
 
     <div>
-      <carousel-user/>
+      <!-- <carousel-user/> -->
     </div>
     <!-- <div class="row">
       <div class="col-lg-4" :class="{'text-right': isRTL}">
@@ -141,7 +141,7 @@
   import config from '@/config';
   import UserCard from './Profile/UserCard'
   import DepartamentosCards from './Profile/DepartamentosCards'
-  import CarouselUser from '@/components/CarouselUserCard.vue'
+  // import CarouselUser from '@/components/CarouselUserCard.vue'
 
   import store from '../store/index.js'
   
@@ -153,7 +153,7 @@
       // UserTable,
       UserCard,
       DepartamentosCards,
-      CarouselUser
+      // CarouselUser
     },
     /*
     data() {

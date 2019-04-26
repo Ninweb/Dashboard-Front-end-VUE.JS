@@ -1,6 +1,6 @@
 <template>
   <div>
-    <infinite-slide-bar>
+    <!-- <infinite-slide-bar>
       <div class="slide">
         <div v-for="departamento in departamentos" :key="departamento.key">
           <div id="img">
@@ -13,7 +13,7 @@
           </div>
         </div>
       </div>
-    </infinite-slide-bar>
+    </infinite-slide-bar> -->
   </div>
 
 </template>

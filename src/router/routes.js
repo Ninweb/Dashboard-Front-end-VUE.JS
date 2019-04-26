@@ -25,6 +25,10 @@ import DesignDepartment from '@/pages/Departamentos/DesignDepartment.vue'
 import CommunityDepartment from '@/pages/Departamentos/CommunityDepartment.vue'
 import RecursosDepartment from '@/pages/Departamentos/RecursosDepartment.vue'
 
+import Documentos from '@/pages/Documentos'
+import UploadDocument from '@/pages/Documentos/Upload.vue'
+import MainDocumentos from '@/pages/Documentos/Main.vue'
+
 
 const routes = [
   {
@@ -62,6 +66,24 @@ const routes = [
         path: "/dashboard/profile",
         name: "profile",
         component: Profile
+      },
+      {
+        path: "/dashboard/documentos",
+        name: "documentos",
+        component: Documentos,
+        redirect: "/dashboard/documentos/main",
+        children : [
+          {
+            path: "/dashboard/documentos/main",
+            name: "documents",
+            component: MainDocumentos
+          },
+          {
+            path: "/dashboard/documentos/upload",
+            name: "upload",
+            component: UploadDocument
+          }
+        ]
       },
       {
         path: "/dashboard/empleados",
